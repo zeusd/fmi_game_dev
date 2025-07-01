@@ -1,14 +1,17 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Kruv : MonoBehaviour
 {
     private int kruv;
-    private int kliu4owe;
 
     Vector2 na4alo;
 
     [SerializeField]
     int max_kruv;
+
+    [SerializeField]
+    GameObject g_hud;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,18 +26,26 @@ public class Kruv : MonoBehaviour
 
     }
 
-    public int Kolko()
-    {
-        return kliu4owe;
-    }
-
     public void Vzemi()
     {
-        kliu4owe += 1;
+        g_hud.GetComponent<Hud>().Pokaji();
+    }
+
+    public void Narani()
+    {
+        if (kruv > 0)
+        {
+            kruv--;
+            g_hud.GetComponent<Hud>().Narani();
+        }
+        else
+        {
+            Umri();
+        }
     }
 
     public void Umri()
     {
-        transform.position = na4alo;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

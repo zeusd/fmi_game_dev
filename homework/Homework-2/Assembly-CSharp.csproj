@@ -68,11 +68,13 @@
     <Compile Include="Assets/Scripts/Respawn.cs" />
     <Compile Include="Assets/Scripts/Gravitaciq.cs" />
     <Compile Include="Assets/Scripts/Ubivai.cs" />
+    <Compile Include="Assets/Scripts/Narani.cs" />
     <Compile Include="Assets/Scripts/Animaciq.cs" />
     <Compile Include="Assets/Scripts/Movement.cs" />
     <Compile Include="Assets/Scripts/ResolveLookDirection.cs" />
     <Compile Include="Assets/Scripts/Dviji_platforma.cs" />
     <Compile Include="Assets/Scripts/Kruv.cs" />
+    <Compile Include="Assets/Scripts/Hud.cs" />
     <Compile Include="Assets/Scripts/CameraFollow.cs" />
     <Compile Include="Assets/Scripts/Jump.cs" />
     <Compile Include="Assets/Scripts/MovingPlatform.cs" />
