@@ -1,6 +1,6 @@
 m_ProjectFiles:
   m_ManifestFileStatus:
-    m_FilePath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Packages/manifest.json
+    m_FilePath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Packages/manifest.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
@@ -8,7 +8,7 @@ m_ProjectFiles:
       ticks: 638846515380000000
     m_Hash: 3796164382
   m_LockFileStatus:
-    m_FilePath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Packages/packages-lock.json
+    m_FilePath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
@@ -19,7 +19,7 @@ m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
   m_LocalFileStatus: []
-m_ProjectPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Packages
+m_ProjectPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Packages
 m_EditorVersion: 6000.0.39f1 (15ea7ed0b100)
 m_ResolvedPackages:
 - packageId: com.unity.2d.sprite@1.0.0
@@ -27,7 +27,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.2d.sprite@2ec8aabae3ca
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.2d.sprite@2ec8aabae3ca
   assetPath: Packages/com.unity.2d.sprite
   name: com.unity.2d.sprite
   displayName: 2D Sprite
@@ -97,7 +97,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.2d.tilemap@704786a06883
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.2d.tilemap@704786a06883
   assetPath: Packages/com.unity.2d.tilemap
   name: com.unity.2d.tilemap
   displayName: 2D Tilemap Editor
@@ -184,7 +184,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.6
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ai.navigation@c74b2724ed42
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ai.navigation@c74b2724ed42
   assetPath: Packages/com.unity.ai.navigation
   name: com.unity.ai.navigation
   displayName: AI Navigation
@@ -305,7 +305,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.6.0
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.collab-proxy@001b54a8988a
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.collab-proxy@001b54a8988a
   assetPath: Packages/com.unity.collab-proxy
   name: com.unity.collab-proxy
   displayName: Version Control
@@ -499,7 +499,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 3.0.31
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ide.rider@7921be93db40
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ide.rider@7921be93db40
   assetPath: Packages/com.unity.ide.rider
   name: com.unity.ide.rider
   displayName: JetBrains Rider Editor
@@ -622,7 +622,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.22
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e
   assetPath: Packages/com.unity.ide.visualstudio
   name: com.unity.ide.visualstudio
   displayName: Visual Studio Editor
@@ -730,7 +730,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.2.5
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ide.vscode@82e68656b7bd
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ide.vscode@82e68656b7bd
   assetPath: Packages/com.unity.ide.vscode
   name: com.unity.ide.vscode
   displayName: Visual Studio Code Editor
@@ -823,7 +823,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.multiplayer.center@f5e57a8bed06
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.multiplayer.center@f5e57a8bed06
   assetPath: Packages/com.unity.multiplayer.center
   name: com.unity.multiplayer.center
   displayName: Multiplayer Center
@@ -913,7 +913,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.4.6
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.test-framework@5ac417e07314
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.test-framework@5ac417e07314
   assetPath: Packages/com.unity.test-framework
   name: com.unity.test-framework
   displayName: Test Framework
@@ -1065,7 +1065,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.8.7
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.timeline@c58b4ee65782
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.timeline@c58b4ee65782
   assetPath: Packages/com.unity.timeline
   name: com.unity.timeline
   displayName: Timeline
@@ -1251,7 +1251,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.10
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.toolchain.linux-x86_64@5a6ce31f8a65
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.toolchain.linux-x86_64@5a6ce31f8a65
   assetPath: Packages/com.unity.toolchain.linux-x86_64
   name: com.unity.toolchain.linux-x86_64
   displayName: Toolchain Linux x64
@@ -1350,7 +1350,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 2.0.0
   source: 2
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ugui@95bb0390e44c
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ugui@95bb0390e44c
   assetPath: Packages/com.unity.ugui
   name: com.unity.ugui
   displayName: Unity UI
@@ -1377,7 +1377,10 @@ m_ResolvedPackages:
     - 3.0.0-exp.3
     - 3.0.0-exp.4
     recommended: 2.0.0
-    deprecated: []
+    deprecated:
+    - 3.0.0-exp.1
+    - 3.0.0-exp.3
+    - 3.0.0-exp.4
   dependencies:
   - name: com.unity.modules.ui
     version: 1.0.0
@@ -3863,7 +3866,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.10
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.sysroot@7bbbb9339c14
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.sysroot@7bbbb9339c14
   assetPath: Packages/com.unity.sysroot
   name: com.unity.sysroot
   displayName: Sysroot Base
@@ -3953,7 +3956,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.9
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.sysroot.linux-x86_64@1998d1c7730e
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.sysroot.linux-x86_64@1998d1c7730e
   assetPath: Packages/com.unity.sysroot.linux-x86_64
   name: com.unity.sysroot.linux-x86_64
   displayName: Sysroot Linux x64
@@ -4044,7 +4047,7 @@ m_ResolvedPackages:
   isDirectDependency: 0
   version: 2.0.5
   source: 1
-  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd
+  resolvedPath: /home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd
   assetPath: Packages/com.unity.ext.nunit
   name: com.unity.ext.nunit
   displayName: Custom NUnit

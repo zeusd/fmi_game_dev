@@ -21,7 +21,7 @@ public class Dvijenie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (!jumping)
+        if (!jumping)
         {
             jumping = grounded && Input.GetButtonDown("Jump");
         }
@@ -63,5 +63,10 @@ public class Dvijenie : MonoBehaviour
     void OnCollisionExit2D(Collision2D collider2D)
     {
         grounded = false;
+    }
+
+    public bool MidAir()
+    {
+        return !grounded;
     }
 }

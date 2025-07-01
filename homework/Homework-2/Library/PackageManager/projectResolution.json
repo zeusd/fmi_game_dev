@@ -1,18 +1,18 @@
 {
   "context": {
-    "projectPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Packages",
+    "projectPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Packages",
     "unityVersion": "6000.0.39f1"
   },
   "inputs": [
-    "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Packages/manifest.json",
-    "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Packages/packages-lock.json",
+    "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Packages/manifest.json",
+    "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Packages/packages-lock.json",
     "/home/dimov/Unity/Hub/Editor/6000.0.39f1/Editor/Data/Resources/PackageManager/BuiltInPackages/BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
     "com.unity.2d.sprite@1.0.0": {
       "name": "com.unity.2d.sprite",
       "displayName": "2D Sprite",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.2d.sprite@2ec8aabae3ca",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.2d.sprite@2ec8aabae3ca",
       "fingerprint": "2ec8aabae3ca998cabcb3b98a0a05216a7ec2656",
       "editorCompatibility": "2019.2.0a1",
       "version": "1.0.0",
@@ -22,7 +22,7 @@
     "com.unity.2d.tilemap@1.0.0": {
       "name": "com.unity.2d.tilemap",
       "displayName": "2D Tilemap Editor",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.2d.tilemap@704786a06883",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.2d.tilemap@704786a06883",
       "fingerprint": "704786a06883c505eb4f903256cc463b334aad8e",
       "editorCompatibility": "2019.2.0a1",
       "version": "1.0.0",
@@ -32,7 +32,7 @@
     "com.unity.ai.navigation@2.0.6": {
       "name": "com.unity.ai.navigation",
       "displayName": "AI Navigation",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ai.navigation@c74b2724ed42",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ai.navigation@c74b2724ed42",
       "fingerprint": "c74b2724ed42c1aa0380e294156d7f54a7ae2ec6",
       "editorCompatibility": "2023.2.0a18",
       "version": "2.0.6",
@@ -42,7 +42,7 @@
     "com.unity.collab-proxy@2.6.0": {
       "name": "com.unity.collab-proxy",
       "displayName": "Version Control",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.collab-proxy@001b54a8988a",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.collab-proxy@001b54a8988a",
       "fingerprint": "001b54a8988a14785c8e209d6c788bb15f9e58cf",
       "editorCompatibility": "2021.3.0f1",
       "version": "2.6.0",
@@ -52,7 +52,7 @@
     "com.unity.ide.rider@3.0.31": {
       "name": "com.unity.ide.rider",
       "displayName": "JetBrains Rider Editor",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ide.rider@7921be93db40",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ide.rider@7921be93db40",
       "fingerprint": "7921be93db40ec070fcb01ed82d1c3df1bbdddcd",
       "editorCompatibility": "2019.2.6f1",
       "version": "3.0.31",
@@ -62,7 +62,7 @@
     "com.unity.ide.visualstudio@2.0.22": {
       "name": "com.unity.ide.visualstudio",
       "displayName": "Visual Studio Editor",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e",
       "fingerprint": "8140e851d83e922ca2021b04a89519de94ebe38c",
       "editorCompatibility": "2019.4.25f1",
       "version": "2.0.22",
@@ -72,7 +72,7 @@
     "com.unity.ide.vscode@1.2.5": {
       "name": "com.unity.ide.vscode",
       "displayName": "Visual Studio Code Editor",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ide.vscode@82e68656b7bd",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ide.vscode@82e68656b7bd",
       "fingerprint": "82e68656b7bdc5da8beb1fbaf1bb4ecf13456d51",
       "editorCompatibility": "2019.2.0a12",
       "version": "1.2.5",
@@ -82,7 +82,7 @@
     "com.unity.multiplayer.center@1.0.0": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.multiplayer.center@f5e57a8bed06",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.multiplayer.center@f5e57a8bed06",
       "fingerprint": "f5e57a8bed0637672c58142b1bfd7e6fea03746c",
       "editorCompatibility": "6000.0.0a1",
       "version": "1.0.0",
@@ -92,7 +92,7 @@
     "com.unity.test-framework@1.4.6": {
       "name": "com.unity.test-framework",
       "displayName": "Test Framework",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.test-framework@5ac417e07314",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.test-framework@5ac417e07314",
       "fingerprint": "5ac417e07314c8f6afba8109738c32b82d391e68",
       "editorCompatibility": "2019.4.1f1",
       "version": "1.4.6",
@@ -102,7 +102,7 @@
     "com.unity.timeline@1.8.7": {
       "name": "com.unity.timeline",
       "displayName": "Timeline",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.timeline@c58b4ee65782",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.timeline@c58b4ee65782",
       "fingerprint": "c58b4ee65782ad38338e29f7ee67787cb6998f04",
       "editorCompatibility": "2019.3.0a1",
       "version": "1.8.7",
@@ -112,7 +112,7 @@
     "com.unity.toolchain.linux-x86_64@2.0.10": {
       "name": "com.unity.toolchain.linux-x86_64",
       "displayName": "Toolchain Linux x64",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.toolchain.linux-x86_64@5a6ce31f8a65",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.toolchain.linux-x86_64@5a6ce31f8a65",
       "fingerprint": "5a6ce31f8a65b8bae16857cfbdc108c58cdd34f9",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.0.10",
@@ -122,7 +122,7 @@
     "com.unity.ugui@2.0.0": {
       "name": "com.unity.ugui",
       "displayName": "Unity UI",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ugui@95bb0390e44c",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ugui@95bb0390e44c",
       "fingerprint": "95bb0390e44ca96765f9b1e9907f417eb6fb06bc",
       "editorCompatibility": "2019.2.0a1",
       "version": "2.0.0",
@@ -404,7 +404,7 @@
     "com.unity.sysroot@2.0.10": {
       "name": "com.unity.sysroot",
       "displayName": "Sysroot Base",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.sysroot@7bbbb9339c14",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.sysroot@7bbbb9339c14",
       "fingerprint": "7bbbb9339c143f6fbccaeb0a52c77b9217b35a71",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.0.10",
@@ -414,7 +414,7 @@
     "com.unity.sysroot.linux-x86_64@2.0.9": {
       "name": "com.unity.sysroot.linux-x86_64",
       "displayName": "Sysroot Linux x64",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.sysroot.linux-x86_64@1998d1c7730e",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.sysroot.linux-x86_64@1998d1c7730e",
       "fingerprint": "1998d1c7730e48fa49f28d983fececfc9cbd970b",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.0.9",
@@ -424,7 +424,7 @@
     "com.unity.ext.nunit@2.0.5": {
       "name": "com.unity.ext.nunit",
       "displayName": "Custom NUnit",
-      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-1/Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd",
+      "resolvedPath": "/home/dimov/Downloads/SU/igri/repo/homework/Homework-2/Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd",
       "fingerprint": "60ef35ffd3cd5e2f5c8887a4a4ca6148854cd092",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.0.5",

@@ -386,6 +386,7 @@
 -analyzer:"/home/dimov/Unity/Hub/Editor/6000.0.39f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"/home/dimov/Unity/Hub/Editor/6000.0.39f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 -analyzer:"/home/dimov/Unity/Hub/Editor/6000.0.39f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.UIToolkit.SourceGenerator.dll"
+"Assets/Scripts/Animaciq.cs"
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/Dvijenie.cs"
 "Assets/Scripts/Dviji_platforma.cs"
@@ -398,6 +399,7 @@
 "Assets/Scripts/ResolveLookDirection.cs"
 "Assets/Scripts/Respawn.cs"
 "Assets/Scripts/Ubivai.cs"
+"Assets/Scripts/Vzemi.cs"
 -langversion:9.0
 /deterministic
 /optimize+
