@@ -401,6 +401,7 @@
 "Assets/Scripts/ResolveLookDirection.cs"
 "Assets/Scripts/Respawn.cs"
 "Assets/Scripts/Ubivai.cs"
+"Assets/Scripts/Vrag.cs"
 "Assets/Scripts/Vzemi.cs"
 -langversion:9.0
 /deterministic

@@ -79,6 +79,7 @@
     <Compile Include="Assets/Scripts/Jump.cs" />
     <Compile Include="Assets/Scripts/MovingPlatform.cs" />
     <Compile Include="Assets/Scripts/Dvijenie.cs" />
+    <Compile Include="Assets/Scripts/Vrag.cs" />
     <Compile Include="Assets/Scripts/Vzemi.cs" />
     <Compile Include="Assets/Scripts/Kamera.cs" />
   </ItemGroup>
