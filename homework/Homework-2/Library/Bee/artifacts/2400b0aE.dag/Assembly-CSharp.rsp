@@ -397,6 +397,7 @@
 "Assets/Scripts/Kruv.cs"
 "Assets/Scripts/Movement.cs"
 "Assets/Scripts/MovingPlatform.cs"
+"Assets/Scripts/Nachalo.cs"
 "Assets/Scripts/Narani.cs"
 "Assets/Scripts/ResolveLookDirection.cs"
 "Assets/Scripts/Respawn.cs"
