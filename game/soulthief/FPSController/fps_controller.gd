@@ -18,6 +18,7 @@ var cur_stick_look := Vector2.ZERO
 @export var walk_speed := 4.3
 @export var sprint_speed := 7.7
 
+var last_bounce := Vector3.ZERO
 var wall_normal := Vector3.ZERO
 
 @export var frict := 6.0
@@ -102,6 +103,7 @@ func _clip_velocity(normal: Vector3, overbounce: float, delta: float) -> void:
 func _handle_ground_physics(delta: float) -> void:
 	_friction(delta)
 	_accelerate(delta)
+	last_bounce = Vector3.ZERO
 	_headbob_effect(delta)
 
 func _handle_air_physics(delta: float) -> void:
@@ -117,6 +119,7 @@ func _handle_air_physics(delta: float) -> void:
 	if is_on_floor():
 		_friction(delta)
 		_accelerate(delta)
+		last_bounce = Vector3.ZERO
 	else:
 		_air_accelerate(wish_veloc, delta)
 
@@ -156,7 +159,8 @@ func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
 func _wall_run(delta: float) -> void:
 	if is_on_wall() and Input.is_action_pressed("sprint"):
 		wall_normal = get_slide_collision(0).get_normal()
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump") and !wall_normal.is_equal_approx(last_bounce):
+			last_bounce = wall_normal
 			self.velocity += frict * wall_normal
 			self.velocity.y = max_speed * delta
 		else:
