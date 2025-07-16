@@ -10,19 +10,32 @@
 script = ExtResource("1_u08xt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_a0tk4")
 
 [node name="PlayerModel" type="Node3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerModel"]
+unique_name_in_owner = true
 mesh = SubResource("CapsuleMesh_a0tk4")
 
-[node name="Head" type="Node3D" parent="."]
+[node name="HeadOriginal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.875, 0)
+
+[node name="Head" type="Node3D" parent="HeadOriginal"]
 unique_name_in_owner = true
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="CameraSmooth" type="Node3D" parent="HeadOriginal/Head"]
+
+[node name="Camera3D" type="Camera3D" parent="HeadOriginal/Head/CameraSmooth"]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0.874511, 0)
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, 0)
 rotation_order = 1
 cull_mask = 1048573
+
+[node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
+
+[node name="StairsBelowRayCast3D" type="RayCast3D" parent="."]

@@ -14,16 +14,26 @@ var headbob_time := 0.0
 var cur_stick_look := Vector2.ZERO
 
 @export var jump_velocity := 3.7
-@export var auto_bhop = true
 @export var walk_speed := 4.3
 @export var sprint_speed := 7.7
 
+var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var last_bounce := Vector3.ZERO
 var wall_normal := Vector3.ZERO
+
+const MAX_JUMPS := 2
 var jump_cnt := 0
-var max_jumps := 2
 var jump_timer : Timer = Timer.new()
-var jump_timeout := jump_velocity / 10
+var jump_timeout := jump_velocity / gravity
+
+const MAX_STEP_HEIGHT := 0.5
+var _snapped_to_stairs_last_frame := false
+var _last_frame_was_on_floor := -INF
+
+const CROUCH_DIST = 0.7
+const CROUCH_SLOW = 0.8
+const CROUCH_JUMP_ADD = CROUCH_DIST * 0.9
+var crouching = false
 
 @export var frict := 6.0
 @export var accel := 100.0
@@ -35,7 +45,8 @@ var jump_timeout := jump_velocity / 10
 var wish_dir := Vector3.ZERO
 
 func get_speed() -> float:
-	return sprint_speed if Input.is_action_pressed("sprint") else walk_speed
+	var speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
+	return speed * CROUCH_SLOW if crouching else speed
 
 func _ready():
 	for child in %PlayerModel.find_children("*", "VisualInstance3D"):
@@ -81,6 +92,8 @@ func _headbob_effect(delta: float) -> void:
 func _process(delta: float) -> void:
 	_handle_stick_look_input(delta)
 	
+	_crouch_uncrouch(delta)
+	
 	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	# mind player look direction for the negations
@@ -93,8 +106,8 @@ func _process(delta: float) -> void:
 	else:
 		_handle_air_physics(delta)
 		
-	if jump_cnt < max_jumps and jump_timer.is_stopped() and (Input.is_action_pressed("jump") or (auto_bhop and Input.is_action_pressed("jump"))):
-		self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / max_jumps)) + 1)
+	if Input.is_action_pressed("jump") and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
+		self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / MAX_JUMPS)) + 1)
 		jump_timer.start(jump_timeout)
 		jump_cnt += 1
 
@@ -102,14 +115,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	pass
-
-func _clip_velocity(normal: Vector3, overbounce: float, delta: float) -> void:
-	var backoff := self.velocity.dot(normal) * overbounce
-	
-	if backoff >= 0:
-		return
-	
-	self.velocity -= normal * backoff;
 
 func _handle_ground_physics(delta: float) -> void:
 	_friction(delta)
@@ -151,12 +156,11 @@ func _accelerate(delta: float) -> void:
 	
 	if add_speed > 0:
 		var accel_speed = accel * get_speed() * delta
-		if accel_speed > add_speed:
-			accel_speed = add_speed
+		accel_speed = min(accel_speed, add_speed)
 		self.velocity += accel_speed * wish_dir
 
 func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
-	self.velocity.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta
+	self.velocity.y -= gravity * delta
 	
 	var wish_speed = min(air_move_cap, (air_speed * wish_dir).length())
 	var cur_speed = self.velocity.dot(wish_veloc)
@@ -169,12 +173,36 @@ func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
 
 func _wall_run(delta: float) -> void:
 	if is_on_wall() and Input.is_action_pressed("sprint"):
-		jump_cnt = max_jumps
+		jump_cnt = MAX_JUMPS
 		wall_normal = get_slide_collision(0).get_normal()
-		if Input.is_action_just_pressed("jump") and !wall_normal.is_equal_approx(last_bounce):
+		if Input.is_action_just_pressed("jump") and not wall_normal.is_equal_approx(last_bounce):
 			last_bounce = wall_normal
 			self.velocity += frict * wall_normal
 			self.velocity.y = max_speed * delta
 		else:
 			self.velocity -= wall_normal
 			self.velocity.y += frict * delta
+
+@onready var reg_height = %CollisionShape3D.shape.height
+func _crouch_uncrouch(delta) -> void:
+	var was_crouched = crouching
+	if Input.is_action_pressed("crouch"):
+		crouching = true
+	elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
+		crouching = false
+	
+	var bump_up_if_possible := 0.0
+	if was_crouched != crouching and not is_on_floor() and not _snapped_to_stairs_last_frame:
+		bump_up_if_possible = CROUCH_JUMP_ADD if crouching else -CROUCH_JUMP_ADD
+	
+	if not is_zero_approx(bump_up_if_possible):
+		var res = KinematicCollision3D.new()
+		self.test_move(self.transform, Vector3(0, bump_up_if_possible, 0), res)
+		self.position.y += res.get_travel().y
+		%Head.position.y -= res.get_travel().y
+		%Head.position.y = clampf(%Head.position.y, -CROUCH_DIST, 0)
+	
+	%Head.position.y = move_toward(%Head.position.y, (-CROUCH_DIST if crouching else 0), 7.0 * delta)
+	%CollisionShape3D.shape.height = reg_height - CROUCH_DIST if crouching else reg_height
+	%CollisionShape3D.position.y = %CollisionShape3D.shape.height / 2
+	

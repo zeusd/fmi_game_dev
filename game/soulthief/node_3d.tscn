@@ -743,4 +743,3 @@ shape = SubResource("ConvexPolygonShape3D_j34tw")
 shape = SubResource("ConvexPolygonShape3D_6migg")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_r3fl7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66263, 0)
