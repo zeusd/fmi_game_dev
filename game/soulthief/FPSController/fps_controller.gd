@@ -13,25 +13,26 @@ var headbob_time := 0.0
 
 var cur_stick_look := Vector2.ZERO
 
-@export var jump_velocity := 3.7
-@export var walk_speed := 4.3
+@export var jump_velocity := 5.3
+@export var walk_speed := 5.3
 @export var sprint_speed := 7.7
 
+const WALLRUN_POWER = 3
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var last_bounce := Vector3.ZERO
 var wall_normal := Vector3.ZERO
 
-const MAX_JUMPS := 2
+const MAX_JUMPS := 1
 var jump_cnt := 0
 var jump_timer : Timer = Timer.new()
 var jump_timeout := jump_velocity / gravity
 
 const MAX_STEP_HEIGHT := 0.5
 var _snapped_to_stairs_last_frame := false
-var _last_frame_was_on_floor := -INF
+var _last_frame_on_floor := -INF
 
 const CROUCH_DIST = 0.7
-const CROUCH_SLOW = 0.8
+const CROUCH_SLOW = 0.5
 const CROUCH_JUMP_ADD = CROUCH_DIST * 0.9
 var crouching = false
 
@@ -47,6 +48,19 @@ var wish_dir := Vector3.ZERO
 func get_speed() -> float:
 	var speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
 	return speed * CROUCH_SLOW if crouching else speed
+
+func is_surface_too_steep(normal: Vector3) -> bool:
+	return normal.angle_to(Vector3.UP) > self.floor_max_angle
+
+func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) -> bool:
+	if not result:
+		result = PhysicsTestMotionResult3D.new()
+	
+	var params = PhysicsTestMotionParameters3D.new()
+	params.from = from
+	params.motion = motion
+	
+	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _ready():
 	for child in %PlayerModel.find_children("*", "VisualInstance3D"):
@@ -81,6 +95,24 @@ func _handle_stick_look_input(delta: float) -> void:
 	%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 
+var _saved_camera_global_pos = null
+func _save_camera_pos() -> void:
+	if _saved_camera_global_pos == null:
+		_saved_camera_global_pos = %CameraSmooth.global_position
+
+func _slide_camera_smooth(delta) -> void:
+	if _saved_camera_global_pos == null:
+		return
+	
+	%CameraSmooth.global_position.y = _saved_camera_global_pos.y
+	%CameraSmooth.position.y = clampf($%CameraSmooth.position.y, -0.7, 0.7)
+	var move_amount = max(self.velocity.length() * delta, (walk_speed / 2) * delta)
+	%CameraSmooth.position.y = move_toward(%CameraSmooth.position.y, 0.0, move_amount)
+	_saved_camera_global_pos = %CameraSmooth.global_position
+	
+	if is_zero_approx(%CameraSmooth.position.y):
+		_saved_camera_global_pos = null
+
 func _headbob_effect(delta: float) -> void:
 	headbob_time += self.velocity.length() * delta
 	%Camera3D.transform.origin = Vector3(
@@ -90,31 +122,80 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _process(delta: float) -> void:
-	_handle_stick_look_input(delta)
+	if is_on_floor() or _snapped_to_stairs_last_frame:
+		_last_frame_on_floor = Engine.get_physics_frames()
 	
+	_handle_stick_look_input(delta)
 	_crouch_uncrouch(delta)
 	
 	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	
-	# mind player look direction for the negations
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
 	
-	if is_on_floor():
+	if is_on_floor() or _snapped_to_stairs_last_frame:
 		jump_cnt = 0
 		jump_timer.stop()
 		_handle_ground_physics(delta)
 	else:
 		_handle_air_physics(delta)
-		
-	if Input.is_action_pressed("jump") and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
+	
+	var jumping : bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
+	if jumping and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
 		self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / MAX_JUMPS)) + 1)
 		jump_timer.start(jump_timeout)
 		jump_cnt += 1
 
-	move_and_slide()
+	if not _snap_up_stairs_check(delta):
+		move_and_slide()
+		_snap_down_stairs_check()
+	
+	_slide_camera_smooth(delta)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pass
+
+func _snap_down_stairs_check() -> void:
+	var has_snapped = false
+	var floor_below : bool = %StairsBelowRayCast3D.is_colliding() and not is_surface_too_steep(%StairsBelowRayCast3D.get_collision_normal())
+	var was_on_floor_prev_frame = Engine.get_physics_frames() - _last_frame_on_floor == 1
+	
+	if not is_on_floor() and velocity.y <= 0 and (was_on_floor_prev_frame or _snapped_to_stairs_last_frame) and floor_below:
+		var body_test_res = PhysicsTestMotionResult3D.new()
+		if _run_body_test_motion(self.global_transform, Vector3(0, -MAX_STEP_HEIGHT, 0), body_test_res):
+			_save_camera_pos()
+			var move_y = body_test_res.get_travel().y
+			self.position.y += move_y
+			apply_floor_snap()
+			has_snapped = true
+	
+	_snapped_to_stairs_last_frame = has_snapped
+
+func _snap_up_stairs_check(delta: float) -> bool:
+	if not is_on_floor() and not _snapped_to_stairs_last_frame:
+		return false
+	
+	if self.velocity.y > 0 or is_zero_approx((self.velocity * Vector3(1, 0, 1)).length()):
+		return false
+	
+	var expected_move_motion = self.velocity * Vector3(1, 0, 1) * delta
+	var step_pos_with_clearance = self.global_transform.translated(expected_move_motion + Vector3(0, MAX_STEP_HEIGHT * 2, 0))
+	var body_test_res = PhysicsTestMotionResult3D.new()
+	
+	if _run_body_test_motion(step_pos_with_clearance, Vector3(0, -MAX_STEP_HEIGHT * 2, 0), body_test_res) and body_test_res.get_collider().is_class("StaticBody3D"):
+		var step_height = ((step_pos_with_clearance.origin + body_test_res.get_travel()) - self.global_position).y
+		if step_height > MAX_STEP_HEIGHT or step_height <= 0.01 or (body_test_res.get_collision_point() - self.global_position).y > MAX_STEP_HEIGHT:
+			return false
+		
+		%StairsAheadRayCast3D.global_position = body_test_res.get_collision_point() + Vector3(0, MAX_STEP_HEIGHT, 0) + expected_move_motion.normalized() * 0.1
+		%StairsAheadRayCast3D.force_raycast_update()
+		
+		if %StairsAheadRayCast3D.is_colliding() and not is_surface_too_steep(%StairsAheadRayCast3D.get_collision_normal()):
+			_save_camera_pos()
+			self.global_position = step_pos_with_clearance.origin + body_test_res.get_travel()
+			apply_floor_snap()
+			return true
+	
+	return false
 
 func _handle_ground_physics(delta: float) -> void:
 	_friction(delta)
@@ -132,7 +213,7 @@ func _handle_air_physics(delta: float) -> void:
 	
 	_wall_run(delta)
 	
-	if is_on_floor():
+	if is_on_floor() or _snapped_to_stairs_last_frame:
 		_friction(delta)
 		_accelerate(delta)
 		last_bounce = Vector3.ZERO
@@ -175,21 +256,23 @@ func _wall_run(delta: float) -> void:
 	if is_on_wall() and Input.is_action_pressed("sprint"):
 		jump_cnt = MAX_JUMPS
 		wall_normal = get_slide_collision(0).get_normal()
+		
 		if Input.is_action_just_pressed("jump") and not wall_normal.is_equal_approx(last_bounce):
 			last_bounce = wall_normal
 			self.velocity += frict * wall_normal
 			self.velocity.y = max_speed * delta
 		else:
 			self.velocity -= wall_normal
-			self.velocity.y += frict * delta
+			self.velocity.y += WALLRUN_POWER * delta
 
 @onready var reg_height = %CollisionShape3D.shape.height
 func _crouch_uncrouch(delta) -> void:
 	var was_crouched = crouching
-	if Input.is_action_pressed("crouch"):
-		crouching = true
-	elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
-		crouching = false
+	if Input.is_action_just_pressed("crouch"):
+		if not crouching:
+			crouching = true
+		elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
+			crouching = false
 	
 	var bump_up_if_possible := 0.0
 	if was_crouched != crouching and not is_on_floor() and not _snapped_to_stairs_last_frame:
@@ -202,7 +285,6 @@ func _crouch_uncrouch(delta) -> void:
 		%Head.position.y -= res.get_travel().y
 		%Head.position.y = clampf(%Head.position.y, -CROUCH_DIST, 0)
 	
-	%Head.position.y = move_toward(%Head.position.y, (-CROUCH_DIST if crouching else 0), 7.0 * delta)
+	%Head.position.y = move_toward(%Head.position.y, (-CROUCH_DIST if crouching else 0.0), 7.0 * delta)
 	%CollisionShape3D.shape.height = reg_height - CROUCH_DIST if crouching else reg_height
 	%CollisionShape3D.position.y = %CollisionShape3D.shape.height / 2
-	
