@@ -13,13 +13,17 @@ var headbob_time := 0.0
 
 var cur_stick_look := Vector2.ZERO
 
-@export var jump_velocity := 13.0
+@export var jump_velocity := 3.7
 @export var auto_bhop = true
 @export var walk_speed := 4.3
 @export var sprint_speed := 7.7
 
 var last_bounce := Vector3.ZERO
 var wall_normal := Vector3.ZERO
+var jump_cnt := 0
+var max_jumps := 2
+var jump_timer : Timer = Timer.new()
+var jump_timeout := jump_velocity / 10
 
 @export var frict := 6.0
 @export var accel := 100.0
@@ -37,6 +41,9 @@ func _ready():
 	for child in %PlayerModel.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
 		child.set_layer_mask_value(2, true)
+	
+	add_child(jump_timer)
+	jump_timer.one_shot = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -80,13 +87,17 @@ func _process(delta: float) -> void:
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
 	
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump") or (auto_bhop and Input.is_action_pressed("jump")):
-			self.velocity.y += jump_velocity
-		
+		jump_cnt = 0
+		jump_timer.stop()
 		_handle_ground_physics(delta)
-	else :
+	else:
 		_handle_air_physics(delta)
-	
+		
+	if jump_cnt < max_jumps and jump_timer.is_stopped() and (Input.is_action_pressed("jump") or (auto_bhop and Input.is_action_pressed("jump"))):
+		self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / max_jumps)) + 1)
+		jump_timer.start(jump_timeout)
+		jump_cnt += 1
+
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:
@@ -158,6 +169,7 @@ func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
 
 func _wall_run(delta: float) -> void:
 	if is_on_wall() and Input.is_action_pressed("sprint"):
+		jump_cnt = max_jumps
 		wall_normal = get_slide_collision(0).get_normal()
 		if Input.is_action_just_pressed("jump") and !wall_normal.is_equal_approx(last_bounce):
 			last_bounce = wall_normal

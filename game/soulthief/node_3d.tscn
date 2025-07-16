@@ -744,20 +744,3 @@ shape = SubResource("ConvexPolygonShape3D_6migg")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_r3fl7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.66263, 0)
-x_mouse_sensitivity = 0.006
-y_mouse_sensitivity = 0.006
-x_stick_sensitivity = 0.12
-y_stick_sensitivity = 0.12
-stick_look_smoothing = 0.3
-headbob_move = 0.06
-headbob_frequency = 2.4
-jump_velocity = 13.0
-auto_bhop = true
-walk_speed = 4.3
-sprint_speed = 7.7
-frict = 6.0
-accel = 100.0
-stop_speed = 100.0
-max_speed = 320.0
-air_move_cap = 0.85
-air_speed = 500.0
