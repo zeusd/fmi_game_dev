@@ -1345,3 +1345,55 @@
 ( 992 -80 144 ) ( 992 -81 144 ) ( 992 -80 145 ) bricks1_5 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 }
+// entity 7
+{
+"classname" "omni_light"
+"origin" "528 16 72"
+"range" "50"
+"light" "16"
+"color" "255 200 0"
+"attenuation" "1"
+}
+// entity 8
+{
+"classname" "spot_light"
+"origin" "1152 -40 136"
+"angle" "65"
+"range" "10"
+"light" "16"
+"color" "255 200 0"
+"rotation_deg" "-90.0 -90.0 0.0"
+"attenuation" "0"
+}
+// entity 9
+{
+"classname" "spot_light"
+"origin" "1456 456 184"
+"angle" "65"
+"range" "10"
+"light" "16"
+"color" "255 200 0"
+"rotation_deg" "-90.0 -90.0 0.0"
+"attenuation" "0"
+}
+// entity 10
+{
+"classname" "spot_light"
+"origin" "1536 1120 184"
+"angle" "65"
+"range" "20"
+"light" "16"
+"color" "255 200 0"
+"rotation_deg" "-80.0 -180.0 0.0"
+"attenuation" "0"
+}
+// entity 11
+{
+"classname" "spot_light"
+"origin" "1120 1696 560"
+"color" "255 200 0"
+"angle" "45"
+"range" "20"
+"rotation_deg" "-90.0 -90.0 0.0"
+"attenuation" "0"
+}
