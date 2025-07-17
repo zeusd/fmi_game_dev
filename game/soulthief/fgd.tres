@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bxb0w5lalsn2d" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_ptpdh"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_t3dar"]
-[ext_resource type="Resource" uid="uid://b57xy5fo8o2g0" path="res://entities/omni_light.tres" id="2_q4u6f"]
-[ext_resource type="Resource" uid="uid://cmcs7hlto3gni" path="res://entities/spot_light.tres" id="3_7jryi"]
+[ext_resource type="Resource" uid="uid://b57xy5fo8o2g0" path="res://entities/light_omni.tres" id="2_7jryi"]
+[ext_resource type="Resource" uid="uid://cmcs7hlto3gni" path="res://entities/light_spot.tres" id="3_7jryi"]
 
 [resource]
 script = ExtResource("1_ptpdh")
@@ -11,5 +11,5 @@ export_file = false
 target_map_editor = 1
 fgd_name = "soulthief"
 base_fgd_files = Array[Resource]([ExtResource("1_t3dar")])
-entity_definitions = Array[Resource]([ExtResource("2_q4u6f"), ExtResource("3_7jryi")])
+entity_definitions = Array[Resource]([ExtResource("2_7jryi"), ExtResource("3_7jryi")])
 metadata/_custom_type_script = "uid://bxb0w5lalsn2d"

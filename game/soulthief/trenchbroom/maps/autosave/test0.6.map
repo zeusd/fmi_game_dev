@@ -5,7 +5,7 @@
 "mapversion" "220"
 "wad" "assets\textures\world\wads\medieval.wad"
 "classname" "worldspawn"
-"_tb_mod" "assets;entities"
+"_tb_mod" "assets"
 // brush 0
 {
 ( 624 -48 -16 ) ( 624 -47 -16 ) ( 624 -48 -15 ) bricks4_4 [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1
@@ -1347,12 +1347,23 @@
 }
 // entity 7
 {
+"classname" "spot_light"
+"origin" "1536 1120 184"
+"angle" "65"
+"range" "20"
+"light" "16"
+"color" "255 200 0"
+"rotation_deg" "-80.0 -180.0 0.0"
+"attenuation" "0"
+}
+// entity 8
+{
 "classname" "light_omni"
 "origin" "536 16 64"
 "range" "50"
 "color" "255 200 0"
 }
-// entity 8
+// entity 9
 {
 "classname" "light_spot"
 "origin" "1152 -40 136"
@@ -1362,7 +1373,17 @@
 "attenuation" "0"
 "spot_angle" "65"
 }
-// entity 9
+// entity 10
+{
+"classname" "light_spot"
+"origin" "1456 456 184"
+"attenuation" "0"
+"color" "255 200 0"
+"range" "10"
+"rotation_deg" "-90.0 -90.0 0.0"
+"spot_angle" "65"
+}
+// entity 11
 {
 "classname" "light_spot"
 "origin" "1120 1696 560"
@@ -1371,21 +1392,10 @@
 "range" "20"
 "rotation_deg" "-90.0 -90.0 0.0"
 }
-// entity 10
-{
-"classname" "light_spot"
-"origin" "1520 1104 184"
-"spot_angle" "65"
-"rotation_deg" "-70.0 -180.0 0.0"
-"attenuation" "0"
-"color" "255 200 0"
-"range" "20"
-}
-// entity 11
+// entity 12
 {
 "classname" "light_omni"
-"origin" "1392 456 176"
+"origin" "1536 1120 192"
 "attenuation" "0"
 "color" "255 200 0"
-"range" "10"
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=4 uid="uid://c8lk6phvitt7g"]
+[gd_scene load_steps=159 format=4 uid="uid://c8lk6phvitt7g"]
 
 [ext_resource type="Script" uid="uid://b6nbs6rtakpre" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_a0tk4"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_r3fl7"]
@@ -8,8 +8,23 @@
 [ext_resource type="Material" uid="uid://c0xtfy7ul4m14" path="res://assets/textures/bricks5_1.tres" id="5_6iypd"]
 [ext_resource type="Material" uid="uid://bmpstxgwuu1rd" path="res://assets/textures/bricks4_6.tres" id="6_tereu"]
 [ext_resource type="Material" uid="uid://c6x5myh30lqvw" path="res://assets/textures/bricks1_7.tres" id="7_cdqbm"]
-[ext_resource type="Script" uid="uid://sl7kynx4vjwo" path="res://scripts/omni_light.gd" id="8_4arys"]
-[ext_resource type="Script" uid="uid://xcqpyy1xq38t" path="res://scripts/spot_light.gd" id="9_6iypd"]
+[ext_resource type="Script" uid="uid://sl7kynx4vjwo" path="res://scripts/light_omni.gd" id="8_4arys"]
+[ext_resource type="Script" uid="uid://xcqpyy1xq38t" path="res://scripts/light_spot.gd" id="9_6iypd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cdqbm"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_imku0"]
+sky_material = SubResource("ProceduralSkyMaterial_cdqbm")
+
+[sub_resource type="Environment" id="Environment_wlxy5"]
+background_mode = 2
+sky = SubResource("Sky_imku0")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6iypd"]
 _surfaces = [{
@@ -509,6 +524,9 @@ points = PackedVector3Array(-2.5, 4.5, 27, -2.5, -0.5, 27, -1.5, -0.5, 27, -1.5,
 
 [node name="Training" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wlxy5")
+
 [node name="FuncGodotMap" type="Node3D" parent="."]
 script = ExtResource("1_a0tk4")
 local_map_file = "uid://br1s2sls0hsbc"
@@ -953,14 +971,14 @@ shape = SubResource("ConvexPolygonShape3D_5tpnh")
 [node name="entity_0_brush_142_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_6xwum")
 
-[node name="entity_1_omni_light" type="OmniLight3D" parent="FuncGodotMap"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 2.25, 16.5)
+[node name="entity_1_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 2, 16.75)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
 omni_range = 50.0
 script = ExtResource("8_4arys")
 
-[node name="entity_2_spot_light" type="SpotLight3D" parent="FuncGodotMap"]
+[node name="entity_2_light_spot" type="SpotLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, -1.25, 4.25, 36)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
@@ -969,30 +987,29 @@ spot_attenuation = 0.0
 spot_angle = 65.0
 script = ExtResource("9_6iypd")
 
-[node name="entity_3_spot_light" type="SpotLight3D" parent="FuncGodotMap"]
-transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 14.25, 5.75, 45.5)
-light_color = Color(1, 0.784314, 0, 1)
-light_energy = 16.0
-spot_range = 10.0
-spot_attenuation = 0.0
-spot_angle = 65.0
-script = ExtResource("9_6iypd")
-
-[node name="entity_4_spot_light" type="SpotLight3D" parent="FuncGodotMap"]
-transform = Transform3D(-1, -8.60946e-08, 1.51808e-08, 0, 0.173648, 0.984808, -8.74228e-08, 0.984808, -0.173648, 35, 5.75, 48)
-light_color = Color(1, 0.784314, 0, 1)
-light_energy = 16.0
-spot_range = 20.0
-spot_attenuation = 0.0
-spot_angle = 65.0
-script = ExtResource("9_6iypd")
-
-[node name="entity_5_spot_light" type="SpotLight3D" parent="FuncGodotMap"]
+[node name="entity_3_light_spot" type="SpotLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-4.37114e-08, 1, 4.37114e-08, 0, -4.37114e-08, 1, 1, 4.37114e-08, 1.91069e-15, 53, 17.5, 35)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
 spot_range = 20.0
 spot_attenuation = 0.0
 script = ExtResource("9_6iypd")
+
+[node name="entity_4_light_spot" type="SpotLight3D" parent="FuncGodotMap"]
+transform = Transform3D(-1, -8.21505e-08, 2.99004e-08, 0, 0.34202, 0.939693, -8.74228e-08, 0.939693, -0.34202, 34.5, 5.75, 47.5)
+light_color = Color(1, 0.784314, 0, 1)
+light_energy = 16.0
+spot_range = 20.0
+spot_attenuation = 0.0
+spot_angle = 65.0
+script = ExtResource("9_6iypd")
+
+[node name="entity_5_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 14.25, 5.5, 43.5)
+light_color = Color(1, 0.784314, 0, 1)
+light_energy = 16.0
+omni_range = 10.0
+omni_attenuation = 0.0
+script = ExtResource("8_4arys")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_r3fl7")]

@@ -16,6 +16,7 @@ var cur_stick_look := Vector2.ZERO
 @export var jump_velocity := 5.3
 @export var walk_speed := 5.3
 @export var sprint_speed := 7.7
+var sprinting := false
 
 const WALLRUN_POWER = 3
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -44,9 +45,14 @@ var crouching = false
 @export var air_speed := 500.0
 
 var wish_dir := Vector3.ZERO
+var cam_aligned_wish_dir := Vector3.ZERO
+
+const NOCLIP_SPEED_ORIG := 3.0
+var noclip_speed_mult := NOCLIP_SPEED_ORIG
+var noclip := false
 
 func get_speed() -> float:
-	var speed = sprint_speed if Input.is_action_pressed("sprint") else walk_speed
+	var speed = sprint_speed if sprinting else walk_speed
 	return speed * CROUCH_SLOW if crouching else speed
 
 func is_surface_too_steep(normal: Vector3) -> bool:
@@ -81,6 +87,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			rotate_y(-event.relative.x * x_mouse_sensitivity)
 			%Camera3D.rotate_x(event.relative.y * y_mouse_sensitivity)
 			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	if noclip:
+		if event is InputEventMouseButton and event.is_pressed():
+			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				noclip_speed_mult = min(100.0, noclip_speed_mult * 1.1)
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				noclip_speed_mult = max(0.1, noclip_speed_mult * 0.9)
 
 func _handle_stick_look_input(delta: float) -> void:
 	var target_look = Input.get_vector("look_left", "look_right", "look_up", "look_down").normalized()
@@ -122,6 +134,8 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _process(delta: float) -> void:
+	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
+	
 	if is_on_floor() or _snapped_to_stairs_last_frame:
 		_last_frame_on_floor = Engine.get_physics_frames()
 	
@@ -131,28 +145,48 @@ func _process(delta: float) -> void:
 	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
+	cam_aligned_wish_dir = %Camera3D.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
+	if not _handle_noclip(delta):
+		if is_on_floor() or _snapped_to_stairs_last_frame:
+			jump_cnt = 0
+			jump_timer.stop()
+			_handle_ground_physics(delta)
+		else:
+			_handle_air_physics(delta)
 	
-	if is_on_floor() or _snapped_to_stairs_last_frame:
-		jump_cnt = 0
-		jump_timer.stop()
-		_handle_ground_physics(delta)
-	else:
-		_handle_air_physics(delta)
-	
-	var jumping : bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
-	if jumping and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
-		self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / MAX_JUMPS)) + 1)
-		jump_timer.start(jump_timeout)
-		jump_cnt += 1
+		var jumping : bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
+		if jumping and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
+			self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / MAX_JUMPS)) + 1)
+			jump_timer.start(jump_timeout)
+			jump_cnt += 1
 
-	if not _snap_up_stairs_check(delta):
-		move_and_slide()
-		_snap_down_stairs_check()
+		if not _snap_up_stairs_check(delta):
+			move_and_slide()
+			_snap_down_stairs_check()
 	
 	_slide_camera_smooth(delta)
 
 func _physics_process(_delta: float) -> void:
 	pass
+
+func _handle_noclip(delta: float) -> bool:
+	if Input.is_action_just_pressed("_noclip") and OS.has_feature("debug"):
+		noclip = !noclip
+		noclip_speed_mult = NOCLIP_SPEED_ORIG
+	
+	$CollisionShape3D.disabled = noclip
+	
+	if not noclip:
+		return false
+	
+	var speed = get_speed() * noclip_speed_mult
+	if sprinting:
+		speed *= NOCLIP_SPEED_ORIG
+	
+	self.velocity = cam_aligned_wish_dir * speed
+	self.global_position += self.velocity * delta
+	
+	return true
 
 func _snap_down_stairs_check() -> void:
 	var has_snapped = false
@@ -253,7 +287,7 @@ func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
 		self.velocity += accel_speed * wish_veloc
 
 func _wall_run(delta: float) -> void:
-	if is_on_wall() and Input.is_action_pressed("sprint"):
+	if is_on_wall() and sprinting:
 		jump_cnt = MAX_JUMPS
 		wall_normal = get_slide_collision(0).get_normal()
 		
