@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDSolidClass" load_steps=3 format=3 uid="uid://cya8ths816sjt"]
+
+[ext_resource type="Script" uid="uid://bo7t1rujs5syu" path="res://addons/func_godot/src/fgd/func_godot_fgd_solid_class.gd" id="1_3k1ek"]
+[ext_resource type="Script" uid="uid://dujb8xs3tyg5x" path="res://scripts/st_water.gd" id="2_t80na"]
+
+[resource]
+script = ExtResource("1_3k1ek")
+spawn_type = 2
+origin_type = 4
+build_visuals = true
+use_in_baked_light = true
+shadow_casting_setting = 1
+build_occlusion = false
+render_layers = 1
+collision_shape_type = 1
+collision_layer = 1
+collision_mask = 1
+collision_priority = 1.0
+collision_shape_margin = 0.04
+add_textures_metadata = false
+add_vertex_metadata = false
+add_face_position_metadata = false
+add_face_normal_metadata = false
+add_collision_shape_face_range_metadata = false
+script_class = ExtResource("2_t80na")
+classname = "st_water"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(0, 0.42, 1, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = "Area3D"
+name_property = ""
+metadata/_custom_type_script = "uid://bo7t1rujs5syu"
