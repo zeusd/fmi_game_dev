@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://m0wu2ssbjov1"]
+
+[ext_resource type="Texture2D" uid="uid://dxpddn6tv7mmx" path="res://assets/textures/special/st_water0.png" id="1_qwxac"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
+albedo_texture = ExtResource("1_qwxac")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.6, 0.6, 0.6)
+uv1_triplanar = true
+texture_filter = 2

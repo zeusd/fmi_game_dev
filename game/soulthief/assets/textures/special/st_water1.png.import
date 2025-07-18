@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u17gila1k86b"
-path.s3tc="res://.godot/imported/skip.png-f72443bba6be90bcfdcb6f2321669c22.s3tc.ctex"
+uid="uid://b400x1s3t43du"
+path.s3tc="res://.godot/imported/st_water1.png-a7bdee90a2b5051461957ca247d6cb0b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/special/skip.png"
-dest_files=["res://.godot/imported/skip.png-f72443bba6be90bcfdcb6f2321669c22.s3tc.ctex"]
+source_file="res://assets/textures/special/st_water1.png"
+dest_files=["res://.godot/imported/st_water1.png-a7bdee90a2b5051461957ca247d6cb0b.s3tc.ctex"]
 
 [params]
 

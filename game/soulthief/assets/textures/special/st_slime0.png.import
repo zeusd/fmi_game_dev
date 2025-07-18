@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u17gila1k86b"
-path.s3tc="res://.godot/imported/skip.png-f72443bba6be90bcfdcb6f2321669c22.s3tc.ctex"
+uid="uid://ceiuybt6ys3kf"
+path.s3tc="res://.godot/imported/st_slime0.png-7a21fe4d62a31e3608c3f1f56374041e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/special/skip.png"
-dest_files=["res://.godot/imported/skip.png-f72443bba6be90bcfdcb6f2321669c22.s3tc.ctex"]
+source_file="res://assets/textures/special/st_slime0.png"
+dest_files=["res://.godot/imported/st_slime0.png-7a21fe4d62a31e3608c3f1f56374041e.s3tc.ctex"]
 
 [params]
 

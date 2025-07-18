@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dhms2q388b4bi"]
+
+[ext_resource type="Texture2D" uid="uid://bxfhf2uo8y01i" path="res://assets/textures/special/st_skip_water.png" id="1_q2p8k"]
+
+[resource]
+albedo_texture = ExtResource("1_q2p8k")
+metallic_specular = 0.0
+texture_filter = 2
