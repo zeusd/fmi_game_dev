@@ -27,8 +27,17 @@ classname = "st_liquid"
 description = ""
 func_godot_internal = false
 base_classes = Array[Resource]([])
-class_properties = {}
-class_property_descriptions = {}
+class_properties = {
+"gamma": 1.0,
+"liquid_type": {
+"lava": 2,
+"slime": 1,
+"water": 0
+}
+}
+class_property_descriptions = {
+"liquid_type": ["Which liquid behavior", 0]
+}
 auto_apply_to_matching_node_properties = false
 meta_properties = {
 "color": Color(0.8, 0.8, 0.8, 1),
