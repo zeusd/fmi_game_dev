@@ -1,6 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D screen_texture : hint_screen_texture;
+uniform vec4 tint : source_color;
 
 void fragment() {
     vec2 uv = SCREEN_UV;
@@ -21,7 +22,7 @@ void fragment() {
     uv.y += sin(angle * rippleDensity + TIME * rippleSpeed) * rippleStrength * distance;
 
     // Simple blur effect
-    vec4 color = vec4(0.0);
+	vec4 color = tint;
     float total = 0.0;
     for (float x = -2.0; x <= 2.0; x++) {
         for (float y = -2.0; y <= 2.0; y++) {

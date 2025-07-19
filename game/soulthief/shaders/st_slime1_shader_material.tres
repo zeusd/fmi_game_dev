@@ -6,7 +6,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_nsph6")
-shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo = Color(1, 1, 1, 0.7)
 shader_parameter/texture_albedo = ExtResource("2_50jiq")
 shader_parameter/albedo_texture_size = Vector2i(64, 64)
 shader_parameter/point_size = 1.0
