@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddg8c3vrt53w6"]
+[gd_scene load_steps=5 format=3 uid="uid://ddg8c3vrt53w6"]
 
 [ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
 
@@ -6,7 +6,10 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_u08xt"]
+radius = 0.1
+
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_u08xt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -36,6 +39,11 @@ unique_name_in_owner = true
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, 0)
 rotation_order = 1
 cull_mask = 1048573
+
+[node name="Area3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Area3D"]
+shape = SubResource("SphereShape3D_u08xt")
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
