@@ -40,9 +40,9 @@ transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, 
 rotation_order = 1
 cull_mask = 1048573
 
-[node name="CameraArea3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+[node name="Area3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D/CameraArea3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Area3D"]
 shape = SubResource("SphereShape3D_u08xt")
 
 [node name="Hand" type="Marker3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]

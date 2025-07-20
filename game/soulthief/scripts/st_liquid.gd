@@ -64,7 +64,7 @@ const ST_LAVA1 := "st_lava1"
 	#var head : Area3D = player.find_child("HeadArea")
 
 func _ready() -> void:
-	
+	self.add_to_group("liquid")
 	# # #
 	# SCREEN RIPPLE EFFECT
 	# # #

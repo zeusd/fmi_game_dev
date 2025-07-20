@@ -1,4 +1,4 @@
-[gd_scene load_steps=276 format=4 uid="uid://c8lk6phvitt7g"]
+[gd_scene load_steps=278 format=4 uid="uid://c8lk6phvitt7g"]
 
 [ext_resource type="Script" uid="uid://b6nbs6rtakpre" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_a0tk4"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_r3fl7"]
@@ -932,6 +932,10 @@ shader_parameter/height_falloff = 0.0
 shader_parameter/edge_fade = 0.1
 shader_parameter/fade_plane = Vector4(0, 1, 0, -999)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsnrv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lggff"]
+
 [node name="Training" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." groups=["env"]]
@@ -1737,7 +1741,7 @@ script = ExtResource("8_4arys")
 [node name="entity_10_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.5, -1.875, 37.25)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@37875")
+col_rect = NodePath("@ColorRect@21767")
 liquid_type = 1
 gamma = 0.7
 
@@ -1764,7 +1768,7 @@ script = ExtResource("8_4arys")
 [node name="entity_12_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 6, -2.5)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@37876")
+col_rect = NodePath("@ColorRect@21768")
 gamma = 0.7
 
 [node name="entity_12_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_12_st_liquid"]
@@ -1776,7 +1780,7 @@ shape = SubResource("ConvexPolygonShape3D_nnr25")
 [node name="entity_13_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 6, -10)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@37877")
+col_rect = NodePath("@ColorRect@21769")
 liquid_type = 2
 gamma = 1.0
 
@@ -1805,3 +1809,38 @@ visible = false
 size = Vector3(6.79346, 5.46399, 6.15479)
 material = SubResource("ShaderMaterial_jsnrv")
 script = ExtResource("19_ealrb")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.67752, 2.92685, 12.0886)
+mass = 5.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_jsnrv")
+
+[node name="weight" type="Node3D" parent="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D/weight"]
+mesh = SubResource("BoxMesh_lggff")
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45491, 2.92685, 12.0886)
+mass = 10.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2"]
+shape = SubResource("BoxShape3D_jsnrv")
+
+[node name="weight" type="Node3D" parent="RigidBody3D2"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2/weight"]
+mesh = SubResource("BoxMesh_lggff")
+
+[node name="RigidBody3D3" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3731, 2.92685, 12.0886)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
+shape = SubResource("BoxShape3D_jsnrv")
+
+[node name="weight" type="Node3D" parent="RigidBody3D3"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3/weight"]
+mesh = SubResource("BoxMesh_lggff")

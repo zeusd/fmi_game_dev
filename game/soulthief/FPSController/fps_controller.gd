@@ -44,6 +44,16 @@ var crouching = false
 @export var air_move_cap := 0.85
 @export var air_speed := 500.0
 
+@export var swim_up_speed := 7.0
+@export var water_speed_mult := 1.0
+var swimming = false
+
+const WEIGHT := 100
+const FORCE := 1.0
+
+var held_obj : RigidBody3D
+var look_speed : float
+
 var wish_dir := Vector3.ZERO
 var cam_aligned_wish_dir := Vector3.ZERO
 
@@ -87,6 +97,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			rotate_y(-event.relative.x * x_mouse_sensitivity)
 			%Camera3D.rotate_x(event.relative.y * y_mouse_sensitivity)
 			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			
+			look_speed = event.screen_relative.length()
+		else:
+			look_speed = 0.0
 	if noclip:
 		if event is InputEventMouseButton and event.is_pressed():
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -106,6 +120,13 @@ func _handle_stick_look_input(delta: float) -> void:
 	%Camera3D.rotate_x(cur_stick_look.y * y_stick_sensitivity)
 	%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("interact"):
+		if held_obj == null:
+			_hold_object()
+		else:
+			_drop_object()
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -147,12 +168,13 @@ func _process(delta: float) -> void:
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
 	cam_aligned_wish_dir = %Camera3D.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
 	if not _handle_noclip(delta):
-		if is_on_floor() or _snapped_to_stairs_last_frame:
-			jump_cnt = 0
-			jump_timer.stop()
-			_handle_ground_physics(delta)
-		else:
-			_handle_air_physics(delta)
+		if not _handle_liquid_physics(delta):
+			if is_on_floor() or _snapped_to_stairs_last_frame:
+				jump_cnt = 0
+				jump_timer.stop()
+				_handle_ground_physics(delta)
+			else:
+				_handle_air_physics(delta)
 	
 		var jumping : bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
 		if jumping and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
@@ -161,8 +183,14 @@ func _process(delta: float) -> void:
 			jump_cnt += 1
 
 		if not _snap_up_stairs_check(delta):
+			_push_rigid_bodies()
 			move_and_slide()
 			_snap_down_stairs_check()
+	
+	if held_obj != null:
+		var obj_pos = held_obj.global_transform.origin
+		var target_pos = %Hand.global_transform.origin
+		held_obj.global_position -= obj_pos - target_pos
 	
 	_slide_camera_smooth(delta)
 
@@ -230,6 +258,58 @@ func _snap_up_stairs_check(delta: float) -> bool:
 			return true
 	
 	return false
+
+func _push_rigid_bodies() -> void:
+	
+	for i in get_slide_collision_count():
+		var c := get_slide_collision(i)
+		if c.get_collider() is RigidBody3D:
+			var push_dir = -c.get_normal()
+			var veloc_diff = self.velocity.dot(push_dir) - c.get_collider().linear_velocity.dot(push_dir)
+			veloc_diff = max(0, veloc_diff)
+			if swimming:
+				veloc_diff *= 100
+			
+			var mass_ratio = min(1.0, WEIGHT / c.get_collider().mass)
+			var push_force = mass_ratio * FORCE
+			c.get_collider().apply_impulse(push_dir * veloc_diff * push_force, c.get_position() - c.get_collider().global_position)
+
+func _hold_object() -> void:
+	var collider = %Interaction.get_collider()
+	if collider != null and collider is RigidBody3D:
+		held_obj = collider
+		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = true
+	
+
+func _drop_object() -> void:
+	if held_obj != null:
+		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = false
+		var target_pos : Vector3 = %Camera3D.global_transform.origin + (%Camera3D.global_basis * Vector3(0, 0, -2))
+		var obj_pos : Vector3 = held_obj.global_transform.origin
+		held_obj.linear_velocity = (target_pos - obj_pos) * (look_speed / (3 + held_obj.mass))
+		held_obj.linear_velocity += self.velocity
+		
+		
+		held_obj = null
+
+func _handle_liquid_physics(delta: float) -> bool:
+	if get_tree().get_nodes_in_group("liquid").all(func(area: Area3D): return !area.overlaps_body(self)):
+		swimming = false
+		return false
+	
+	if not is_on_floor():
+		velocity.y -= gravity * 0.1 * delta
+
+	self.velocity += cam_aligned_wish_dir * get_speed() * delta
+	
+	if Input.is_action_pressed("jump"):
+		self.velocity.y -= cam_aligned_wish_dir.y * get_speed() * delta
+		self.velocity.y += swim_up_speed * delta
+	
+	self.velocity = self.velocity.lerp(Vector3.ZERO, delta)
+	
+	swimming = true
+	return true
 
 func _handle_ground_physics(delta: float) -> void:
 	_friction(delta)
