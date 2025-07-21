@@ -50,7 +50,9 @@ var swimming = false
 
 const WEIGHT := 100
 const FORCE := 1.0
+const THROW_FORCE := 70
 
+#signal interact_obj
 var held_obj : RigidBody3D
 var look_speed : float
 
@@ -82,6 +84,9 @@ func _ready():
 	for child in %PlayerModel.find_children("*", "VisualInstance3D"):
 		child.set_layer_mask_value(1, false)
 		child.set_layer_mask_value(2, true)
+	
+	%sword_down.visible = false
+	%sword_up.visible = true
 	
 	add_child(jump_timer)
 	jump_timer.one_shot = true
@@ -127,6 +132,8 @@ func _input(event: InputEvent) -> void:
 			_hold_object()
 		else:
 			_drop_object()
+	if held_obj != null and Input.is_action_just_pressed("attack"):
+		_drop_object(THROW_FORCE)
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -155,6 +162,12 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _process(delta: float) -> void:
+	#if %Interaction.is_colliding():
+		#var reach = %Interaction.get_collider()
+		#interact_obj.emit(reach)
+	#else:
+		#interact_obj.emit(null)
+	
 	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
 	
 	if is_on_floor() or _snapped_to_stairs_last_frame:
@@ -270,30 +283,33 @@ func _push_rigid_bodies() -> void:
 			if swimming:
 				veloc_diff *= 100
 			
-			var mass_ratio = min(1.0, WEIGHT / c.get_collider().mass)
+			var mass_ratio = min(1.0, WEIGHT / (c.get_collider().mass))
 			var push_force = mass_ratio * FORCE
 			c.get_collider().apply_impulse(push_dir * veloc_diff * push_force, c.get_position() - c.get_collider().global_position)
 
 func _hold_object() -> void:
 	var collider = %Interaction.get_collider()
+	#for i in %ShapeCast3D.get_collision_count():
+		#var collider = %ShapeCast3D.get_collider(i)
 	if collider != null and collider is RigidBody3D:
 		held_obj = collider
 		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = true
 	
 
-func _drop_object() -> void:
+func _drop_object(throw : float = 0) -> void:
 	if held_obj != null:
 		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = false
 		var target_pos : Vector3 = %Camera3D.global_transform.origin + (%Camera3D.global_basis * Vector3(0, 0, -2))
 		var obj_pos : Vector3 = held_obj.global_transform.origin
-		held_obj.linear_velocity = (target_pos - obj_pos) * (look_speed / (3 + held_obj.mass))
-		held_obj.linear_velocity += self.velocity
-		
+		held_obj.linear_velocity = self.velocity
+		held_obj.linear_velocity += (target_pos - obj_pos) * (look_speed / (3 + held_obj.mass))
+		if not is_zero_approx(throw) :
+			held_obj.linear_velocity += (throw / (3 + held_obj.mass)) * (obj_pos - %Camera3D.global_transform.origin)
 		
 		held_obj = null
 
 func _handle_liquid_physics(delta: float) -> bool:
-	if get_tree().get_nodes_in_group("liquid").all(func(area: Area3D): return !area.overlaps_body(self)):
+	if get_tree().get_nodes_in_group("LIQUID").all(func(area: Area3D): return !area.overlaps_body(self)):
 		swimming = false
 		return false
 	
@@ -385,8 +401,16 @@ func _crouch_uncrouch(delta) -> void:
 	if Input.is_action_just_pressed("crouch"):
 		if not crouching:
 			crouching = true
+			#%knife_up.visible = false
+			#%knife_down.visible = true
+			%sword_up.visible = false
+			%sword_down.visible = true
 		elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
 			crouching = false
+			#%knife_down.visible = false
+			#%knife_up.visible = true
+			%sword_down.visible = false
+			%sword_up.visible = true
 	
 	var bump_up_if_possible := 0.0
 	if was_crouched != crouching and not is_on_floor() and not _snapped_to_stairs_last_frame:

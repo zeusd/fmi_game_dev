@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://clwc3ssv0fvpl"]
+
+[ext_resource type="PackedScene" uid="uid://df1eacwvndo47" path="res://assets/models/blender/sword/sword.blend" id="1_td0cs"]
+[ext_resource type="ArrayMesh" uid="uid://d1a3kw14misgy" path="res://assets/models/blender/sword2/sword3.res" id="2_4l4mc"]
+
+[node name="Hands" type="Node3D"]
+
+[node name="sword" parent="." instance=ExtResource("1_td0cs")]
+
+[node name="Blade" parent="sword" index="0"]
+layers = 3
+mesh = ExtResource("2_4l4mc")
+
+[editable path="sword"]

@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i7rw04pvp3gw"
-path.s3tc="res://.godot/imported/sky3.png-366af8c18bc8e9b055c7ce7e03ce6b69.s3tc.ctex"
+uid="uid://g0e11b2w20be"
+path.s3tc="res://.godot/imported/sword3_sword_texture.png-08326cd771ec537def202a26da1f4bd5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "bffb93f8cee12e880b57d51e2ac084cf"
+}
 
 [deps]
 
-source_file="res://assets/textures/special/sky3.png"
-dest_files=["res://.godot/imported/sky3.png-366af8c18bc8e9b055c7ce7e03ce6b69.s3tc.ctex"]
+source_file="res://assets/models/blender/sword2/sword3_sword_texture.png"
+dest_files=["res://.godot/imported/sword3_sword_texture.png-08326cd771ec537def202a26da1f4bd5.s3tc.ctex"]
 
 [params]
 

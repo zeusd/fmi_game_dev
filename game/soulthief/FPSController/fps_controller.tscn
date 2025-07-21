@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddg8c3vrt53w6"]
+[gd_scene load_steps=6 format=3 uid="uid://ddg8c3vrt53w6"]
 
 [ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
+[ext_resource type="PackedScene" uid="uid://df1eacwvndo47" path="res://assets/models/blender/sword/sword.blend" id="3_wwe65"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tk4"]
 
@@ -9,7 +10,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_u08xt"]
 radius = 0.1
 
-[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["PLAYER"]]
 script = ExtResource("1_u08xt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -52,6 +53,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 [node name="Interaction" type="RayCast3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -3)
+
+[node name="sword_up" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
+unique_name_in_owner = true
+transform = Transform3D(0.967935, -0.251064, -0.00830774, 0.251073, 0.967968, -4.48913e-08, 0.00804156, -0.00208579, 0.999965, 1.00608, -0.43274, -1.11991)
+
+[node name="sword_down" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
+unique_name_in_owner = true
+transform = Transform3D(0.490976, 0.869261, 0.057691, -0.867141, 0.493994, -0.0635267, -0.0837203, -0.0188362, 0.996311, 0.31522, -0.540031, -1.1122)
+visible = false
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
