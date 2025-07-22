@@ -56,12 +56,11 @@ target_position = Vector3(0, 0, -3)
 
 [node name="sword_up" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
 unique_name_in_owner = true
-transform = Transform3D(0.967935, -0.251064, -0.00830774, 0.251073, 0.967968, -4.48913e-08, 0.00804156, -0.00208579, 0.999965, 1.00608, -0.43274, -1.11991)
+transform = Transform3D(0.967935, -0.251064, -0.00830774, 0.251073, 0.967968, -4.48913e-08, 0.00804156, -0.00208579, 0.999965, 0.694488, -0.43274, -1.11991)
 
 [node name="sword_down" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
 unique_name_in_owner = true
 transform = Transform3D(0.490976, 0.869261, 0.057691, -0.867141, 0.493994, -0.0635267, -0.0837203, -0.0188362, 0.996311, 0.31522, -0.540031, -1.1122)
-visible = false
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
