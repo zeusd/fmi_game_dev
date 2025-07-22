@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7oted57d2hbg"]
+
+[ext_resource type="Texture2D" uid="uid://bjja1rarumxq6" path="res://assets/textures/special/st_lava1.png" id="1_sh510"]
+
+[resource]
+albedo_texture = ExtResource("1_sh510")
+metallic_specular = 0.0
+texture_filter = 2

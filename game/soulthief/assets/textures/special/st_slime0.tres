@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ultsreqpx104"]
+
+[ext_resource type="Texture2D" uid="uid://ceiuybt6ys3kf" path="res://assets/textures/special/st_slime0.png" id="1_gi7v8"]
+
+[resource]
+albedo_texture = ExtResource("1_gi7v8")
+metallic_specular = 0.0
+texture_filter = 2

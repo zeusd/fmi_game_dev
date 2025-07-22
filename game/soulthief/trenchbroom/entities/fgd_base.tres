@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=8 format=3 uid="uid://b32n2k0guskgy"]
+
+[ext_resource type="Resource" uid="uid://d4buv26pirxbl" path="res://trenchbroom/entities/base/func_base.tres" id="1_d7rq8"]
+[ext_resource type="Script" uid="uid://bxb0w5lalsn2d" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_hfq5a"]
+[ext_resource type="Resource" uid="uid://dukx4b4xgo1o2" path="res://trenchbroom/entities/base/light_base.tres" id="1_nrwbv"]
+[ext_resource type="Resource" uid="uid://15u0x03860vi" path="res://trenchbroom/entities/base/globalname_base.tres" id="2_w5nsc"]
+[ext_resource type="Resource" uid="uid://bi7gdi7kpbwbv" path="res://trenchbroom/entities/base/targetname_base.tres" id="4_jkvpb"]
+[ext_resource type="Resource" uid="uid://c6c6r8gk6owi" path="res://trenchbroom/entities/base/target_base.tres" id="5_vcu7e"]
+[ext_resource type="Resource" uid="uid://hnx0olvm0jt2" path="res://trenchbroom/entities/base/trigger_base.tres" id="6_b4shb"]
+
+[resource]
+script = ExtResource("1_hfq5a")
+export_file = false
+target_map_editor = 1
+fgd_name = "base"
+base_fgd_files = Array[Resource]([])
+entity_definitions = Array[Resource]([ExtResource("1_d7rq8"), ExtResource("2_w5nsc"), ExtResource("1_nrwbv"), ExtResource("4_jkvpb"), ExtResource("5_vcu7e"), ExtResource("6_b4shb")])
+metadata/_custom_type_script = "uid://bxb0w5lalsn2d"

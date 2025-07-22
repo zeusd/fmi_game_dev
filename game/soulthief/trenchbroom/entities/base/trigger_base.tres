@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDBaseClass" load_steps=5 format=3 uid="uid://hnx0olvm0jt2"]
+
+[ext_resource type="Script" uid="uid://by017veugu3a1" path="res://addons/func_godot/src/fgd/func_godot_fgd_base_class.gd" id="1_0kba8"]
+[ext_resource type="Resource" uid="uid://c6c6r8gk6owi" path="res://trenchbroom/entities/base/target_base.tres" id="1_73jh0"]
+[ext_resource type="Resource" uid="uid://bi7gdi7kpbwbv" path="res://trenchbroom/entities/base/targetname_base.tres" id="2_7hbee"]
+[ext_resource type="Resource" uid="uid://15u0x03860vi" path="res://trenchbroom/entities/base/globalname_base.tres" id="3_bi0tf"]
+
+[resource]
+script = ExtResource("1_0kba8")
+classname = "trigger"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([ExtResource("1_73jh0"), ExtResource("2_7hbee"), ExtResource("3_bi0tf")])
+class_properties = {}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(0.8, 0.8, 0.8, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_class = ""
+name_property = ""

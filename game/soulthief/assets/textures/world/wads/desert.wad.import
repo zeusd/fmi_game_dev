@@ -1,0 +1,16 @@
+[remap]
+
+importer="func_godot.wad"
+type="Resource"
+uid="uid://c6vtos0km36ar"
+path="res://.godot/imported/desert.wad-f98e6565ccaafa3cfa922f0a59bb69c7.res"
+
+[deps]
+
+source_file="res://assets/textures/world/wads/desert.wad"
+dest_files=["res://.godot/imported/desert.wad-f98e6565ccaafa3cfa922f0a59bb69c7.res"]
+
+[params]
+
+palette_file="res://addons/func_godot/palette.lmp"
+generate_mipmaps=true

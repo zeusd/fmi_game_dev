@@ -1,0 +1,16 @@
+[remap]
+
+importer="func_godot.wad"
+type="Resource"
+uid="uid://g8tpbvscp3jk"
+path="res://.godot/imported/impel.wad-67c42fe0483cb786318de62339f98676.res"
+
+[deps]
+
+source_file="res://assets/textures/world/wads/impel.wad"
+dest_files=["res://.godot/imported/impel.wad-67c42fe0483cb786318de62339f98676.res"]
+
+[params]
+
+palette_file="res://addons/func_godot/palette.lmp"
+generate_mipmaps=true

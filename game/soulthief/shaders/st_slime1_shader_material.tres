@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cco4ckq86gurw"]
+
+[ext_resource type="Shader" uid="uid://7hhweewsryej" path="res://shaders/st_slime1.gdshader" id="1_nsph6"]
+[ext_resource type="Texture2D" uid="uid://bd2e8vjql1lyp" path="res://assets/textures/special/st_slime1.png" id="2_50jiq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_nsph6")
+shader_parameter/albedo = Color(1, 1, 1, 0.7)
+shader_parameter/texture_albedo = ExtResource("2_50jiq")
+shader_parameter/albedo_texture_size = Vector2i(64, 64)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_blend_sharpness = 1.0
+shader_parameter/uv1_scale = Vector3(0.6, 0.6, 0.6)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)

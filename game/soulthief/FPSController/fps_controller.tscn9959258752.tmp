@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddg8c3vrt53w6"]
+
+[ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tk4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u08xt"]
+radius = 0.1
+
+[node name="CharacterBody3D" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_u08xt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_a0tk4")
+
+[node name="PlayerModel" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerModel"]
+unique_name_in_owner = true
+mesh = SubResource("CapsuleMesh_a0tk4")
+
+[node name="HeadOriginal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.875, 0)
+
+[node name="Head" type="Node3D" parent="HeadOriginal"]
+unique_name_in_owner = true
+
+[node name="CameraSmooth" type="Node3D" parent="HeadOriginal/Head"]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="HeadOriginal/Head/CameraSmooth"]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, 0)
+rotation_order = 1
+cull_mask = 1048573
+
+[node name="Area3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Area3D"]
+shape = SubResource("SphereShape3D_u08xt")
+
+[node name="Hand" type="Marker3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Interaction" type="RayCast3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -3)
+
+[node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0.75)
+target_position = Vector3(0, -0.55, 0)
+
+[node name="StairsBelowRayCast3D" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, -0.75, 0)
