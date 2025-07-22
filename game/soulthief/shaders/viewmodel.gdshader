@@ -26,15 +26,16 @@ void vertex() {
 	//PROJECTION_MATRIX[1][1] = -onetanfov;
 	//PROJECTION_MATRIX[0][0] = onetanfov / aspect;
 	//POSITION.z = mix(POSITION.z, POSITION.w, 0.999);
-	float scale = 1.0 / tan(viewmodel_fov * 0.5 * PI / -180.0);
-	PROJECTION_MATRIX[0][0] = scale / (-VIEWPORT_SIZE.x / VIEWPORT_SIZE.y);
-	PROJECTION_MATRIX[1][1] = scale;
+	float scale = 1.0 / tan(viewmodel_fov * 0.5 * PI / 180.0);
+	PROJECTION_MATRIX[0][0] = scale / (VIEWPORT_SIZE.x / VIEWPORT_SIZE.y);
+	PROJECTION_MATRIX[1][1] = -scale;
 
 	POSITION = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX.xyz, 1.0);
+	POSITION.z = mix(POSITION.z, 0, -2);
 }
 
 void fragment() {
-	DEPTH = FRAGCOORD.z * 19.99;
+	//DEPTH = FRAGCOORD.z * 19.99;
 	vec2 base_uv = UV;
 	vec4 albedo_tex = texture(texture_albedo,base_uv);
 	albedo_tex *= COLOR;

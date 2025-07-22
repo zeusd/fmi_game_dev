@@ -100,7 +100,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x * x_mouse_sensitivity)
-			%Camera3D.rotate_x(event.relative.y * y_mouse_sensitivity)
+			%Camera3D.rotate_x(-event.relative.y * y_mouse_sensitivity)
 			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 			
 			look_speed = event.screen_relative.length()
@@ -122,7 +122,7 @@ func _handle_stick_look_input(delta: float) -> void:
 		cur_stick_look = cur_stick_look.lerp(target_look, (1 / stick_look_smoothing) * delta)
 	
 	rotate_y(-cur_stick_look.x * x_stick_sensitivity)
-	%Camera3D.rotate_x(cur_stick_look.y * y_stick_sensitivity)
+	%Camera3D.rotate_x(-cur_stick_look.y * y_stick_sensitivity)
 	%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
 	
 
@@ -134,6 +134,11 @@ func _input(event: InputEvent) -> void:
 			_drop_object()
 	if held_obj != null and Input.is_action_just_pressed("attack"):
 		_drop_object(THROW_FORCE)
+	elif Input.is_action_just_pressed("attack"):
+		if crouching:
+			%AnimationPlayer.play("stealth_hit")
+		else:
+			%AnimationPlayer.play("hit")
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -273,7 +278,6 @@ func _snap_up_stairs_check(delta: float) -> bool:
 	return false
 
 func _push_rigid_bodies() -> void:
-	
 	for i in get_slide_collision_count():
 		var c := get_slide_collision(i)
 		if c.get_collider() is RigidBody3D:
@@ -294,7 +298,6 @@ func _hold_object() -> void:
 	if collider != null and collider is RigidBody3D:
 		held_obj = collider
 		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = true
-	
 
 func _drop_object(throw : float = 0) -> void:
 	if held_obj != null:
