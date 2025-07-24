@@ -2644,3 +2644,37 @@
 ( 640 -80 672 ) ( 640 80 672 ) ( 640 80 400 ) special/sky3 [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 1 1
 }
 }
+// entity 46
+{
+"classname" "knight"
+"origin" "-16 320 0"
+}
+// entity 47
+{
+"classname" "knight"
+"origin" "64 320 0"
+"angle" "270"
+}
+// entity 48
+{
+"classname" "knight"
+"origin" "160 320 0"
+"angle" "180"
+}
+// entity 49
+{
+"classname" "knight"
+"origin" "240 320 0"
+"angle" "90"
+}
+// entity 50
+{
+"classname" "knight"
+"origin" "-16 240 0"
+"angle" "-2"
+}
+// entity 51
+{
+"classname" "knight"
+"origin" "96 240 0"
+}

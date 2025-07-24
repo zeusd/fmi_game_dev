@@ -2647,10 +2647,56 @@
 // entity 46
 {
 "classname" "knight"
-"origin" "64 160 0"
+"origin" "-16 320 0"
+"angle" "0"
 }
 // entity 47
 {
+"classname" "knight"
+"origin" "64 320 0"
+"angle" "270"
+}
+// entity 48
+{
+"classname" "knight"
+"origin" "160 320 0"
+"angle" "180"
+}
+// entity 49
+{
+"classname" "knight"
+"origin" "240 320 0"
+"angle" "90"
+}
+// entity 50
+{
+"classname" "knight"
+"origin" "96 240 0"
+"angle" "180"
+}
+// entity 51
+{
+"classname" "knight"
+"origin" "256 240 0"
+"angle" "0"
+}
+// entity 52
+{
+"classname" "knight"
+"origin" "-16 160 0"
+"angle" "90"
+}
+// entity 53
+{
+"classname" "knight"
+"origin" "256 160 0"
+"angle" "270"
+}
+// entity 54
+{
 "classname" "light_spot"
-"origin" "152 120 8"
+"origin" "40 248 248"
+"mangle" "180 0 0"
+"attenuation" "0"
+"energy" "16"
 }

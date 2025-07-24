@@ -453,7 +453,10 @@ func build_entity_nodes() -> Array:
 							if not angle is float:
 								angle = float(angle)
 							angles.y += angle
+							# model point entity sync between model angle, trenchbroom angle and game angle
+							angles.y += 90
 						angles.y += 180
+						
 						node.rotation_degrees = angles
 					
 					if 'scale' in node and entity_definition.apply_scale_on_map_build:

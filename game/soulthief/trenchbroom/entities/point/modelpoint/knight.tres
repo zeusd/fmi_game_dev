@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" load_steps=3 format=3 uid="uid://s8qpov0wyg64"]
+
+[ext_resource type="Script" uid="uid://b4chji4lrxlvp" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="1_0hb6l"]
+[ext_resource type="PackedScene" uid="uid://buhp48yd82wwj" path="res://assets/models/blender/knight/knight.glb" id="1_ruf81"]
+
+[resource]
+script = ExtResource("1_0hb6l")
+target_map_editor = 1
+models_sub_folder = ""
+scale_expression = ""
+generate_size_property = false
+generate_gd_ignore_file = false
+scene_file = ExtResource("1_ruf81")
+apply_rotation_on_map_build = true
+apply_scale_on_map_build = true
+classname = "knight"
+description = ""
+func_godot_internal = false
+base_classes = Array[Resource]([])
+class_properties = {
+"angle": 0.0
+}
+class_property_descriptions = {}
+auto_apply_to_matching_node_properties = false
+meta_properties = {
+"color": Color(0.8, 0.8, 0.8, 1),
+"model": "\"trenchbroom\\models/knight.glb\"",
+"size": AABB(-16, -16, 0, 16, 16, 64)
+}
+node_class = ""
+name_property = ""
+metadata/_custom_type_script = "uid://b4chji4lrxlvp"
