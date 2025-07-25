@@ -1,4 +1,4 @@
-[gd_scene load_steps=276 format=4 uid="uid://c8lk6phvitt7g"]
+[gd_scene load_steps=277 format=4 uid="uid://c8lk6phvitt7g"]
 
 [ext_resource type="Script" uid="uid://b6nbs6rtakpre" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_a0tk4"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_r3fl7"]
@@ -21,6 +21,7 @@
 [ext_resource type="Material" uid="uid://b343mbse81g2i" path="res://assets/textures/city3_1.tres" id="18_s0gvp"]
 [ext_resource type="Material" uid="uid://2dll7fpfu1co" path="res://assets/textures/city1_9.tres" id="19_vxd74"]
 [ext_resource type="Material" uid="uid://cym5uamj6saul" path="res://assets/textures/special/sky3.tres" id="20_dhlwf"]
+[ext_resource type="Script" uid="uid://bdwq452m8i8la" path="res://components/combat.gd" id="22_s0gvp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jsnrv"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -1667,7 +1668,7 @@ shape = SubResource("ConvexPolygonShape3D_mr8ws")
 [node name="entity_1_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -2.5, 37.25)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@68038")
+col_rect = NodePath("@ColorRect@89963")
 liquid_type = 1
 gamma = 0.7
 
@@ -1686,7 +1687,7 @@ shape = SubResource("ConvexPolygonShape3D_hhwog")
 [node name="entity_2_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5.5, -2.5)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@68039")
+col_rect = NodePath("@ColorRect@89964")
 gamma = 0.7
 
 [node name="entity_2_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_2_st_liquid"]
@@ -1698,7 +1699,7 @@ shape = SubResource("ConvexPolygonShape3D_yp7n5")
 [node name="entity_3_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5.5, -10)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@68040")
+col_rect = NodePath("@ColorRect@89965")
 liquid_type = 2
 gamma = 1.0
 
@@ -1712,6 +1713,7 @@ shape = SubResource("ConvexPolygonShape3D_hfy6f")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, 16.75)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 50.0
 script = ExtResource("8_4arys")
 
@@ -1719,6 +1721,7 @@ script = ExtResource("8_4arys")
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 33, 6.25, 47.5)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
+shadow_enabled = true
 shadow_bias = 0.1
 spot_range = 37.5
 spot_attenuation = 0.0
@@ -1729,6 +1732,7 @@ script = ExtResource("9_6iypd")
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 52.5, 17, 35)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
+shadow_enabled = true
 shadow_bias = 0.1
 spot_range = 18.75
 spot_attenuation = 0.0
@@ -1737,12 +1741,14 @@ script = ExtResource("9_6iypd")
 [node name="entity_7_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 52.5, 11.75, 13.75)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 15.625
 script = ExtResource("8_4arys")
 
 [node name="entity_8_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 56.75, 9.25, 57.25)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 500.0
 script = ExtResource("8_4arys")
 
@@ -1750,6 +1756,7 @@ script = ExtResource("8_4arys")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 14.25, 5, 43.5)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 10.0
 omni_attenuation = 0.0
 script = ExtResource("8_4arys")
@@ -1757,6 +1764,7 @@ script = ExtResource("8_4arys")
 [node name="entity_10_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4.25, 7.75, 57.25)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 500.0
 script = ExtResource("8_4arys")
 
@@ -1764,6 +1772,7 @@ script = ExtResource("8_4arys")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.75, 3.75, 36)
 light_color = Color(1, 0.784314, 0, 1)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 10.0
 omni_attenuation = 0.0
 script = ExtResource("8_4arys")
@@ -1771,12 +1780,14 @@ script = ExtResource("8_4arys")
 [node name="entity_12_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 9.75, 7.75, 24.25)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 500.0
 script = ExtResource("8_4arys")
 
 [node name="entity_13_light_omni" type="OmniLight3D" parent="FuncGodotMap"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -10.75, 7.75, 24.25)
 light_energy = 16.0
+shadow_enabled = true
 omni_range = 500.0
 script = ExtResource("8_4arys")
 
@@ -1893,3 +1904,8 @@ shape = SubResource("BoxShape3D_jsnrv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3/weight"]
 mesh = SubResource("BoxMesh_lggff")
+
+[node name="Combat" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("22_s0gvp")
+metadata/_custom_type_script = "uid://bdwq452m8i8la"

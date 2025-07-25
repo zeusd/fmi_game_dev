@@ -1,0 +1,57 @@
+class_name Combat
+extends Node
+
+enum fighter_type {
+	PLAYER,
+	GUARD
+}
+
+var health : Dictionary = {
+	fighter_type.PLAYER: 100,
+	fighter_type.GUARD: 100
+}
+
+var damage : Dictionary = {
+	fighter_type.PLAYER: 20,
+	fighter_type.GUARD: 10
+}
+
+const REF := "ref"
+const HLT := "health"
+const DMG := "damage"
+
+var fighters : Dictionary = {}
+
+func activate(id: String, ftr_type: fighter_type) -> void:
+	if not fighters.has(id):
+		
+		var b = Blood.new()
+
+		
+		var new_val : Dictionary = {
+			REF: instance_from_id(int(id)),
+			HLT: health[ftr_type],
+			DMG: damage[ftr_type],
+			"bld": instance_from_id(b.get_instance_id())
+		}
+		fighters[id] = new_val
+		fighters[id][REF].add_child(b)
+		b.name = "Blood"
+		b.global_position = fighters[id][REF].global_position# + Vector3.UP
+		b.emitting = false
+
+func splat(id: String) -> void:
+	fighters[id]["bld"].emitting = true
+	fighters[id]["bld"].restart()
+	fighters[id]["bld"].global_position = fighters[id][REF].global_position + Vector3.UP*1
+
+func hit(from_id: String, to_id: String) -> void:
+	if fighters.has(from_id) and fighters.has(to_id):
+		fighters[to_id][HLT] -= fighters[from_id][DMG]
+		if fighters[to_id][HLT] <= 0:
+			fighters.erase(to_id)
+			#fighters[to_id].die()
+			
+func _kill(id: String) -> void:
+	fighters[id][REF].die()
+	# blood decal?

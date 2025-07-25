@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody3D
 
 @export var x_mouse_sensitivity : float = 0.006
@@ -63,6 +64,17 @@ const NOCLIP_SPEED_ORIG := 3.0
 var noclip_speed_mult := NOCLIP_SPEED_ORIG
 var noclip := false
 
+const FTR_TYPE = Combat.fighter_type.PLAYER
+
+func _ready():
+	%Combat.activate(str(self.get_instance_id()), FTR_TYPE)
+	
+	%sword_down.visible = false
+	%sword_up.visible = true
+	
+	add_child(jump_timer)
+	jump_timer.one_shot = true
+
 func get_speed() -> float:
 	var speed = sprint_speed if sprinting else walk_speed
 	return speed * CROUCH_SLOW if crouching else speed
@@ -79,17 +91,6 @@ func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) ->
 	params.motion = motion
 	
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
-
-func _ready():
-	for child in %PlayerModel.find_children("*", "VisualInstance3D"):
-		child.set_layer_mask_value(1, false)
-		child.set_layer_mask_value(2, true)
-	
-	%sword_down.visible = false
-	%sword_up.visible = true
-	
-	add_child(jump_timer)
-	jump_timer.one_shot = true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -139,6 +140,7 @@ func _input(event: InputEvent) -> void:
 			%AnimationPlayer.play("stealth_hit")
 		else:
 			%AnimationPlayer.play("hit")
+		%Combat.splat(str(self.get_instance_id()))
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:

@@ -11,10 +11,10 @@ func_godot_internal = false
 base_classes = Array[Resource]([ExtResource("1_ciod2")])
 class_properties = {
 "color": Color(1, 1, 1, 1),
-"energy": 1.0,
+"energy": 16.0,
 "indirect_energy": 1.0,
 "shadow_bias": 0.1,
-"shadows": false
+"shadows": true
 }
 class_property_descriptions = {
 "color": "The light's color.",
