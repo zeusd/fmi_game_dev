@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" load_steps=3 format=3 uid="uid://s8qpov0wyg64"]
+[gd_resource type="Resource" script_class="FuncGodotFGDModelPointClass" load_steps=4 format=3 uid="uid://s8qpov0wyg64"]
 
 [ext_resource type="Script" uid="uid://b4chji4lrxlvp" path="res://addons/func_godot/src/fgd/func_godot_fgd_model_point_class.gd" id="1_0hb6l"]
 [ext_resource type="PackedScene" uid="uid://buhp48yd82wwj" path="res://assets/models/blender/knight/knight.glb" id="1_ruf81"]
+[ext_resource type="Script" uid="uid://bnafgxxtsyecu" path="res://scripts/point/modelpoint/knight.gd" id="3_4lc22"]
 
 [resource]
 script = ExtResource("1_0hb6l")
@@ -11,6 +12,7 @@ scale_expression = ""
 generate_size_property = false
 generate_gd_ignore_file = false
 scene_file = ExtResource("1_ruf81")
+script_class = ExtResource("3_4lc22")
 apply_rotation_on_map_build = true
 apply_scale_on_map_build = true
 classname = "knight"

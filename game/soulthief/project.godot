@@ -28,6 +28,7 @@ enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
 PLAYER=""
 ENV=""
 LIQUID=""
+COMPONENT=""
 
 [input]
 

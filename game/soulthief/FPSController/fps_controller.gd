@@ -66,13 +66,53 @@ var noclip := false
 
 const FTR_TYPE = Combat.fighter_type.PLAYER
 
+var hitbox : Hitbox
+var hurtbox : Hurtbox
+var atk_timer : Timer = Timer.new()
+
 func _ready():
+	hurtbox = Hurtbox.new()
+	self.add_child(hurtbox)
+	hurtbox.id = str(self.get_instance_id())
+	hurtbox.global_transform.origin = %BodyBean.global_transform.origin
+	hurtbox.rotation_degrees = self.rotation_degrees
+	var c_hurt_b = CollisionShape3D.new()
+	hurtbox.add_child(c_hurt_b)
+	c_hurt_b.shape = %BodyBean.shape
+	
+	hitbox = Hitbox.new()
+	%sword_up.add_child(hitbox)
+	hitbox.id = str(self.get_instance_id())
+	hitbox.global_transform.origin = %sword_up.global_transform.origin
+	hitbox.position += Vector3(0.0, 0.6, 0.0)
+	var c_hit_b = CollisionShape3D.new()
+	hitbox.add_child(c_hit_b)
+	hitbox.monitorable = false
+	var hit_s = CapsuleShape3D.new()
+	hit_s.height = 1.2
+	hit_s.radius = 0.3
+	c_hit_b.shape = hit_s
+	
+	self.add_child(atk_timer)
+	atk_timer.one_shot = true
+	
+	#var hit_m = MeshInstance3D.new()
+	#hitbox.add_child(hit_m)
+	#var sword_m = CapsuleMesh.new()
+	#sword_m.height = hit_s.height
+	#sword_m.radius = hit_s.radius
+	#hit_m.mesh = sword_m
+	
+	
 	%Combat.activate(str(self.get_instance_id()), FTR_TYPE)
+	
+	%MeshInstance3D.mesh.height = %BodyBean.shape.height
+	%MeshInstance3D.mesh.radius = %BodyBean.shape.radius
 	
 	%sword_down.visible = false
 	%sword_up.visible = true
 	
-	add_child(jump_timer)
+	self.add_child(jump_timer)
 	jump_timer.one_shot = true
 
 func get_speed() -> float:
@@ -140,7 +180,10 @@ func _input(event: InputEvent) -> void:
 			%AnimationPlayer.play("stealth_hit")
 		else:
 			%AnimationPlayer.play("hit")
-		%Combat.splat(str(self.get_instance_id()))
+		if atk_timer.is_stopped():
+			hitbox.monitorable = true
+			var anim_time = 0.25 if crouching else 0.4
+			atk_timer.start(anim_time)
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -169,11 +212,8 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _process(delta: float) -> void:
-	#if %Interaction.is_colliding():
-		#var reach = %Interaction.get_collider()
-		#interact_obj.emit(reach)
-	#else:
-		#interact_obj.emit(null)
+	if atk_timer.is_stopped():
+		hitbox.monitorable = false
 	
 	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
 	
@@ -222,7 +262,7 @@ func _handle_noclip(delta: float) -> bool:
 		noclip = !noclip
 		noclip_speed_mult = NOCLIP_SPEED_ORIG
 	
-	$CollisionShape3D.disabled = noclip
+	%BodyBean.disabled = noclip
 	
 	if not noclip:
 		return false
@@ -400,7 +440,7 @@ func _wall_run(delta: float) -> void:
 			self.velocity -= wall_normal
 			self.velocity.y += WALLRUN_POWER * delta
 
-@onready var reg_height = %CollisionShape3D.shape.height
+@onready var reg_height = %BodyBean.shape.height
 func _crouch_uncrouch(delta) -> void:
 	var was_crouched = crouching
 	if Input.is_action_just_pressed("crouch"):
@@ -429,5 +469,7 @@ func _crouch_uncrouch(delta) -> void:
 		%Head.position.y = clampf(%Head.position.y, -CROUCH_DIST, 0)
 	
 	%Head.position.y = move_toward(%Head.position.y, (-CROUCH_DIST if crouching else 0.0), 7.0 * delta)
-	%CollisionShape3D.shape.height = reg_height - CROUCH_DIST if crouching else reg_height
-	%CollisionShape3D.position.y = %CollisionShape3D.shape.height / 2
+	%BodyBean.shape.height = reg_height - CROUCH_DIST if crouching else reg_height
+	%BodyBean.position.y = %BodyBean.shape.height / 2
+	%MeshInstance3D.mesh.height = %BodyBean.shape.height
+	%MeshInstance3D.position.y = %BodyBean.position.y

@@ -14,7 +14,7 @@ radius = 0.1
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -26,7 +26,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -38,7 +38,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -50,7 +50,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -60,6 +60,54 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0, 0.0339845, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.694488, -0.43274, -1.10452)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.6676e-08, -0.00830775, 0.253789)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.31522, -0.540031, -1.09681)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0635695, 0.05784, -1.05297)]
+}
 
 [sub_resource type="Animation" id="Animation_wwe65"]
 resource_name = "hit"
@@ -67,7 +115,7 @@ length = 0.4
 step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -79,7 +127,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -89,6 +137,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-1.03301, 0.439958, -0.242562), Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.17, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.694488, -0.43274, -1.10452), Vector3(0.691, -0.398, -1.486), Vector3(0.694488, -0.43274, -1.10452)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(3.6676e-08, -0.00830775, 0.253789), Vector3(-1.03323, 0.352556, 0.00698132), Vector3(3.6676e-08, -0.00830775, 0.253789)]
+}
 
 [sub_resource type="Animation" id="Animation_4ybej"]
 resource_name = "stealth_hit"
@@ -96,7 +168,7 @@ length = 0.25
 step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -108,7 +180,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -117,6 +189,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.841764, 0.768593, -0.433759), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.31522, -0.540031, -1.09681), Vector3(0.287, -0.73, -1.594), Vector3(0.31522, -0.540031, -1.09681)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0635695, 0.05784, -1.05297), Vector3(-0.841764, 0.768593, -0.433759), Vector3(0.0635695, 0.05784, -1.05297)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ybej"]
@@ -129,17 +225,17 @@ _data = {
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["PLAYER"]]
 script = ExtResource("1_u08xt")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="BodyBean" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_a0tk4")
 
 [node name="PlayerModel" type="Node3D" parent="."]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerModel"]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_a0tk4")
 
 [node name="HeadOriginal" type="Node3D" parent="."]
@@ -171,17 +267,17 @@ target_position = Vector3(0, 0, -3)
 
 [node name="sword_up" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
 unique_name_in_owner = true
-transform = Transform3D(0.967935, -0.251064, -0.00830774, 0.251073, 0.967968, -4.48913e-08, 0.00804156, -0.00208579, 0.999965, 0.694488, -0.43274, -1.10452)
+transform = Transform3D(0.967935, -0.251065, -0.00830765, 0.251073, 0.967968, -3.6676e-08, 0.00804156, -0.00208579, 0.999965, 0.694488, -0.43274, -1.10452)
 
 [node name="Blade" parent="HeadOriginal/Head/CameraSmooth/Camera3D/sword_up" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0339845, 0)
 
 [node name="sword_down" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
 unique_name_in_owner = true
-transform = Transform3D(0.490976, 0.869261, 0.057691, -0.867141, 0.493994, -0.0635267, -0.0837203, -0.0188362, 0.996311, 0.31522, -0.540031, -1.09681)
+transform = Transform3D(0.490974, 0.869262, 0.057691, -0.867142, 0.493993, -0.0635267, -0.0837203, -0.0188363, 0.996311, 0.31522, -0.540031, -1.09681)
 
 [node name="Blade" parent="HeadOriginal/Head/CameraSmooth/Camera3D/sword_down" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0339845, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.018)
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
