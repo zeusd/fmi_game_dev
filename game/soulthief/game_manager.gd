@@ -11,7 +11,7 @@ enum {
 	TRIGGER_LAYER = (1 << 2)
 }
 
-func use_targets(activator: Node, target: String) -> void:
+func use_targets(activator: Node, target: String, new_activator: Node = null) -> void:
 	# Targetnames are really Godot Groups, so we can have multiple entities 
 	# share a common "targetname" in Trenchbroom.
 	var target_list: Array[Node] = get_tree().get_nodes_in_group(target)
@@ -24,6 +24,7 @@ func use_targets(activator: Node, target: String) -> void:
 		if f.is_empty():
 			f = "use"
 		if targ.has_method(f):
+			targ.activator = activator if new_activator == null else new_activator
 			targ.call(f)
 
 func set_targetname(node: Node, targetname: String) -> void:

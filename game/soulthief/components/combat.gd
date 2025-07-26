@@ -6,12 +6,12 @@ enum fighter_type {
 	KNIGHT
 }
 
-var health : Dictionary = {
+var health: Dictionary = {
 	fighter_type.PLAYER: 100,
 	fighter_type.KNIGHT: 100
 }
 
-var damage : Dictionary = {
+var damage: Dictionary = {
 	fighter_type.PLAYER: 20,
 	fighter_type.KNIGHT: 10
 }
@@ -20,7 +20,7 @@ const REF := "ref"
 const HLT := "health"
 const DMG := "damage"
 
-var fighters : Dictionary = {}
+var fighters: Dictionary = {}
 
 func activate(id: String, ftr_type: fighter_type) -> void:
 	if not fighters.has(id):
@@ -29,7 +29,7 @@ func activate(id: String, ftr_type: fighter_type) -> void:
 		
 		var ftr = instance_from_id(int(id))
 		
-		var new_val : Dictionary = {
+		var new_val: Dictionary = {
 			REF: ftr,
 			HLT: health[ftr_type],
 			DMG: damage[ftr_type],

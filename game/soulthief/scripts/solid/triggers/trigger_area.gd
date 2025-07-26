@@ -5,6 +5,7 @@ extends Area3D
 @export var target: String = ""
 @export var targetfunc: String = ""
 @export var targetname: String = ""
+@export var globalname: String = ""
 
 enum TriggerStates {
 	READY,

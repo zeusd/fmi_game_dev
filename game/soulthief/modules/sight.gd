@@ -1,9 +1,9 @@
 class_name Sight
 extends Node3D
 
-var id : String
+var id: String
 
-var intelligence : Intelligence
+var intelligence: Intelligence
 
 func _ready() -> void:
 	var vision = VisionCone3D.new()

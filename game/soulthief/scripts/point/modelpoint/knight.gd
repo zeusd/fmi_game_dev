@@ -1,17 +1,36 @@
+@tool
+class_name Knight
 extends CharacterBody3D
 
-var hitbox : Hitbox
-var hurtbox : Hurtbox
+@export var target: String = ""
+@export var targetname: String = ""
+@export var globalname: String = ""
 
-var sight : Sight
-var target : Node3D
-var look_timer : Timer
-var last_known_pos : Vector3
+var hitbox: Hitbox
+var hurtbox: Hurtbox
 
-var nav_agent : NavigationAgent3D
+var sight: Sight
+var nav_target: Node3D
+var look_timer: Timer
+var last_known_pos: Vector3
+
+var nav_agent: NavigationAgent3D
 var speed := 4.0
 
+signal is_there
+
+func _func_godot_apply_properties(props: Dictionary) -> void:
+	target = props["target"] as String
+	targetname = props["targetname"] as String
+	globalname = props["globalname"] as String
+
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
+	#GAME.set_targetname(self, targetname)
+	GAME.use_targets(self, target)
+	
 	var hit = Hitbox.new()
 	self.add_child(hit)
 	hit.id = str(self.get_instance_id())
@@ -73,19 +92,30 @@ func _ready() -> void:
 	look_timer.one_shot = true
 	
 	%Intelligence.activate(str(self.get_instance_id()), Intelligence.enemy_type.KNIGHT)
-	
 	%Combat.activate(str(self.get_instance_id()), Combat.fighter_type.KNIGHT)
 
 func _process(delta: float) -> void:
-	if %Intelligence.state_is(str(self.get_instance_id())) == Intelligence.enemy_state.FIGHT:
-		nav_agent.target_position = target.global_position
+	if Engine.is_editor_hint():
+		return
+	
+	var state: Intelligence.enemy_state = %Intelligence.state_is(str(self.get_instance_id()))
+	
+	if state == Intelligence.enemy_state.IDLE or state == Intelligence.enemy_state.ALERT:
+		var tar_gr = get_tree().get_first_node_in_group(target) as PathCorner
+		move_to(tar_gr.global_position)
+		smooth_look_at(tar_gr.global_position, delta)
+		
+		if (tar_gr.global_position - self.global_position).length() < 0.1:
+			self.emit_signal("is_there")
+	
+	if state == Intelligence.enemy_state.FIGHT:
+		nav_agent.target_position = nav_target.global_position
 		var next = nav_agent.get_next_path_position()
 		next.y -= 1.0
 		last_known_pos = next
 		move_to(next)
 		smooth_look_at(next, delta)
-		
-	elif %Intelligence.state_is(str(self.get_instance_id())) == Intelligence.enemy_state.SEARCH:
+	elif state == Intelligence.enemy_state.SEARCH:
 		if not look_timer.is_stopped():
 			var angle 
 			if (last_known_pos - self.global_position).length() < 0.5:

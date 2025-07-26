@@ -2663,5 +2663,4 @@
 {
 "classname" "knight"
 "origin" "288 192 0"
-"target" "path_1_1"
 }

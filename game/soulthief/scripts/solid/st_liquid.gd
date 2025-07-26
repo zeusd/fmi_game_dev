@@ -13,7 +13,7 @@ const TINT := "tint"
 const DENS := "dens"
 const ST_RIPPLE := "st_ripple_overlay"
 
-var env : WorldEnvironment = null
+var env: WorldEnvironment = null
 const COL_MULT := 0.6
 const FOG_DIV := 300
 
@@ -25,9 +25,9 @@ const WATER_TINT := Vector4(0, 5, 10, 0)
 const LAVA_TINT := Vector4(10, 2, 0, 0)
 const SLIME_TINT := Vector4(0, 3, 0, 0)
 
-@export var col_rect : ColorRect
-@export var liquid_type : int
-@export var gamma : float
+@export var col_rect: ColorRect
+@export var liquid_type: int
+@export var gamma: float
 
 const LIQ_TYPES := {
 	0: {
@@ -49,19 +49,19 @@ const ST_WATER0 := "st_water0"
 const ST_SLIME1 := "st_slime1"
 const ST_LAVA1 := "st_lava1"
 
-@onready var water0_shader : Shader = preload(SHADER_DIR + ST_WATER0 + SHADER_SUFF)
-@onready var slime1_shader : Shader = preload(SHADER_DIR + ST_SLIME1 + SHADER_SUFF)
-@onready var lava1_shader : Shader = preload(SHADER_DIR + ST_LAVA1 + SHADER_SUFF)
+@onready var water0_shader: Shader = preload(SHADER_DIR + ST_WATER0 + SHADER_SUFF)
+@onready var slime1_shader: Shader = preload(SHADER_DIR + ST_SLIME1 + SHADER_SUFF)
+@onready var lava1_shader: Shader = preload(SHADER_DIR + ST_LAVA1 + SHADER_SUFF)
 
-@onready var water0_shd_mat : ShaderMaterial = preload(SHADER_DIR + ST_WATER0 + SHD_MAT_SUFF)
-@onready var slime1_shd_mat : ShaderMaterial = preload(SHADER_DIR + ST_SLIME1 + SHD_MAT_SUFF)
-@onready var lava1_shd_mat : ShaderMaterial = preload(SHADER_DIR + ST_LAVA1 + SHD_MAT_SUFF)
+@onready var water0_shd_mat: ShaderMaterial = preload(SHADER_DIR + ST_WATER0 + SHD_MAT_SUFF)
+@onready var slime1_shd_mat: ShaderMaterial = preload(SHADER_DIR + ST_SLIME1 + SHD_MAT_SUFF)
+@onready var lava1_shd_mat: ShaderMaterial = preload(SHADER_DIR + ST_LAVA1 + SHD_MAT_SUFF)
 
-@onready var ripple_shader : Shader = preload(SHADER_DIR + ST_RIPPLE + SHADER_SUFF)
+@onready var ripple_shader: Shader = preload(SHADER_DIR + ST_RIPPLE + SHADER_SUFF)
 
 #func _physics_process(delta: float) -> void:
-	#var player : Node3D = get_tree().get_nodes_in_group("PLAYER")[0]
-	#var head : Area3D = player.find_child("HeadArea")
+	#var player: Node3D = get_tree().get_nodes_in_group("PLAYER")[0]
+	#var head: Area3D = player.find_child("HeadArea")
 
 func _ready() -> void:
 	self.add_to_group("LIQUID")
@@ -106,13 +106,13 @@ func _on_area_exited(area: Area3D) -> void:
 		env.environment.volumetric_fog_albedo = Color.WHITE
 
 func _func_godot_apply_properties(properties: Dictionary) -> void:
-	var shader_dict : Dictionary = {
+	var shader_dict: Dictionary = {
 		ST_WATER0: water0_shader,
 		ST_SLIME1: slime1_shader,
 		ST_LAVA1: lava1_shader
 	}
 	
-	var shd_mat_dict : Dictionary = {
+	var shd_mat_dict: Dictionary = {
 		ST_WATER0: water0_shd_mat,
 		ST_SLIME1: slime1_shd_mat,
 		ST_LAVA1: lava1_shd_mat
@@ -140,8 +140,8 @@ func _func_godot_apply_properties(properties: Dictionary) -> void:
 			break
 	
 	if res_name != null:
-		var shader : Shader = shader_dict.get(res_name)
-		var shd_mat : ShaderMaterial = shd_mat_dict.get(res_name)
+		var shader: Shader = shader_dict.get(res_name)
+		var shd_mat: ShaderMaterial = shd_mat_dict.get(res_name)
 		
 		shd_mat.shader = shader
 		mesh_inst.mesh.surface_set_material(0, shd_mat)
@@ -153,7 +153,7 @@ func _func_godot_apply_properties(properties: Dictionary) -> void:
 	# # #
 	# GENERATE MATERIAL FOR SHADER CREATION
 	# # #
-		var material : StandardMaterial3D = mesh_inst.mesh.surface_get_material(0)
+		var material: StandardMaterial3D = mesh_inst.mesh.surface_get_material(0)
 		
 		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.cull_mode = BaseMaterial3D.CULL_DISABLED

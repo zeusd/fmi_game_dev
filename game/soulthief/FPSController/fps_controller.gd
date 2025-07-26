@@ -1,12 +1,12 @@
 class_name PlayerController
 extends CharacterBody3D
 
-@export var x_mouse_sensitivity : float = 0.006
-@export var y_mouse_sensitivity : float = 0.006
+@export var x_mouse_sensitivity: float = 0.006
+@export var y_mouse_sensitivity: float = 0.006
 
-@export var x_stick_sensitivity : float = 0.12
-@export var y_stick_sensitivity : float = 0.12
-@export var stick_look_smoothing : float = 0.3
+@export var x_stick_sensitivity: float = 0.12
+@export var y_stick_sensitivity: float = 0.12
+@export var stick_look_smoothing: float = 0.3
 
 @export var headbob_move := 0.06
 @export var headbob_frequency := 2.4
@@ -20,13 +20,13 @@ var cur_stick_look := Vector2.ZERO
 var sprinting := false
 
 const WALLRUN_POWER = 3
-var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var last_bounce := Vector3.ZERO
 var wall_normal := Vector3.ZERO
 
 const MAX_JUMPS := 1
 var jump_cnt := 0
-var jump_timer : Timer = Timer.new()
+var jump_timer: Timer = Timer.new()
 var jump_timeout := jump_velocity / gravity
 
 const MAX_STEP_HEIGHT := 0.5
@@ -54,8 +54,8 @@ const FORCE := 1.0
 const THROW_FORCE := 70
 
 #signal interact_obj
-var held_obj : RigidBody3D
-var look_speed : float
+var held_obj: RigidBody3D
+var look_speed: float
 
 var wish_dir := Vector3.ZERO
 var cam_aligned_wish_dir := Vector3.ZERO
@@ -66,9 +66,9 @@ var noclip := false
 
 const FTR_TYPE = Combat.fighter_type.PLAYER
 
-var hitbox : Hitbox
-var hurtbox : Hurtbox
-var atk_timer : Timer = Timer.new()
+var hitbox: Hitbox
+var hurtbox: Hurtbox
+var atk_timer: Timer = Timer.new()
 
 func _ready():
 	hurtbox = Hurtbox.new()
@@ -236,7 +236,7 @@ func _process(delta: float) -> void:
 			else:
 				_handle_air_physics(delta)
 	
-		var jumping : bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
+		var jumping: bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
 		if jumping and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
 			self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / MAX_JUMPS)) + 1)
 			jump_timer.start(jump_timeout)
@@ -278,7 +278,7 @@ func _handle_noclip(delta: float) -> bool:
 
 func _snap_down_stairs_check() -> void:
 	var has_snapped = false
-	var floor_below : bool = %StairsBelowRayCast3D.is_colliding() and not is_surface_too_steep(%StairsBelowRayCast3D.get_collision_normal())
+	var floor_below: bool = %StairsBelowRayCast3D.is_colliding() and not is_surface_too_steep(%StairsBelowRayCast3D.get_collision_normal())
 	var was_on_floor_prev_frame = Engine.get_physics_frames() - _last_frame_on_floor == 1
 	
 	if not is_on_floor() and velocity.y <= 0 and (was_on_floor_prev_frame or _snapped_to_stairs_last_frame) and floor_below:
@@ -341,11 +341,11 @@ func _hold_object() -> void:
 		held_obj = collider
 		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = true
 
-func _drop_object(throw : float = 0) -> void:
+func _drop_object(throw: float = 0) -> void:
 	if held_obj != null:
 		(held_obj.find_child("CollisionShape3D") as CollisionShape3D).disabled = false
-		var target_pos : Vector3 = %Camera3D.global_transform.origin + (%Camera3D.global_basis * Vector3(0, 0, -2))
-		var obj_pos : Vector3 = held_obj.global_transform.origin
+		var target_pos: Vector3 = %Camera3D.global_transform.origin + (%Camera3D.global_basis * Vector3(0, 0, -2))
+		var obj_pos: Vector3 = held_obj.global_transform.origin
 		held_obj.linear_velocity = self.velocity
 		held_obj.linear_velocity += (target_pos - obj_pos) * (look_speed / (3 + held_obj.mass))
 		if not is_zero_approx(throw) :

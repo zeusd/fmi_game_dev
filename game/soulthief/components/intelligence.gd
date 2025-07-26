@@ -1,7 +1,7 @@
 class_name Intelligence
 extends Node
 
-var combat : Combat
+var combat: Combat
 
 enum enemy_type {
 	KNIGHT
@@ -20,7 +20,7 @@ const STA := "state"
 const VIS := "vision"
 const NAV := "navigation"
 
-var enemies : Dictionary = {}
+var enemies: Dictionary = {}
 
 func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("COMPONENT"):
@@ -31,7 +31,7 @@ func _ready() -> void:
 func activate(id: String, type: enemy_type) -> void:
 	if not enemies.has(id):
 		var guy = instance_from_id(int(id))
-		var new_val : Dictionary = {
+		var new_val: Dictionary = {
 			REF: guy as CharacterBody3D,
 			STA: enemy_state.IDLE,
 			VIS: guy.sight as Sight,
@@ -46,7 +46,7 @@ func change_state(id: String, state: enemy_state) -> void:
 	enemies[id][STA] = state
 
 func spotted(id: String, body: Node3D) -> void:
-	enemies[id][REF].target = body
+	enemies[id][REF].nav_target = body
 	enemies[id][STA] = enemy_state.FIGHT
 	enemies[id][NAV].target_position = body.global_position
 

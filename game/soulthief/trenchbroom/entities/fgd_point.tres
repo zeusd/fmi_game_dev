@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=6 format=3 uid="uid://5auqbv7sy3tl"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=7 format=3 uid="uid://5auqbv7sy3tl"]
 
 [ext_resource type="Resource" uid="uid://b57xy5fo8o2g0" path="res://trenchbroom/entities/point/lights/light_omni.tres" id="1_1eq8s"]
 [ext_resource type="Resource" uid="uid://drhgccbh1koh8" path="res://trenchbroom/entities/point/info_camera.tres" id="1_f5woh"]
 [ext_resource type="Resource" uid="uid://cmcs7hlto3gni" path="res://trenchbroom/entities/point/lights/light_spot.tres" id="2_vjme7"]
 [ext_resource type="Script" uid="uid://bxb0w5lalsn2d" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="3_htna4"]
+[ext_resource type="Resource" uid="uid://dne6eqahhuo06" path="res://trenchbroom/entities/point/st_path_corner.tres" id="4_4ycqn"]
 [ext_resource type="Resource" uid="uid://s8qpov0wyg64" path="res://trenchbroom/entities/point/modelpoint/knight.tres" id="4_itf37"]
 
 [resource]
@@ -12,5 +13,5 @@ export_file = false
 target_map_editor = 1
 fgd_name = "point"
 base_fgd_files = Array[Resource]([])
-entity_definitions = Array[Resource]([ExtResource("1_f5woh"), ExtResource("1_1eq8s"), ExtResource("2_vjme7"), ExtResource("4_itf37")])
+entity_definitions = Array[Resource]([ExtResource("1_f5woh"), ExtResource("1_1eq8s"), ExtResource("2_vjme7"), ExtResource("4_4ycqn"), ExtResource("4_itf37")])
 metadata/_custom_type_script = "uid://bxb0w5lalsn2d"
