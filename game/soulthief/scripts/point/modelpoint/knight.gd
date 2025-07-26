@@ -1,7 +1,15 @@
-extends Node3D
+extends CharacterBody3D
 
 var hitbox : Hitbox
 var hurtbox : Hurtbox
+
+var sight : Sight
+var target : Node3D
+var look_timer : Timer
+var last_known_pos : Vector3
+
+var nav_agent : NavigationAgent3D
+var speed := 4.0
 
 func _ready() -> void:
 	var hit = Hitbox.new()
@@ -49,4 +57,68 @@ func _ready() -> void:
 	#hurt_m.mesh = k_m
 	hurtbox = hurt
 	
-	%Combat.activate(str(self.get_instance_id()), Combat.fighter_type.GUARD)
+	sight = Sight.new()
+	self.add_child(sight)
+	sight.id = str(self.get_instance_id())
+	sight.global_rotation = self.global_rotation
+	sight.global_rotation_degrees += Vector3(0.0, -90.0, 0.0)
+	sight.position += Vector3.UP * 1.85
+	
+	self.nav_agent = NavigationAgent3D.new()
+	self.add_child(nav_agent)
+	nav_agent.target_position = self.global_position
+	
+	look_timer = Timer.new()
+	self.add_child(look_timer)
+	look_timer.one_shot = true
+	
+	%Intelligence.activate(str(self.get_instance_id()), Intelligence.enemy_type.KNIGHT)
+	
+	%Combat.activate(str(self.get_instance_id()), Combat.fighter_type.KNIGHT)
+
+func _process(delta: float) -> void:
+	if %Intelligence.state_is(str(self.get_instance_id())) == Intelligence.enemy_state.FIGHT:
+		nav_agent.target_position = target.global_position
+		var next = nav_agent.get_next_path_position()
+		next.y -= 1.0
+		last_known_pos = next
+		move_to(next)
+		smooth_look_at(next, delta)
+		
+	elif %Intelligence.state_is(str(self.get_instance_id())) == Intelligence.enemy_state.SEARCH:
+		if not look_timer.is_stopped():
+			var angle 
+			if (last_known_pos - self.global_position).length() < 0.5:
+				angle = 90.0
+				last_known_pos = self.global_position
+				self.velocity = Vector3.ZERO
+			else:
+				angle = 15.0
+				move_to(last_known_pos)
+			smooth_rotate(angle if sin(Time.get_datetime_dict_from_system()["second"] * 0.5 - 0.5) < 0.0 else -angle, delta)
+		else:
+			%Intelligence.change_state(str(self.get_instance_id()), %Intelligence.enemy_state.ALERT)
+	
+	move_and_slide()
+
+func move_to(pos: Vector3) -> void:
+	var dir = (pos - self.global_position).normalized()
+	self.velocity = dir# * speed
+
+func smooth_look_at(to: Vector3, delta: float) -> void:
+	if (to - self.global_position).length() < 0.1:
+		return
+	var old_tr = self.transform
+	self.look_at(to, Vector3.UP)
+	self.rotation = self.rotation * Vector3(0.0, 1.0, 0.0)
+	self.rotation_degrees += Vector3(0.0, 90.0, 0.0)
+	var new_tr = self.transform
+	self.transform = old_tr
+	self.transform = self.transform.interpolate_with(new_tr, speed * delta)
+
+func smooth_rotate(angle: float, delta: float) -> void:
+	var old_tr = self.transform
+	self.rotation_degrees += Vector3(0.0, angle, 0.0)
+	var new_tr = self.transform
+	self.transform = old_tr
+	self.transform = self.transform.interpolate_with(new_tr, delta)

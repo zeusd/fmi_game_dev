@@ -236,6 +236,7 @@ unique_name_in_owner = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerModel"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_a0tk4")
 
 [node name="HeadOriginal" type="Node3D" parent="."]
@@ -252,7 +253,7 @@ unique_name_in_owner = true
 rotation_order = 1
 cull_mask = 1048573
 
-[node name="CameraArea3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+[node name="CameraArea3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D" groups=["CAM"]]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D/CameraArea3D"]
 shape = SubResource("SphereShape3D_u08xt")
@@ -267,7 +268,7 @@ target_position = Vector3(0, 0, -3)
 
 [node name="sword_up" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
 unique_name_in_owner = true
-transform = Transform3D(0.967935, -0.251065, -0.00830765, 0.251073, 0.967968, -3.6676e-08, 0.00804156, -0.00208579, 0.999965, 0.694488, -0.43274, -1.10452)
+transform = Transform3D(0.967935, -0.251065, -0.00830765, 0.251073, 0.967968, -3.6676e-08, 0.00804156, -0.0020858, 0.999965, 0.694488, -0.43274, -1.10452)
 
 [node name="Blade" parent="HeadOriginal/Head/CameraSmooth/Camera3D/sword_up" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0339845, 0)

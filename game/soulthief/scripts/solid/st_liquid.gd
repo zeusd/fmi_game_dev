@@ -93,15 +93,17 @@ func _on_body_exited(node: Node3D) -> void:
 	pass
 
 func _on_area_entered(area: Area3D) -> void:
-	col_rect.visible = true
-	env.environment.volumetric_fog_density = LIQ_TYPES[liquid_type][DENS]
-	var col = LAVA_TINT / FOG_DIV
-	env.environment.volumetric_fog_albedo = Color(col.x, col.y, col.z, col.w)
+	if area.is_in_group("CAM"):
+		col_rect.visible = true
+		env.environment.volumetric_fog_density = LIQ_TYPES[liquid_type][DENS]
+		var col = LAVA_TINT / FOG_DIV
+		env.environment.volumetric_fog_albedo = Color(col.x, col.y, col.z, col.w)
 
 func _on_area_exited(area: Area3D) -> void:
-	col_rect.visible = false
-	env.environment.volumetric_fog_density = 0.0
-	env.environment.volumetric_fog_albedo = Color.WHITE
+	if area.is_in_group("CAM"):
+		col_rect.visible = false
+		env.environment.volumetric_fog_density = 0.0
+		env.environment.volumetric_fog_albedo = Color.WHITE
 
 func _func_godot_apply_properties(properties: Dictionary) -> void:
 	var shader_dict : Dictionary = {

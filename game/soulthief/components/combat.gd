@@ -3,17 +3,17 @@ extends Node
 
 enum fighter_type {
 	PLAYER,
-	GUARD
+	KNIGHT
 }
 
 var health : Dictionary = {
 	fighter_type.PLAYER: 100,
-	fighter_type.GUARD: 100
+	fighter_type.KNIGHT: 100
 }
 
 var damage : Dictionary = {
 	fighter_type.PLAYER: 20,
-	fighter_type.GUARD: 10
+	fighter_type.KNIGHT: 10
 }
 
 const REF := "ref"

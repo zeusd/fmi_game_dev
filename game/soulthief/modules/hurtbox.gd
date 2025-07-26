@@ -9,7 +9,7 @@ func _ready() -> void:
 func _on_area_entered(hitbox: Area3D) -> void:
 	var combat
 	for node in get_tree().get_nodes_in_group("COMPONENT"):
-		if node.name == "Combat":
+		if node is Combat:
 			combat = node
 			break
 	

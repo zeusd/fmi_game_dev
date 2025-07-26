@@ -21,7 +21,7 @@ GAME="*res://game_manager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg")
 
 [global_group]
 
@@ -29,6 +29,7 @@ PLAYER=""
 ENV=""
 LIQUID=""
 COMPONENT=""
+CAM=""
 
 [input]
 
@@ -131,6 +132,11 @@ attack={
 3d_physics/layer_1="WORLD"
 3d_physics/layer_2="ACTOR"
 3d_physics/layer_3="TRIGGER"
+
+[navigation]
+
+3d/default_cell_size=0.1
+3d/default_cell_height=0.7
 
 [physics]
 
