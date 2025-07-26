@@ -15,7 +15,7 @@ var look_timer: Timer
 var last_known_pos: Vector3
 
 var nav_agent: NavigationAgent3D
-var speed := 4.0
+var speed := 3.0
 
 signal is_there
 
@@ -27,8 +27,6 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	
-	#GAME.set_targetname(self, targetname)
 	GAME.use_targets(self, target)
 	
 	var hit = Hitbox.new()
@@ -113,7 +111,7 @@ func _process(delta: float) -> void:
 		var next = nav_agent.get_next_path_position()
 		next.y -= 1.0
 		last_known_pos = next
-		move_to(next)
+		move_to(next, speed)
 		smooth_look_at(next, delta)
 	elif state == Intelligence.enemy_state.SEARCH:
 		if not look_timer.is_stopped():
@@ -131,9 +129,9 @@ func _process(delta: float) -> void:
 	
 	move_and_slide()
 
-func move_to(pos: Vector3) -> void:
+func move_to(pos: Vector3, spd: float = 1.0) -> void:
 	var dir = (pos - self.global_position).normalized()
-	self.velocity = dir# * speed
+	self.velocity = dir * spd
 
 func smooth_look_at(to: Vector3, delta: float) -> void:
 	if (to - self.global_position).length() < 0.1:

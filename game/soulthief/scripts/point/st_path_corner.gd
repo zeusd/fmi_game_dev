@@ -14,7 +14,6 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	GAME.set_targetname(self, targetname)
-	emit_signal("is_done")
 	
 	var area = CollisionShape3D.new()
 	self.add_child(area)

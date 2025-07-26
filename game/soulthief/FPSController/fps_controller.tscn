@@ -173,7 +173,7 @@ tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Bla
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.25),
+"times": PackedFloat32Array(0, 0.0606061, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, -0.018), Vector3(-0.279861, -0.190421, -0.497134), Vector3(0, 0, 0)]
@@ -200,7 +200,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.08, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.31522, -0.540031, -1.09681), Vector3(0.287, -0.73, -1.594), Vector3(0.31522, -0.540031, -1.09681)]
+"values": [Vector3(0.31522, -0.540031, -1.09681), Vector3(-0.271405, -0.281922, -1.44796), Vector3(0.31522, -0.540031, -1.09681)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -212,7 +212,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.12, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0.0635695, 0.05784, -1.05297), Vector3(-0.841764, 0.768593, -0.433759), Vector3(0.0635695, 0.05784, -1.05297)]
+"values": [Vector3(0.0635695, 0.05784, -1.05297), Vector3(0.0215398, 1.32387, -1.10252), Vector3(0.0635695, 0.05784, -1.05297)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4ybej"]

@@ -18,7 +18,7 @@ func _ready() -> void:
 			break
 	
 	vision.body_sighted.connect(_on_spotted)
-	vision.body_exited.connect(_on_unspotted)
+	vision.body_hidden.connect(_on_unspotted)
 
 func _on_spotted(body: Node3D) -> void:
 	intelligence.spotted(id, body)

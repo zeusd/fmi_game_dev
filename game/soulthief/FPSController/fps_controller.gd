@@ -67,6 +67,7 @@ var noclip := false
 const FTR_TYPE = Combat.fighter_type.PLAYER
 
 var hitbox: Hitbox
+var hitbox_stealth: Hitbox
 var hurtbox: Hurtbox
 var atk_timer: Timer = Timer.new()
 
@@ -88,10 +89,24 @@ func _ready():
 	var c_hit_b = CollisionShape3D.new()
 	hitbox.add_child(c_hit_b)
 	hitbox.monitorable = false
+	
 	var hit_s = CapsuleShape3D.new()
 	hit_s.height = 1.2
 	hit_s.radius = 0.3
 	c_hit_b.shape = hit_s
+	
+	hitbox_stealth = Hitbox.new()
+	%sword_down.add_child(hitbox_stealth)
+	hitbox_stealth.id = str(self.get_instance_id())
+	hitbox_stealth.global_transform.origin = %sword_down.global_transform.origin
+	hitbox_stealth.position += Vector3(0.0, 0.6, 0.0)
+	var c_hit_b_s = CollisionShape3D.new()
+	hitbox_stealth.add_child(c_hit_b_s)
+	hitbox_stealth.monitorable = false
+	c_hit_b_s.shape = hit_s
+	
+	hurtbox.exclude["sword_up"] = hitbox
+	hurtbox.exclude["sword_down"] = hitbox_stealth
 	
 	self.add_child(atk_timer)
 	atk_timer.one_shot = true
@@ -181,8 +196,13 @@ func _input(event: InputEvent) -> void:
 		else:
 			%AnimationPlayer.play("hit")
 		if atk_timer.is_stopped():
-			hitbox.monitorable = true
-			var anim_time = 0.25 if crouching else 0.4
+			var anim_time
+			if crouching:
+				anim_time = 0.25
+				hitbox_stealth.monitorable = true
+			else:
+				anim_time = 0.4
+				hitbox.monitorable = true
 			atk_timer.start(anim_time)
 
 var _saved_camera_global_pos = null
@@ -214,6 +234,7 @@ func _headbob_effect(delta: float) -> void:
 func _process(delta: float) -> void:
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
+		hitbox_stealth.monitorable = false
 	
 	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
 	
@@ -360,7 +381,7 @@ func _handle_liquid_physics(delta: float) -> bool:
 	
 	if not is_on_floor():
 		velocity.y -= gravity * 0.1 * delta
-
+	
 	self.velocity += cam_aligned_wish_dir * get_speed() * delta
 	
 	if Input.is_action_pressed("jump"):
