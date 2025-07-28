@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://i6um3xayorqr"]
+
+[ext_resource type="Script" uid="uid://nwcthvx34rkp" path="res://weapons/weapon_resource.gd" id="1_df2ta"]
+[ext_resource type="PackedScene" uid="uid://bqip6nt6u6404" path="res://weapons/sword_up/sword_up.tscn" id="2_q28e3"]
+
+[resource]
+script = ExtResource("1_df2ta")
+view_model = ExtResource("2_q28e3")
+wep_name = "sword_up"
+pos = Vector3(0.5, -0.3, -0.5)
+rot = Vector3(-0.523599, -0.523599, 0.261799)
+hold_anim = ""
+strike_anim = "hit"
+revert_anim = ""
+metadata/_custom_type_script = "uid://nwcthvx34rkp"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhy4e7up44yph"
-path="res://.godot/imported/Guard Metallic.png-ffb260a997644bf017890e1e89c5a785.ctex"
+uid="uid://d3hn57wkxitbe"
+path="res://.godot/imported/Handle Metallic.png-c9a385565aa4cc46c8758e9cd9b0796f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/models/blender/sword/textures/Guard Metallic.png"
-dest_files=["res://.godot/imported/Guard Metallic.png-ffb260a997644bf017890e1e89c5a785.ctex"]
+source_file="res://weapons/sword_up/textures/Handle Metallic.png"
+dest_files=["res://.godot/imported/Handle Metallic.png-c9a385565aa4cc46c8758e9cd9b0796f.ctex"]
 
 [params]
 

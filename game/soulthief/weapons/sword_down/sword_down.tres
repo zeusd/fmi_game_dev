@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=3 format=3 uid="uid://bh2r712yibslg"]
+
+[ext_resource type="Script" uid="uid://nwcthvx34rkp" path="res://weapons/weapon_resource.gd" id="1_1kebw"]
+[ext_resource type="PackedScene" uid="uid://cvsbyd183jy6e" path="res://weapons/sword_down/sword_down.tscn" id="2_ybmwf"]
+
+[resource]
+script = ExtResource("1_1kebw")
+view_model = ExtResource("2_ybmwf")
+wep_name = "sword_down"
+pos = Vector3(0.3, -0.3, -0.5)
+rot = Vector3(0, 0.349066, -1.5708)
+hold_anim = ""
+strike_anim = "stealth_hit"
+revert_anim = ""
+metadata/_custom_type_script = "uid://nwcthvx34rkp"

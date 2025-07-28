@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://df1eacwvndo47"
-path="res://.godot/imported/sword.blend-aec931a144010f1e6ed3a747da0acb83.scn"
+uid="uid://dk2x0hrvhndxu"
+path="res://.godot/imported/sword.blend-cc8795ac0d77140fdd0fe21aee14f335.scn"
 
 [deps]
 
-source_file="res://assets/models/blender/sword/sword.blend"
-dest_files=["res://.godot/imported/sword.blend-aec931a144010f1e6ed3a747da0acb83.scn"]
+source_file="res://weapons/sword_down/sword.blend"
+dest_files=["res://.godot/imported/sword.blend-cc8795ac0d77140fdd0fe21aee14f335.scn"]
 
 [params]
 
@@ -40,7 +40,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "save_to_file/enabled": true,
-"save_to_file/path": "res://assets/models/blender/sword/sword_texture.res"
+"save_to_file/path": "res://weapons/sword_down/sword_texture.res"
 }
 }
 }

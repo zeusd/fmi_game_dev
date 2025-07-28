@@ -67,9 +67,13 @@ var noclip := false
 const FTR_TYPE = Combat.fighter_type.PLAYER
 
 var hitbox: Hitbox
-var hitbox_stealth: Hitbox
 var hurtbox: Hurtbox
 var atk_timer: Timer = Timer.new()
+
+@onready var sword_up_res: WeaponResource = preload("res://weapons/sword_up/sword_up.tres")
+@onready var sword_down_res: WeaponResource = preload("res://weapons/sword_down/sword_down.tres")
+var sword_up: Node3D
+var sword_down: Node3D
 
 func _ready():
 	hurtbox = Hurtbox.new()
@@ -81,10 +85,28 @@ func _ready():
 	hurtbox.add_child(c_hurt_b)
 	c_hurt_b.shape = %BodyBean.shape
 	
+	set_r_wep(sword_up, sword_up_res)
+	self.add_child(atk_timer)
+	atk_timer.one_shot = true
+	
+	%Combat.activate(str(self.get_instance_id()), FTR_TYPE)
+	
+	%MeshInstance3D.mesh.height = %BodyBean.shape.height
+	%MeshInstance3D.mesh.radius = %BodyBean.shape.radius
+	
+	self.add_child(jump_timer)
+	jump_timer.one_shot = true
+
+func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
+	%WeaponManager.curr_r = wep_res
+	var rl = %WeaponManager.update_weapon_model()
+	
+	wep = rl[0]
+	
 	hitbox = Hitbox.new()
-	%sword_up.add_child(hitbox)
+	wep.add_child(hitbox)
 	hitbox.id = str(self.get_instance_id())
-	hitbox.global_transform.origin = %sword_up.global_transform.origin
+	hitbox.global_transform.origin = wep.global_transform.origin
 	hitbox.position += Vector3(0.0, 0.6, 0.0)
 	var c_hit_b = CollisionShape3D.new()
 	hitbox.add_child(c_hit_b)
@@ -95,22 +117,6 @@ func _ready():
 	hit_s.radius = 0.3
 	c_hit_b.shape = hit_s
 	
-	hitbox_stealth = Hitbox.new()
-	%sword_down.add_child(hitbox_stealth)
-	hitbox_stealth.id = str(self.get_instance_id())
-	hitbox_stealth.global_transform.origin = %sword_down.global_transform.origin
-	hitbox_stealth.position += Vector3(0.0, 0.6, 0.0)
-	var c_hit_b_s = CollisionShape3D.new()
-	hitbox_stealth.add_child(c_hit_b_s)
-	hitbox_stealth.monitorable = false
-	c_hit_b_s.shape = hit_s
-	
-	hurtbox.exclude["sword_up"] = hitbox
-	hurtbox.exclude["sword_down"] = hitbox_stealth
-	
-	self.add_child(atk_timer)
-	atk_timer.one_shot = true
-	
 	#var hit_m = MeshInstance3D.new()
 	#hitbox.add_child(hit_m)
 	#var sword_m = CapsuleMesh.new()
@@ -118,17 +124,7 @@ func _ready():
 	#sword_m.radius = hit_s.radius
 	#hit_m.mesh = sword_m
 	
-	
-	%Combat.activate(str(self.get_instance_id()), FTR_TYPE)
-	
-	%MeshInstance3D.mesh.height = %BodyBean.shape.height
-	%MeshInstance3D.mesh.radius = %BodyBean.shape.radius
-	
-	%sword_down.visible = false
-	%sword_up.visible = true
-	
-	self.add_child(jump_timer)
-	jump_timer.one_shot = true
+	hurtbox.exclude["sword"] = hitbox
 
 func get_speed() -> float:
 	var speed = sprint_speed if sprinting else walk_speed
@@ -192,14 +188,15 @@ func _input(event: InputEvent) -> void:
 		_drop_object(THROW_FORCE)
 	elif Input.is_action_just_pressed("attack"):
 		if crouching:
-			%AnimationPlayer.play("stealth_hit")
+			pass
 		else:
-			%AnimationPlayer.play("hit")
+			pass
+		%WeaponManager.managed_input(event)
 		if atk_timer.is_stopped():
 			var anim_time
 			if crouching:
 				anim_time = 0.25
-				hitbox_stealth.monitorable = true
+				hitbox.monitorable = true
 			else:
 				anim_time = 0.4
 				hitbox.monitorable = true
@@ -234,7 +231,7 @@ func _headbob_effect(delta: float) -> void:
 func _process(delta: float) -> void:
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
-		hitbox_stealth.monitorable = false
+		pass
 	
 	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
 	
@@ -467,16 +464,10 @@ func _crouch_uncrouch(delta) -> void:
 	if Input.is_action_just_pressed("crouch"):
 		if not crouching:
 			crouching = true
-			#%knife_up.visible = false
-			#%knife_down.visible = true
-			%sword_up.visible = false
-			%sword_down.visible = true
+			set_r_wep(sword_down, sword_down_res)
 		elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
 			crouching = false
-			#%knife_down.visible = false
-			#%knife_up.visible = true
-			%sword_down.visible = false
-			%sword_up.visible = true
+			set_r_wep(sword_up, sword_up_res)
 	
 	var bump_up_if_possible := 0.0
 	if was_crouched != crouching and not is_on_floor() and not _snapped_to_stairs_last_frame:
@@ -494,3 +485,6 @@ func _crouch_uncrouch(delta) -> void:
 	%BodyBean.position.y = %BodyBean.shape.height / 2
 	%MeshInstance3D.mesh.height = %BodyBean.shape.height
 	%MeshInstance3D.position.y = %BodyBean.position.y
+
+func hit_by(who: Node3D) -> void:
+	pass

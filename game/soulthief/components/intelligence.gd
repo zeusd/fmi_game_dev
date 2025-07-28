@@ -51,6 +51,7 @@ func spotted(id: String, body: Node3D) -> void:
 	enemies[id][NAV].target_position = body.global_position
 
 func unspotted(id: String, body: Node3D) -> void:
+	enemies[id][REF].nav_target = null
 	enemies[id][REF].look_timer.start(30.0)
 	enemies[id][STA] = enemy_state.SEARCH
 	enemies[id][NAV].target_position = enemies[id][REF].global_position

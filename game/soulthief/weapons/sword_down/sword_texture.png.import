@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://osel8dlsjyw8"
-path.s3tc="res://.godot/imported/sword_texture.png-6bf1cba26e18dae8a416f7bb68d3be44.s3tc.ctex"
+uid="uid://qkgj4q44nf8w"
+path.s3tc="res://.godot/imported/sword_texture.png-cf88e687cf0f2e74575a8b0719ad46ca.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/blender/sword/sword_texture.png"
-dest_files=["res://.godot/imported/sword_texture.png-6bf1cba26e18dae8a416f7bb68d3be44.s3tc.ctex"]
+source_file="res://weapons/sword_down/sword_texture.png"
+dest_files=["res://.godot/imported/sword_texture.png-cf88e687cf0f2e74575a8b0719ad46ca.s3tc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coduokxujxtix"
-path="res://.godot/imported/Pommel Metallic.png-73b6b9c96cafc43c3fefe3fd1bcdd536.ctex"
+uid="uid://bqcqhdmhgndjm"
+path="res://.godot/imported/Blade Metallic.png-b60ba095f9004d995dd80da09121a57d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/models/blender/sword/textures/Pommel Metallic.png"
-dest_files=["res://.godot/imported/Pommel Metallic.png-73b6b9c96cafc43c3fefe3fd1bcdd536.ctex"]
+source_file="res://weapons/sword_down/textures/Blade Metallic.png"
+dest_files=["res://.godot/imported/Blade Metallic.png-b60ba095f9004d995dd80da09121a57d.ctex"]
 
 [params]
 

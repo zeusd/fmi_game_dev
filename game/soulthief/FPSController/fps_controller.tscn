@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddg8c3vrt53w6"]
+[gd_scene load_steps=8 format=3 uid="uid://ddg8c3vrt53w6"]
 
 [ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
-[ext_resource type="PackedScene" uid="uid://df1eacwvndo47" path="res://assets/models/blender/sword/sword.blend" id="3_wwe65"]
+[ext_resource type="PackedScene" uid="uid://b0jsuh0xqrhen" path="res://weapons/weapon_manager.tscn" id="3_4ybej"]
+[ext_resource type="Script" uid="uid://bgbslid4xxer5" path="res://weapons/weapon_manager.gd" id="4_4ybej"]
+[ext_resource type="Resource" uid="uid://i6um3xayorqr" path="res://weapons/sword_up/sword_up.tres" id="4_lm1k8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tk4"]
 
@@ -9,218 +11,6 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u08xt"]
 radius = 0.1
-
-[sub_resource type="Animation" id="Animation_x025n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.0339845, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = false
-tracks/3/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0.0339845, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.694488, -0.43274, -1.10452)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(3.6676e-08, -0.00830775, 0.253789)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.31522, -0.540031, -1.09681)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.0635695, 0.05784, -1.05297)]
-}
-
-[sub_resource type="Animation" id="Animation_wwe65"]
-resource_name = "hit"
-length = 0.4
-step = 0.03
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.17, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0.0339845, 0), Vector3(-0.00306368, 0.0347792, -0.380963), Vector3(0, 0.0339845, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up/Blade:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-1.03301, 0.439958, -0.242562), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.17, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.694488, -0.43274, -1.10452), Vector3(0.691, -0.398, -1.486), Vector3(0.694488, -0.43274, -1.10452)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_up:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(3.6676e-08, -0.00830775, 0.253789), Vector3(-1.03323, 0.352556, 0.00698132), Vector3(3.6676e-08, -0.00830775, 0.253789)]
-}
-
-[sub_resource type="Animation" id="Animation_4ybej"]
-resource_name = "stealth_hit"
-length = 0.25
-step = 0.03
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0606061, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, -0.018), Vector3(-0.279861, -0.190421, -0.497134), Vector3(0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down/Blade:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.841764, 0.768593, -0.433759), Vector3(0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.31522, -0.540031, -1.09681), Vector3(-0.271405, -0.281922, -1.44796), Vector3(0.31522, -0.540031, -1.09681)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HeadOriginal/Head/CameraSmooth/Camera3D/sword_down:rotation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0.0635695, 0.05784, -1.05297), Vector3(0.0215398, 1.32387, -1.10252), Vector3(0.0635695, 0.05784, -1.05297)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ybej"]
-_data = {
-&"RESET": SubResource("Animation_x025n"),
-&"hit": SubResource("Animation_wwe65"),
-&"stealth_hit": SubResource("Animation_4ybej")
-}
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["PLAYER"]]
 script = ExtResource("1_u08xt")
@@ -266,19 +56,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 unique_name_in_owner = true
 target_position = Vector3(0, 0, -3)
 
-[node name="sword_up" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
+[node name="Look" type="RayCast3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+target_position = Vector3(0, 0, -999)
+
+[node name="ViewModel" type="Node3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(0.967935, -0.251065, -0.00830765, 0.251073, 0.967968, -3.6676e-08, 0.00804156, -0.0020858, 0.999965, 0.694488, -0.43274, -1.10452)
-
-[node name="Blade" parent="HeadOriginal/Head/CameraSmooth/Camera3D/sword_up" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0339845, 0)
-
-[node name="sword_down" parent="HeadOriginal/Head/CameraSmooth/Camera3D" instance=ExtResource("3_wwe65")]
-unique_name_in_owner = true
-transform = Transform3D(0.490974, 0.869262, 0.057691, -0.867142, 0.493993, -0.0635267, -0.0837203, -0.0188363, 0.996311, 0.31522, -0.540031, -1.09681)
-
-[node name="Blade" parent="HeadOriginal/Head/CameraSmooth/Camera3D/sword_down" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.018)
 
 [node name="StairsAheadRayCast3D" type="RayCast3D" parent="."]
 unique_name_in_owner = true
@@ -289,11 +71,10 @@ target_position = Vector3(0, -0.55, 0)
 unique_name_in_owner = true
 target_position = Vector3(0, -0.75, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="WeaponManager" parent="." node_paths=PackedStringArray("player", "look_raycast", "view_model_container") instance=ExtResource("3_4ybej")]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_4ybej")
-}
-
-[editable path="HeadOriginal/Head/CameraSmooth/Camera3D/sword_up"]
-[editable path="HeadOriginal/Head/CameraSmooth/Camera3D/sword_down"]
+script = ExtResource("4_4ybej")
+player = NodePath("..")
+look_raycast = NodePath("../HeadOriginal/Head/CameraSmooth/Camera3D/Look")
+view_model_container = NodePath("../HeadOriginal/Head/CameraSmooth/Camera3D/ViewModel")
+curr_r = ExtResource("4_lm1k8")
