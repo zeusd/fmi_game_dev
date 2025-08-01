@@ -15,10 +15,26 @@ var look_timer: Timer
 var last_known_pos: Vector3
 
 var nav_agent: NavigationAgent3D
-var speed := 3.0
-var angry := false
+var speed:= 3.0
+var angry:= false
+var alert:= false
 
 signal is_there
+
+var anim_p: AnimationPlayer
+const A_IDLE:= "idle"
+const A_IDLE_WALK:= "idle_walk"
+const A_ALERT_WALK:= "alert_walk"
+const A_RUN:= "run"
+const A_READY:= "ready"
+const A_SLASH:= "slash"
+const A_HIT:= "hit"
+const A_DEATH:= "death"
+const A_BONK:= "bonk"
+
+var idle_timer:= Timer.new()
+var atk_timer:= Timer.new()
+var pre_atk_timer:= Timer.new()
 
 func _func_godot_apply_properties(props: Dictionary) -> void:
 	target = props["target"] as String
@@ -26,6 +42,18 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	globalname = props["globalname"] as String
 
 func _ready() -> void:
+	(self.find_child("knight") as Node3D).scale = Vector3.ONE * 1.1
+	self.global_position.y += 0.2
+	
+	anim_p = self.find_child("knight").find_child("AnimationPlayer")
+	
+	self.add_child(idle_timer)
+	self.add_child(atk_timer)
+	self.add_child(pre_atk_timer)
+	idle_timer.one_shot = true
+	atk_timer.one_shot = true
+	pre_atk_timer.one_shot = true
+	
 	if Engine.is_editor_hint():
 		return
 	GAME.use_targets(self, target)
@@ -35,14 +63,13 @@ func _ready() -> void:
 	hit.id = str(self.get_instance_id())
 	hit.global_transform.origin = self.global_transform.origin
 	hit.global_rotation = self.global_rotation
-	hit.position += Vector3(0.5, 1.6, 1.0)
-	hit.rotation_degrees = Vector3(0.0, -14.0, -93.0)
+	hit.position += Vector3(1.0, 1.5, 0.0)
 	
 	var hit_b = CollisionShape3D.new()
 	hit.add_child(hit_b)
 	var sword_bean = CapsuleShape3D.new()
 	sword_bean.height = 1.0
-	sword_bean.radius = 0.2
+	sword_bean.radius = 1.0
 	hit_b.shape = sword_bean
 	
 	#var hit_m = MeshInstance3D.new()
@@ -55,6 +82,7 @@ func _ready() -> void:
 	
 	var hurt = Hurtbox.new()
 	self.add_child(hurt)
+	hurt.exclude["ball"] = hitbox
 	hurt.id = str(self.get_instance_id())
 	hurt.global_transform.origin = self.global_transform.origin
 	hurt.rotation_degrees = self.rotation_degrees
@@ -97,15 +125,26 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	if anim_p.current_animation == A_SLASH:
+		hitbox.monitorable = pre_atk_timer.is_stopped()
+	else:
+		hitbox.monitorable = false
+	
 	var state: Intelligence.enemy_state = %Intelligence.state_is(str(self.get_instance_id()))
 	
 	if state == Intelligence.enemy_state.IDLE or state == Intelligence.enemy_state.ALERT:
-		var tar_gr = get_tree().get_first_node_in_group(target) as PathCorner
-		move_to(tar_gr.global_position)
-		smooth_look_at(tar_gr.global_position, delta)
-		
-		if (tar_gr.global_position - self.global_position).length() < 0.1:
-			self.emit_signal("is_there")
+		if target:
+			var tar_gr = get_tree().get_first_node_in_group(target) as PathCorner
+			move_to(tar_gr.global_position)
+			smooth_look_at(tar_gr.global_position, delta)
+			
+			var anim = A_ALERT_WALK if alert else A_IDLE_WALK
+			play_anim_loop(anim)
+			
+			if (tar_gr.global_position - self.global_position).length() < 0.1:
+				self.emit_signal("is_there")
+		else:
+			play_anim_loop(A_IDLE)
 	
 	if state == Intelligence.enemy_state.FIGHT:
 		if nav_target:
@@ -114,17 +153,35 @@ func _process(delta: float) -> void:
 		next.y -= 1.0
 		last_known_pos = next
 		if angry:
-			%Intelligence.unspotted(str(self.get_instance_id()), nav_target)
-			nav_agent.target_position = last_known_pos
-		move_to(next, speed)
-		smooth_look_at(next, 5 * delta)
+			smooth_look_at(last_known_pos, 5 * delta)
+			if not sight.in_sight(nav_target):
+				%Intelligence.unspotted(str(self.get_instance_id()), nav_target)
+				nav_agent.target_position = last_known_pos
+		
+		if (last_known_pos - self.global_position).length() < 2.0:
+			if idle_timer.is_stopped() and atk_timer.is_stopped():
+				var rand = RandomNumberGenerator.new()
+				rand.randomize()
+				var atk_chance = 1.0 if angry else rand.randf_range(0.0, 1.0)
+				if atk_chance < 0.3:
+					idle_timer.start(1.5)
+					play_anim_loop(A_READY)
+				elif sight.in_sight(nav_target):
+					atk_timer.start(1.5)
+					play_anim_loop(A_SLASH)
+		else:
+			play_anim_loop(A_RUN)
+			move_to(next, speed)
+			smooth_look_at(next, 5 * delta)
 	elif state == Intelligence.enemy_state.SEARCH:
 		if not look_timer.is_stopped():
+			play_anim_loop(A_ALERT_WALK)
 			var angle 
 			if (last_known_pos - self.global_position).length() < 0.5:
 				angle = 90.0
 				last_known_pos = self.global_position
 				self.velocity = Vector3.ZERO
+				angry = false
 			else:
 				angle = 15.0
 				move_to(last_known_pos)
@@ -143,7 +200,7 @@ func hit_by(who: Node3D) -> void:
 
 func move_to(pos: Vector3, spd: float = 1.0) -> void:
 	var dir = (pos - self.global_position).normalized()
-	self.velocity = dir * spd
+	self.velocity = dir * spd * Vector3(1.0, 0.0, 1.0)
 
 func smooth_look_at(to: Vector3, delta: float) -> void:
 	if (to - self.global_position).length() < 0.1:
@@ -162,3 +219,12 @@ func smooth_rotate(angle: float, delta: float) -> void:
 	var new_tr = self.transform
 	self.transform = old_tr
 	self.transform = self.transform.interpolate_with(new_tr, delta)
+
+func play_anim_loop(anim: String) -> void:
+	if anim_p.current_animation != anim:
+		anim_p.play(anim)
+		if anim == A_SLASH:
+			pre_atk_timer.start(0.6)
+
+func change_state_anim(state: Intelligence.enemy_state) -> void:
+	pass

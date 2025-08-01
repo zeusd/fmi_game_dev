@@ -231,7 +231,6 @@ func _headbob_effect(delta: float) -> void:
 func _process(delta: float) -> void:
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
-		pass
 	
 	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
 	

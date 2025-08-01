@@ -44,14 +44,16 @@ func state_is(id: String) -> enemy_state:
 
 func change_state(id: String, state: enemy_state) -> void:
 	enemies[id][STA] = state
+	if state == enemy_state.ALERT:
+		enemies[id][REF].alert = true
 
 func spotted(id: String, body: Node3D) -> void:
 	enemies[id][REF].nav_target = body
-	enemies[id][STA] = enemy_state.FIGHT
+	change_state(id, enemy_state.FIGHT)
 	enemies[id][NAV].target_position = body.global_position
 
 func unspotted(id: String, body: Node3D) -> void:
 	enemies[id][REF].nav_target = null
 	enemies[id][REF].look_timer.start(30.0)
-	enemies[id][STA] = enemy_state.SEARCH
+	change_state(id, enemy_state.SEARCH)
 	enemies[id][NAV].target_position = enemies[id][REF].global_position

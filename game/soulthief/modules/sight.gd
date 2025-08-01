@@ -5,15 +5,19 @@ var id: String
 
 var intelligence: Intelligence
 
+var vision_c: VisionCone3D
+var vision_l: VisionCone3D
+var vision_r: VisionCone3D
+
 func _ready() -> void:
-	var vision_c = VisionCone3D.new()
+	vision_c = VisionCone3D.new()
 	self.add_child(vision_c)
 	vision_c.angle = 45
 	vision_c.set_collision_mask_value(1, false)
 	vision_c.set_collision_mask_value(5, true)
 	vision_c.debug_draw = true
 	
-	var vision_l = VisionCone3D.new()
+	vision_l = VisionCone3D.new()
 	self.add_child(vision_l)
 	vision_l.angle = 30
 	vision_l.set_collision_mask_value(1, false)
@@ -21,7 +25,7 @@ func _ready() -> void:
 	vision_l.rotate_y(deg_to_rad(37.7))
 	vision_l.debug_draw = true
 	
-	var vision_r = VisionCone3D.new()
+	vision_r = VisionCone3D.new()
 	self.add_child(vision_r)
 	vision_r.angle = 30
 	vision_r.set_collision_mask_value(1, false)
@@ -46,3 +50,8 @@ func _on_spotted(body: Node3D) -> void:
 
 func _on_unspotted(body: Node3D) -> void:
 	intelligence.unspotted(id, body)
+
+func in_sight(body: Node3D) -> bool:
+	if body == null:
+		return false
+	return vision_c.overlaps_body(body) or vision_l.overlaps_body(body) or vision_r.overlaps_body(body)

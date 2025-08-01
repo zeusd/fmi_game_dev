@@ -2454,7 +2454,7 @@ shape = SubResource("ConvexPolygonShape3D_j24b8")
 [node name="entity_1_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -2.5, 37.25)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@110605")
+col_rect = NodePath("@ColorRect@43053")
 liquid_type = 1
 gamma = 0.7
 
@@ -2473,7 +2473,7 @@ shape = SubResource("ConvexPolygonShape3D_0djwf")
 [node name="entity_2_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5.5, -2.5)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@110606")
+col_rect = NodePath("@ColorRect@43054")
 gamma = 0.7
 
 [node name="entity_2_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_2_st_liquid"]
@@ -2485,7 +2485,7 @@ shape = SubResource("ConvexPolygonShape3D_8bqxk")
 [node name="entity_3_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5.5, -10)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@110607")
+col_rect = NodePath("@ColorRect@43055")
 liquid_type = 2
 gamma = 1.0
 
@@ -2665,7 +2665,7 @@ targetname = "path_1_2"
 target = "path_1_1"
 
 [node name="entity_22_knight" parent="FuncGodotMap" instance=ExtResource("21_dhlwf")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 9)
+transform = Transform3D(-1, 1.75078e-11, -8.75443e-08, 6.00267e-11, 1, 0, 8.74279e-08, -1.16415e-10, -1, 6.00015, 0.2, 8.99976)
 script = ExtResource("24_dhlwf")
 target = "path_1_1"
 
