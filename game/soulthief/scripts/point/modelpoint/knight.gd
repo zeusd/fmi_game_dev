@@ -42,8 +42,8 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	globalname = props["globalname"] as String
 
 func _ready() -> void:
-	(self.find_child("knight") as Node3D).scale = Vector3.ONE * 1.1
-	self.global_position.y += 0.2
+	#(self.find_child("knight") as Node3D).scale = Vector3.ONE * 1.1
+	#self.global_position.y += 0.2
 	
 	anim_p = self.find_child("knight").find_child("AnimationPlayer")
 	
@@ -107,8 +107,8 @@ func _ready() -> void:
 	self.add_child(sight)
 	sight.id = str(self.get_instance_id())
 	sight.global_rotation = self.global_rotation
-	sight.global_rotation_degrees += Vector3(0.0, -90.0, 0.0)
-	sight.position += Vector3.UP * 1.85
+	sight.global_rotation_degrees += Vector3(-0.0, -90.0, 0.0)
+	sight.position += Vector3.UP * 1.75
 	
 	self.nav_agent = NavigationAgent3D.new()
 	self.add_child(nav_agent)
@@ -141,7 +141,7 @@ func _process(delta: float) -> void:
 			var anim = A_ALERT_WALK if alert else A_IDLE_WALK
 			play_anim_loop(anim)
 			
-			if (tar_gr.global_position - self.global_position).length() < 0.1:
+			if ((tar_gr.global_position - self.global_position) * Vector3(1.0, 0.0, 1.0)).length() < 0.1:
 				self.emit_signal("is_there")
 		else:
 			play_anim_loop(A_IDLE)

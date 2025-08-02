@@ -1,4 +1,4 @@
-[gd_scene load_steps=511 format=4 uid="uid://c8lk6phvitt7g"]
+[gd_scene load_steps=509 format=4 uid="uid://c8lk6phvitt7g"]
 
 [ext_resource type="Script" uid="uid://cfw8pqqkmvflr" path="res://components/intelligence.gd" id="1_5t8nk"]
 [ext_resource type="Script" uid="uid://b6nbs6rtakpre" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_a0tk4"]
@@ -22,9 +22,7 @@
 [ext_resource type="Material" uid="uid://b343mbse81g2i" path="res://assets/textures/city3_1.tres" id="18_s0gvp"]
 [ext_resource type="Material" uid="uid://2dll7fpfu1co" path="res://assets/textures/city1_9.tres" id="19_vxd74"]
 [ext_resource type="Material" uid="uid://cym5uamj6saul" path="res://assets/textures/special/sky3.tres" id="20_dhlwf"]
-[ext_resource type="PackedScene" uid="uid://kc8icpip6mrq" path="res://enemies/knight.tscn" id="21_dhlwf"]
 [ext_resource type="Script" uid="uid://bdwq452m8i8la" path="res://components/combat.gd" id="22_s0gvp"]
-[ext_resource type="Script" uid="uid://bnafgxxtsyecu" path="res://scripts/point/modelpoint/knight.gd" id="24_dhlwf"]
 [ext_resource type="Script" uid="uid://wv4hfd7l5k65" path="res://scripts/point/st_path_corner.gd" id="24_j3e5s"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jsnrv"]
@@ -1762,7 +1760,6 @@ map_settings = ExtResource("2_r3fl7")
 metadata/_custom_type_script = "uid://b6nbs6rtakpre"
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]
-collision_mask = 0
 
 [node name="entity_0_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_0_worldspawn"]
 mesh = SubResource("ArrayMesh_j3e5s")
@@ -2454,7 +2451,7 @@ shape = SubResource("ConvexPolygonShape3D_j24b8")
 [node name="entity_1_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -2.5, 37.25)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@43053")
+col_rect = NodePath("@ColorRect@56195")
 liquid_type = 1
 gamma = 0.7
 
@@ -2473,7 +2470,7 @@ shape = SubResource("ConvexPolygonShape3D_0djwf")
 [node name="entity_2_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5.5, -2.5)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@43054")
+col_rect = NodePath("@ColorRect@56196")
 gamma = 0.7
 
 [node name="entity_2_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_2_st_liquid"]
@@ -2485,7 +2482,7 @@ shape = SubResource("ConvexPolygonShape3D_8bqxk")
 [node name="entity_3_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5.5, -10)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@43055")
+col_rect = NodePath("@ColorRect@56197")
 liquid_type = 2
 gamma = 1.0
 
@@ -2662,11 +2659,6 @@ target = "path_1_2"
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 9.25, 0.25, 8.75)
 script = ExtResource("24_j3e5s")
 targetname = "path_1_2"
-target = "path_1_1"
-
-[node name="entity_22_knight" parent="FuncGodotMap" instance=ExtResource("21_dhlwf")]
-transform = Transform3D(-1, 1.75078e-11, -8.75443e-08, 6.00267e-11, 1, 0, 8.74279e-08, -1.16415e-10, -1, 6.00015, 0.2, 8.99976)
-script = ExtResource("24_dhlwf")
 target = "path_1_1"
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

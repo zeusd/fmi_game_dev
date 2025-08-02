@@ -8,61 +8,61 @@ extends CharacterBody3D
 @export var y_stick_sensitivity: float = 0.12
 @export var stick_look_smoothing: float = 0.3
 
-@export var headbob_move := 0.06
-@export var headbob_frequency := 2.4
-var headbob_time := 0.0
+@export var headbob_move:= 0.06
+@export var headbob_frequency:= 2.4
+var headbob_time:= 0.0
 
 var cur_stick_look := Vector2.ZERO
 
-@export var jump_velocity := 5.3
-@export var walk_speed := 5.3
-@export var sprint_speed := 7.7
-var sprinting := false
+@export var jump_velocity:= 5.3
+@export var walk_speed:= 5.3
+@export var sprint_speed:= 7.7
+var sprinting:= false
 
 const WALLRUN_POWER = 3
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-var last_bounce := Vector3.ZERO
-var wall_normal := Vector3.ZERO
+var last_bounce:= Vector3.ZERO
+var wall_normal:= Vector3.ZERO
 
-const MAX_JUMPS := 1
-var jump_cnt := 0
+const MAX_JUMPS:= 1
+var jump_cnt:= 0
 var jump_timer: Timer = Timer.new()
-var jump_timeout := jump_velocity / gravity
+var jump_timeout:= jump_velocity / gravity
 
-const MAX_STEP_HEIGHT := 0.5
-var _snapped_to_stairs_last_frame := false
-var _last_frame_on_floor := -INF
+const MAX_STEP_HEIGHT:= 0.5
+var _snapped_to_stairs_last_frame:= false
+var _last_frame_on_floor:= -INF
 
 const CROUCH_DIST = 0.7
 const CROUCH_SLOW = 0.5
 const CROUCH_JUMP_ADD = CROUCH_DIST * 0.9
 var crouching = false
 
-@export var frict := 6.0
-@export var accel := 100.0
-@export var stop_speed := 100.0
-@export var max_speed := 320.0
-@export var air_move_cap := 0.85
-@export var air_speed := 500.0
+@export var frict:= 6.0
+@export var accel:= 100.0
+@export var stop_speed:= 100.0
+@export var max_speed:= 320.0
+@export var air_move_cap:= 0.85
+@export var air_speed:= 500.0
 
-@export var swim_up_speed := 7.0
-@export var water_speed_mult := 1.0
+@export var swim_up_speed:= 7.0
+@export var water_speed_mult:= 1.0
 var swimming = false
 
-const WEIGHT := 100
-const FORCE := 1.0
-const THROW_FORCE := 70
+const WEIGHT:= 100
+const FORCE:= 1.0
+const THROW_FORCE:= 70
 
 #signal interact_obj
 var held_obj: RigidBody3D
 var look_speed: float
 
-var wish_dir := Vector3.ZERO
-var cam_aligned_wish_dir := Vector3.ZERO
+var wish_dir:= Vector3.ZERO
+var cam_aligned_wish_dir:= Vector3.ZERO
 
-const NOCLIP_SPEED_ORIG := 3.0
-var noclip_speed_mult := NOCLIP_SPEED_ORIG
-var noclip := false
+const NOCLIP_SPEED_ORIG:= 3.0
+var noclip_speed_mult:= NOCLIP_SPEED_ORIG
+var noclip:= false
 
 const FTR_TYPE = Combat.fighter_type.PLAYER
 
@@ -75,7 +75,20 @@ var atk_timer: Timer = Timer.new()
 var sword_up: Node3D
 var sword_down: Node3D
 
+var casting:= false
+var blinking:= false
+var blink_pos: Vector3
+var aim: MeshInstance3D
+const BLINK_SPEED = 37.0
+const BLINK_DIST = 100.0
+enum spell {
+	BLINK
+}
+var curr_spell:= spell.BLINK
+
 func _ready():
+	%Camera3D/SpringArm3D/MeshInstance3D.visible = false
+	
 	hurtbox = Hurtbox.new()
 	self.add_child(hurtbox)
 	hurtbox.id = str(self.get_instance_id())
@@ -96,6 +109,10 @@ func _ready():
 	
 	self.add_child(jump_timer)
 	jump_timer.one_shot = true
+	
+	
+	aim = %Camera3D/SpringArm3D/MeshInstance3D
+	
 
 func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
@@ -229,6 +246,26 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _process(delta: float) -> void:
+	if casting:
+		show_aim(delta)
+		aim.visible = true
+		if Input.is_action_just_released("cast"):
+			blink_pos = aim.global_position
+			blinking = true
+	else:
+		aim.visible = false
+	
+	if blinking:
+		cast(delta * BLINK_SPEED)
+	
+	casting = Input.is_action_pressed("cast")
+	
+	if (blink_pos - self.global_position).length() < 0.1:
+		self.velocity.x = 0.0
+		self.velocity.z = 0.0
+		blinking = false
+	
+	
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
 	
@@ -252,13 +289,13 @@ func _process(delta: float) -> void:
 				_handle_ground_physics(delta)
 			else:
 				_handle_air_physics(delta)
-	
+		
 		var jumping: bool = Input.is_action_just_pressed("jump") if jump_cnt == 0 else Input.is_action_pressed("jump")
 		if jumping and  jump_cnt < MAX_JUMPS and jump_timer.is_stopped():
 			self.velocity.y += jump_velocity * ((jump_cnt / (jump_velocity / MAX_JUMPS)) + 1)
 			jump_timer.start(jump_timeout)
 			jump_cnt += 1
-
+		
 		if not _snap_up_stairs_check(delta):
 			_push_rigid_bodies()
 			move_and_slide()
@@ -487,3 +524,16 @@ func _crouch_uncrouch(delta) -> void:
 
 func hit_by(who: Node3D) -> void:
 	pass
+
+func show_aim(delta: float) -> void:
+	var res = KinematicCollision3D.new()
+	var new_pos = %Camera3D/SpringArm3D/MeshInstance3D.global_position
+	
+	if not self.test_move(self.transform, (new_pos), res, 0.001, false):
+		new_pos = res.get_travel()
+		aim.global_position = new_pos
+
+func cast(delta: float) -> void:
+	print_debug("A")
+	if curr_spell == spell.BLINK:
+		self.velocity = (blink_pos - self.global_position) * delta * BLINK_SPEED
