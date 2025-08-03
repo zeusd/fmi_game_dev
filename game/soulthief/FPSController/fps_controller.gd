@@ -79,6 +79,9 @@ var casting:= false
 var blinking:= false
 var blink_pos: Vector3
 var aim: MeshInstance3D
+var ground_aim: MeshInstance3D
+var gnd_rc: RayCast3D
+var prev_veloc: Vector3
 const BLINK_SPEED = 37.0
 const BLINK_DIST = 100.0
 enum spell {
@@ -112,8 +115,17 @@ func _ready():
 	
 	
 	aim = %Camera3D/SpringArm3D/MeshInstance3D
+	ground_aim = MeshInstance3D.new() #%Camera3D/SpringArm3D/SpringArm3D/MeshInstance3D
+	self.add_child(ground_aim)
+	ground_aim.mesh = CylinderMesh.new()
+	ground_aim.mesh.height = 0.2
+	ground_aim.mesh.bottom_radius = 0.0
+	ground_aim.mesh.material = aim.mesh.material
+	gnd_rc = RayCast3D.new()
+	self.add_child(gnd_rc)
+	gnd_rc.global_position = aim.global_position
+	gnd_rc.target_position = Vector3(0.0, -999, 0.0)
 	
-
 func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
 	var rl = %WeaponManager.update_weapon_model()
@@ -170,7 +182,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x * x_mouse_sensitivity)
 			%Camera3D.rotate_x(-event.relative.y * y_mouse_sensitivity)
-			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 			
 			look_speed = event.screen_relative.length()
 		else:
@@ -192,7 +204,7 @@ func _handle_stick_look_input(delta: float) -> void:
 	
 	rotate_y(-cur_stick_look.x * x_stick_sensitivity)
 	%Camera3D.rotate_x(-cur_stick_look.y * y_stick_sensitivity)
-	%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90), deg_to_rad(90))
+	%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 	
 
 func _input(event: InputEvent) -> void:
@@ -249,20 +261,23 @@ func _process(delta: float) -> void:
 	if casting:
 		show_aim(delta)
 		aim.visible = true
+		ground_aim.visible = true
 		if Input.is_action_just_released("cast"):
-			blink_pos = aim.global_position
+			prev_veloc = self.velocity * Vector3.UP
+			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
 			blinking = true
 	else:
 		aim.visible = false
+		ground_aim.visible = false
 	
 	if blinking:
+		self.velocity = Vector3.ZERO
 		cast(delta * BLINK_SPEED)
 	
 	casting = Input.is_action_pressed("cast")
 	
-	if (blink_pos - self.global_position).length() < 0.1:
-		self.velocity.x = 0.0
-		self.velocity.z = 0.0
+	if blinking and ((blink_pos - self.global_position).length() < 0.1 or is_on_wall() or is_on_ceiling()):
+		self.velocity = prev_veloc
 		blinking = false
 	
 	
@@ -470,7 +485,8 @@ func _accelerate(delta: float) -> void:
 		self.velocity += accel_speed * wish_dir
 
 func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
-	self.velocity.y -= gravity * delta
+	if not blinking:
+		self.velocity.y -= gravity * delta
 	
 	var wish_speed = min(air_move_cap, (air_speed * wish_dir).length())
 	var cur_speed = self.velocity.dot(wish_veloc)
@@ -529,11 +545,22 @@ func show_aim(delta: float) -> void:
 	var res = KinematicCollision3D.new()
 	var new_pos = %Camera3D/SpringArm3D/MeshInstance3D.global_position
 	
-	if not self.test_move(self.transform, (new_pos), res, 0.001, false):
+	gnd_rc.global_position = aim.global_position
+	ground_aim.global_position = gnd_rc.get_collision_point()
+	ground_aim.global_position.y += 0.3
+	if not self.test_move(self.transform, (new_pos), res, 0.1, false):
 		new_pos = res.get_travel()
 		aim.global_position = new_pos
+		gnd_rc.global_position = aim.global_position
+		ground_aim.global_position = gnd_rc.get_collision_point()
+		ground_aim.global_position.y += 0.3
 
 func cast(delta: float) -> void:
-	print_debug("A")
 	if curr_spell == spell.BLINK:
-		self.velocity = (blink_pos - self.global_position) * delta * BLINK_SPEED
+		#var res = KinematicCollision3D.new()
+		#var test_move = self.test_move(self.transform, blink_pos, res, 0.1, false)
+		#
+		#if not test_move:
+		self.global_position = self.global_position.lerp(blink_pos, 0.5)
+		#else:
+			#blinking = false

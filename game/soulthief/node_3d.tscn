@@ -2451,7 +2451,7 @@ shape = SubResource("ConvexPolygonShape3D_j24b8")
 [node name="entity_1_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -2.5, 37.25)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@56195")
+col_rect = NodePath("@ColorRect@63937")
 liquid_type = 1
 gamma = 0.7
 
@@ -2470,7 +2470,7 @@ shape = SubResource("ConvexPolygonShape3D_0djwf")
 [node name="entity_2_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5.5, -2.5)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@56196")
+col_rect = NodePath("@ColorRect@63938")
 gamma = 0.7
 
 [node name="entity_2_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_2_st_liquid"]
@@ -2482,7 +2482,7 @@ shape = SubResource("ConvexPolygonShape3D_8bqxk")
 [node name="entity_3_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5.5, -10)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@56197")
+col_rect = NodePath("@ColorRect@63939")
 liquid_type = 2
 gamma = 1.0
 
@@ -2664,694 +2664,695 @@ target = "path_1_1"
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_5t8nk")
 
-[node name="entity_0_worldspawn" type="StaticBody3D" parent="NavigationRegion3D"]
+[node name="entity_0_worldspawn0" type="StaticBody3D" parent="NavigationRegion3D"]
+collision_layer = 16
 collision_mask = 0
 
-[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_mesh_instance" type="MeshInstance3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 mesh = SubResource("ArrayMesh_5t8nk")
 
-[node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_occluder_instance" type="OccluderInstance3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 occluder = SubResource("ArrayOccluder3D_j3e5s")
 
-[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_0_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_nu31w")
 
-[node name="entity_0_brush_1_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_1_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_obt1j")
 
-[node name="entity_0_brush_2_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_2_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2yde8")
 
-[node name="entity_0_brush_3_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_3_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_id0nj")
 
-[node name="entity_0_brush_4_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_4_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_1q667")
 
-[node name="entity_0_brush_5_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_5_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ype4i")
 
-[node name="entity_0_brush_6_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_6_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_riyl1")
 
-[node name="entity_0_brush_7_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_7_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_pb8dk")
 
-[node name="entity_0_brush_8_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_8_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2mu51")
 
-[node name="entity_0_brush_9_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_9_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_vmvb8")
 
-[node name="entity_0_brush_10_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_10_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_4i7mf")
 
-[node name="entity_0_brush_11_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_11_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3s0n5")
 
-[node name="entity_0_brush_12_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_12_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_qpkl4")
 
-[node name="entity_0_brush_13_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_13_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_g4s1x")
 
-[node name="entity_0_brush_14_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_14_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_pf4ct")
 
-[node name="entity_0_brush_15_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_15_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5w2ad")
 
-[node name="entity_0_brush_16_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_16_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8p5mg")
 
-[node name="entity_0_brush_17_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_17_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_dsgk7")
 
-[node name="entity_0_brush_18_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_18_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_72tv7")
 
-[node name="entity_0_brush_19_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_19_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_x6a8j")
 
-[node name="entity_0_brush_20_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_20_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_s7uix")
 
-[node name="entity_0_brush_21_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_21_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_4hyfj")
 
-[node name="entity_0_brush_22_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_22_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8d0ks")
 
-[node name="entity_0_brush_23_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_23_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8kg7c")
 
-[node name="entity_0_brush_24_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_24_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_wwdad")
 
-[node name="entity_0_brush_25_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_25_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ykyjb")
 
-[node name="entity_0_brush_26_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_26_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_sivbr")
 
-[node name="entity_0_brush_27_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_27_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_4yprr")
 
-[node name="entity_0_brush_28_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_28_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_1ofy4")
 
-[node name="entity_0_brush_29_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_29_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_a41ck")
 
-[node name="entity_0_brush_30_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_30_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_alien")
 
-[node name="entity_0_brush_31_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_31_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8jhw1")
 
-[node name="entity_0_brush_32_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_32_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_if4ww")
 
-[node name="entity_0_brush_33_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_33_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_brp11")
 
-[node name="entity_0_brush_34_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_34_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_dvobo")
 
-[node name="entity_0_brush_35_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_35_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_gvloe")
 
-[node name="entity_0_brush_36_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_36_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_m5u2i")
 
-[node name="entity_0_brush_37_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_37_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_7u8at")
 
-[node name="entity_0_brush_38_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_38_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_u85y0")
 
-[node name="entity_0_brush_39_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_39_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_uhrmv")
 
-[node name="entity_0_brush_40_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_40_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_v3d5c")
 
-[node name="entity_0_brush_41_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_41_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5xjb2")
 
-[node name="entity_0_brush_42_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_42_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_lppl5")
 
-[node name="entity_0_brush_43_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_43_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_l74pm")
 
-[node name="entity_0_brush_44_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_44_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_i7r67")
 
-[node name="entity_0_brush_45_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_45_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_jvcxi")
 
-[node name="entity_0_brush_46_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_46_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8uyoo")
 
-[node name="entity_0_brush_47_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_47_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_j0jmk")
 
-[node name="entity_0_brush_48_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_48_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_cfs6k")
 
-[node name="entity_0_brush_49_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_49_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_u8pt3")
 
-[node name="entity_0_brush_50_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_50_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_g0276")
 
-[node name="entity_0_brush_51_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_51_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_xduql")
 
-[node name="entity_0_brush_52_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_52_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2hapo")
 
-[node name="entity_0_brush_53_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_53_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_7bs2f")
 
-[node name="entity_0_brush_54_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_54_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_txrmw")
 
-[node name="entity_0_brush_55_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_55_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_nrhv2")
 
-[node name="entity_0_brush_56_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_56_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_qshay")
 
-[node name="entity_0_brush_57_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_57_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_wu3aa")
 
-[node name="entity_0_brush_58_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_58_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_pamct")
 
-[node name="entity_0_brush_59_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_59_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_k11t4")
 
-[node name="entity_0_brush_60_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_60_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ssoew")
 
-[node name="entity_0_brush_61_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_61_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_hssls")
 
-[node name="entity_0_brush_62_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_62_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_wigdg")
 
-[node name="entity_0_brush_63_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_63_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_fs8kf")
 
-[node name="entity_0_brush_64_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_64_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_arvyt")
 
-[node name="entity_0_brush_65_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_65_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3ku12")
 
-[node name="entity_0_brush_66_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_66_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ars1g")
 
-[node name="entity_0_brush_67_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_67_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_oa651")
 
-[node name="entity_0_brush_68_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_68_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8tted")
 
-[node name="entity_0_brush_69_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_69_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_487xd")
 
-[node name="entity_0_brush_70_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_70_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_jweu0")
 
-[node name="entity_0_brush_71_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_71_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3yw45")
 
-[node name="entity_0_brush_72_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_72_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_wjvdr")
 
-[node name="entity_0_brush_73_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_73_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_s1scn")
 
-[node name="entity_0_brush_74_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_74_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8ye18")
 
-[node name="entity_0_brush_75_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_75_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_bihgt")
 
-[node name="entity_0_brush_76_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_76_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_be5ab")
 
-[node name="entity_0_brush_77_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_77_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_x880g")
 
-[node name="entity_0_brush_78_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_78_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_4il7c")
 
-[node name="entity_0_brush_79_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_79_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5llcs")
 
-[node name="entity_0_brush_80_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_80_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_cfq67")
 
-[node name="entity_0_brush_81_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_81_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_1wf8v")
 
-[node name="entity_0_brush_82_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_82_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_fg0x7")
 
-[node name="entity_0_brush_83_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_83_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_827e5")
 
-[node name="entity_0_brush_84_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_84_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_b2564")
 
-[node name="entity_0_brush_85_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_85_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_xx45s")
 
-[node name="entity_0_brush_86_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_86_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_jms14")
 
-[node name="entity_0_brush_87_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_87_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_c81n0")
 
-[node name="entity_0_brush_88_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_88_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_px7t7")
 
-[node name="entity_0_brush_89_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_89_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2v21e")
 
-[node name="entity_0_brush_90_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_90_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5pttj")
 
-[node name="entity_0_brush_91_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_91_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_vqaxq")
 
-[node name="entity_0_brush_92_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_92_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_7n28t")
 
-[node name="entity_0_brush_93_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_93_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_l64ev")
 
-[node name="entity_0_brush_94_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_94_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_j34tw")
 
-[node name="entity_0_brush_95_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_95_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_6migg")
 
-[node name="entity_0_brush_96_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_96_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_cti6v")
 
-[node name="entity_0_brush_97_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_97_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2kp1l")
 
-[node name="entity_0_brush_98_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_98_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_eyg7v")
 
-[node name="entity_0_brush_99_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_99_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_bp200")
 
-[node name="entity_0_brush_100_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_100_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_7a8sh")
 
-[node name="entity_0_brush_101_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_101_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ss52n")
 
-[node name="entity_0_brush_102_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_102_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5rywm")
 
-[node name="entity_0_brush_103_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_103_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_k4jpp")
 
-[node name="entity_0_brush_104_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_104_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_npj4g")
 
-[node name="entity_0_brush_105_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_105_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8hpcn")
 
-[node name="entity_0_brush_106_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_106_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ksf64")
 
-[node name="entity_0_brush_107_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_107_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_6oqmm")
 
-[node name="entity_0_brush_108_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_108_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_wwniw")
 
-[node name="entity_0_brush_109_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_109_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_b71jm")
 
-[node name="entity_0_brush_110_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_110_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_m1gn2")
 
-[node name="entity_0_brush_111_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_111_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_en6ay")
 
-[node name="entity_0_brush_112_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_112_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2ygsy")
 
-[node name="entity_0_brush_113_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_113_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_f7utt")
 
-[node name="entity_0_brush_114_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_114_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_81xfv")
 
-[node name="entity_0_brush_115_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_115_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_mkl7y")
 
-[node name="entity_0_brush_116_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_116_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_0elo6")
 
-[node name="entity_0_brush_117_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_117_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_beec5")
 
-[node name="entity_0_brush_118_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_118_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_33rtv")
 
-[node name="entity_0_brush_119_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_119_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_iuekc")
 
-[node name="entity_0_brush_120_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_120_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_h8eeo")
 
-[node name="entity_0_brush_121_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_121_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_e1p1s")
 
-[node name="entity_0_brush_122_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_122_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_sgk7p")
 
-[node name="entity_0_brush_123_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_123_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ftsxn")
 
-[node name="entity_0_brush_124_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_124_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_a0cqq")
 
-[node name="entity_0_brush_125_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_125_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_1dl48")
 
-[node name="entity_0_brush_126_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_126_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5tpnh")
 
-[node name="entity_0_brush_127_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_127_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_6xwum")
 
-[node name="entity_0_brush_128_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_128_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_65ou0")
 
-[node name="entity_0_brush_129_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_129_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3v4wk")
 
-[node name="entity_0_brush_130_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_130_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_l1byh")
 
-[node name="entity_0_brush_131_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_131_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_gly7n")
 
-[node name="entity_0_brush_132_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_132_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_figdr")
 
-[node name="entity_0_brush_133_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_133_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_gypu2")
 
-[node name="entity_0_brush_134_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_134_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_74dcl")
 
-[node name="entity_0_brush_135_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_135_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_62tju")
 
-[node name="entity_0_brush_136_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_136_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_djtot")
 
-[node name="entity_0_brush_137_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_137_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_rhhin")
 
-[node name="entity_0_brush_138_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_138_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_7hbci")
 
-[node name="entity_0_brush_139_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_139_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_dtfhx")
 
-[node name="entity_0_brush_140_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_140_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_sjot3")
 
-[node name="entity_0_brush_141_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_141_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_c5j2y")
 
-[node name="entity_0_brush_142_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_142_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_f3ayd")
 
-[node name="entity_0_brush_143_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_143_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_0pm46")
 
-[node name="entity_0_brush_144_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_144_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_0xbbr")
 
-[node name="entity_0_brush_145_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_145_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_yvgmf")
 
-[node name="entity_0_brush_146_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_146_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ennww")
 
-[node name="entity_0_brush_147_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_147_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_se77o")
 
-[node name="entity_0_brush_148_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_148_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3frk1")
 
-[node name="entity_0_brush_149_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_149_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_1sqa2")
 
-[node name="entity_0_brush_150_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_150_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5imd0")
 
-[node name="entity_0_brush_151_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_151_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ockat")
 
-[node name="entity_0_brush_152_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_152_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_uauwn")
 
-[node name="entity_0_brush_153_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_153_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_uxgqv")
 
-[node name="entity_0_brush_154_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_154_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_vuorr")
 
-[node name="entity_0_brush_155_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_155_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_f0hvd")
 
-[node name="entity_0_brush_156_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_156_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_qhk5v")
 
-[node name="entity_0_brush_157_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_157_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_lwjbj")
 
-[node name="entity_0_brush_158_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_158_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_j5rwu")
 
-[node name="entity_0_brush_159_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_159_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_hen24")
 
-[node name="entity_0_brush_160_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_160_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_x3swx")
 
-[node name="entity_0_brush_161_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_161_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3vp4w")
 
-[node name="entity_0_brush_162_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_162_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_t77oa")
 
-[node name="entity_0_brush_163_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_163_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_74a4o")
 
-[node name="entity_0_brush_164_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_164_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_vq8xf")
 
-[node name="entity_0_brush_165_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_165_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_8tyqd")
 
-[node name="entity_0_brush_166_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_166_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_te84y")
 
-[node name="entity_0_brush_167_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_167_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3gc2o")
 
-[node name="entity_0_brush_168_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_168_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_a6748")
 
-[node name="entity_0_brush_169_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_169_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_sddki")
 
-[node name="entity_0_brush_170_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_170_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_s2gw7")
 
-[node name="entity_0_brush_171_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_171_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_5c6as")
 
-[node name="entity_0_brush_172_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_172_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ein4u")
 
-[node name="entity_0_brush_173_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_173_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_72t5h")
 
-[node name="entity_0_brush_174_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_174_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_bhs0y")
 
-[node name="entity_0_brush_175_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_175_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_dxwbw")
 
-[node name="entity_0_brush_176_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_176_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_6rh27")
 
-[node name="entity_0_brush_177_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_177_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_08tyk")
 
-[node name="entity_0_brush_178_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_178_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_88jk3")
 
-[node name="entity_0_brush_179_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_179_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_1a2ec")
 
-[node name="entity_0_brush_180_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_180_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ccj11")
 
-[node name="entity_0_brush_181_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_181_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ir4n0")
 
-[node name="entity_0_brush_182_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_182_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_uvt4l")
 
-[node name="entity_0_brush_183_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_183_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_yj0qq")
 
-[node name="entity_0_brush_184_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_184_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_obnk4")
 
-[node name="entity_0_brush_185_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_185_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_dd1lt")
 
-[node name="entity_0_brush_186_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_186_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ea88r")
 
-[node name="entity_0_brush_187_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_187_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3hun0")
 
-[node name="entity_0_brush_188_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_188_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_oechf")
 
-[node name="entity_0_brush_189_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_189_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_77ide")
 
-[node name="entity_0_brush_190_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_190_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_q3cen")
 
-[node name="entity_0_brush_191_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_191_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ym7tp")
 
-[node name="entity_0_brush_192_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_192_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_0ma11")
 
-[node name="entity_0_brush_193_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_193_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_yn86y")
 
-[node name="entity_0_brush_194_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_194_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_g3783")
 
-[node name="entity_0_brush_195_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_195_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_yoow5")
 
-[node name="entity_0_brush_196_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_196_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_d3wty")
 
-[node name="entity_0_brush_197_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_197_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_rt7qk")
 
-[node name="entity_0_brush_198_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_198_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3os03")
 
-[node name="entity_0_brush_199_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_199_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2efxv")
 
-[node name="entity_0_brush_200_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_200_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_hqijh")
 
-[node name="entity_0_brush_201_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_201_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_hacum")
 
-[node name="entity_0_brush_202_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_202_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_p4e3c")
 
-[node name="entity_0_brush_203_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_203_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_2pwil")
 
-[node name="entity_0_brush_204_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_204_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_3sm0g")
 
-[node name="entity_0_brush_205_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_205_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_hpbgj")
 
-[node name="entity_0_brush_206_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_206_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_cvbb6")
 
-[node name="entity_0_brush_207_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_207_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_sou7e")
 
-[node name="entity_0_brush_208_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_208_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_o4spe")
 
-[node name="entity_0_brush_209_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_209_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_mp3km")
 
-[node name="entity_0_brush_210_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_210_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ajunh")
 
-[node name="entity_0_brush_211_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_211_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_um0fc")
 
-[node name="entity_0_brush_212_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_212_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_m5ov1")
 
-[node name="entity_0_brush_213_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_213_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_puxww")
 
-[node name="entity_0_brush_214_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_214_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_at6bu")
 
-[node name="entity_0_brush_215_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_215_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_sq4f7")
 
-[node name="entity_0_brush_216_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_216_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_fmuun")
 
-[node name="entity_0_brush_217_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_217_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_c68h2")
 
-[node name="entity_0_brush_218_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_218_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_f35fv")
 
-[node name="entity_0_brush_219_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_219_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_t1sbq")
 
-[node name="entity_0_brush_220_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_220_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_ju38t")
 
-[node name="entity_0_brush_221_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_221_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_xw7ej")
 
-[node name="entity_0_brush_222_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_222_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_mr8ws")
 
-[node name="entity_0_brush_223_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_223_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_he545")
 
-[node name="entity_0_brush_224_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_224_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_u5mj1")
 
-[node name="entity_0_brush_225_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_225_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_vbk2w")
 
-[node name="entity_0_brush_226_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
+[node name="entity_0_brush_226_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn0"]
 shape = SubResource("ConvexPolygonShape3D_hhwog")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_r3fl7")]
