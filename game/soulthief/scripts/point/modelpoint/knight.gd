@@ -177,7 +177,7 @@ func _process(delta: float) -> void:
 		if not look_timer.is_stopped():
 			play_anim_loop(A_ALERT_WALK)
 			var angle 
-			if (last_known_pos - self.global_position).length() < 0.5:
+			if (last_known_pos - self.global_position).length() < 0.1:
 				angle = 90.0
 				last_known_pos = self.global_position
 				self.velocity = Vector3.ZERO
@@ -185,8 +185,8 @@ func _process(delta: float) -> void:
 			else:
 				angle = 15.0
 				move_to(last_known_pos)
-				if angry:
-					smooth_look_at(last_known_pos, 5 * delta)
+			if angry:
+				smooth_look_at(last_known_pos, 5 * delta)
 			smooth_rotate(angle if sin(Time.get_datetime_dict_from_system()["second"] * 0.5 - 0.5) < 0.0 else -angle, delta)
 		else:
 			%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.ALERT)

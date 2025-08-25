@@ -14,7 +14,7 @@ var headbob_time:= 0.0
 
 var cur_stick_look := Vector2.ZERO
 
-@export var jump_velocity:= 5.3
+@export var jump_velocity:= 6.9
 @export var walk_speed:= 5.3
 @export var sprint_speed:= 7.7
 var sprinting:= false
@@ -75,6 +75,7 @@ var atk_timer: Timer = Timer.new()
 var sword_up: Node3D
 var sword_down: Node3D
 
+var aiming:= false
 var casting:= false
 var blinking:= false
 var blink_pos: Vector3
@@ -258,10 +259,12 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _process(delta: float) -> void:
-	if casting:
+	if casting and aiming:
 		show_aim(delta)
 		aim.visible = true
 		ground_aim.visible = true
+		if Input.is_action_just_pressed("interact"):
+			aiming = false
 		if Input.is_action_just_released("cast"):
 			prev_veloc = self.velocity * Vector3.UP
 			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
@@ -274,12 +277,14 @@ func _process(delta: float) -> void:
 		self.velocity = Vector3.ZERO
 		cast(delta * BLINK_SPEED)
 	
+	if Input.is_action_just_pressed("cast"):
+		aiming = true
+	
 	casting = Input.is_action_pressed("cast")
 	
 	if blinking and ((blink_pos - self.global_position).length() < 0.1 or is_on_wall() or is_on_ceiling()):
 		self.velocity = prev_veloc
 		blinking = false
-	
 	
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
