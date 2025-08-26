@@ -132,33 +132,38 @@ func _process(delta: float) -> void:
 	
 	var state: Intelligence.enemy_state = %Intelligence.state_is(str(self.get_instance_id()))
 	
+	if nav_target and nav_agent.target_position != nav_target.global_position:
+		nav_agent.target_position = nav_target.global_position
+		nav_agent.target_position.y = self.global_position.y
+	var next = nav_agent.get_next_path_position()
+	
 	if state == Intelligence.enemy_state.IDLE or state == Intelligence.enemy_state.ALERT:
 		if target:
 			var tar_gr = get_tree().get_first_node_in_group(target) as PathCorner
-			move_to(tar_gr.global_position)
+			
+			nav_target = tar_gr
+			nav_agent.target_position = nav_target.global_position
+			next = nav_agent.get_next_path_position()
+			
+			move_to(next)
 			smooth_look_at(tar_gr.global_position, delta)
 			
 			var anim = A_ALERT_WALK if alert else A_IDLE_WALK
 			play_anim_loop(anim)
 			
-			if ((tar_gr.global_position - self.global_position) * Vector3(1.0, 0.0, 1.0)).length() < 0.1:
+			if nav_agent.is_target_reached():
 				self.emit_signal("is_there")
 		else:
 			play_anim_loop(A_IDLE)
 	
 	if state == Intelligence.enemy_state.FIGHT:
-		if nav_target:
-			nav_agent.target_position = nav_target.global_position
-		var next = nav_agent.get_next_path_position()
-		next.y -= 1.0
-		last_known_pos = next
 		if angry:
 			smooth_look_at(last_known_pos, 5 * delta)
-			if not sight.in_sight(nav_target):
-				%Intelligence.unspotted(str(self.get_instance_id()), nav_target)
-				nav_agent.target_position = last_known_pos
+		if not sight.in_sight(nav_target):
+			%Intelligence.unspotted(str(self.get_instance_id()), nav_target)
+			nav_agent.target_position = last_known_pos
 		
-		if (last_known_pos - self.global_position).length() < 2.0:
+		if ((next - self.global_position)).length() < 2.0:
 			if idle_timer.is_stopped() and atk_timer.is_stopped():
 				var rand = RandomNumberGenerator.new()
 				rand.randomize()
@@ -172,21 +177,21 @@ func _process(delta: float) -> void:
 		else:
 			play_anim_loop(A_RUN)
 			move_to(next, speed)
-			smooth_look_at(next, 5 * delta)
+			smooth_look_at(last_known_pos, 5 * delta)
 	elif state == Intelligence.enemy_state.SEARCH:
 		if not look_timer.is_stopped():
 			play_anim_loop(A_ALERT_WALK)
 			var angle 
-			if (last_known_pos - self.global_position).length() < 0.1:
+			if (next - self.global_position).length() < 0.1:
 				angle = 90.0
-				last_known_pos = self.global_position
+				next = self.global_position
 				self.velocity = Vector3.ZERO
 				angry = false
 			else:
 				angle = 15.0
-				move_to(last_known_pos)
-			if angry:
-				smooth_look_at(last_known_pos, 5 * delta)
+				move_to(next)
+				if angry:
+					smooth_look_at(last_known_pos, 5 * delta)
 			smooth_rotate(angle if sin(Time.get_datetime_dict_from_system()["second"] * 0.5 - 0.5) < 0.0 else -angle, delta)
 		else:
 			%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.ALERT)
@@ -196,11 +201,14 @@ func _process(delta: float) -> void:
 func hit_by(who: Node3D) -> void:
 	%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.FIGHT)
 	nav_target = who
+	last_known_pos = who.global_position
 	angry = true
 
 func move_to(pos: Vector3, spd: float = 1.0) -> void:
-	var dir = (pos - self.global_position).normalized()
-	self.velocity = dir * spd * Vector3(1.0, 0.0, 1.0)
+	var dir = ((pos - self.global_position)).normalized()
+	self.velocity = dir * spd 
+	#print_debug(pos)
+	#print_debug(self.global_position)
 
 func smooth_look_at(to: Vector3, delta: float) -> void:
 	if (to - self.global_position).length() < 0.1:

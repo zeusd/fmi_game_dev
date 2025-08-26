@@ -12,7 +12,7 @@ extends CharacterBody3D
 @export var headbob_frequency:= 2.4
 var headbob_time:= 0.0
 
-var cur_stick_look := Vector2.ZERO
+var cur_stick_look:= Vector2.ZERO
 
 @export var jump_velocity:= 6.9
 @export var walk_speed:= 5.3
@@ -116,7 +116,7 @@ func _ready():
 	
 	
 	aim = %Camera3D/SpringArm3D/MeshInstance3D
-	ground_aim = MeshInstance3D.new() #%Camera3D/SpringArm3D/SpringArm3D/MeshInstance3D
+	ground_aim = MeshInstance3D.new()
 	self.add_child(ground_aim)
 	ground_aim.mesh = CylinderMesh.new()
 	ground_aim.mesh.height = 0.2
@@ -126,6 +126,8 @@ func _ready():
 	self.add_child(gnd_rc)
 	gnd_rc.global_position = aim.global_position
 	gnd_rc.target_position = Vector3(0.0, -999, 0.0)
+	
+	%CameraSmooth/ShapeCast3D.add_exception(self)
 	
 func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
@@ -181,7 +183,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			rotate_y(-event.relative.x * x_mouse_sensitivity)
+			self.rotate_y(-event.relative.x * x_mouse_sensitivity)
 			%Camera3D.rotate_x(-event.relative.y * y_mouse_sensitivity)
 			%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 			
@@ -203,12 +205,17 @@ func _handle_stick_look_input(delta: float) -> void:
 	else:
 		cur_stick_look = cur_stick_look.lerp(target_look, (1 / stick_look_smoothing) * delta)
 	
-	rotate_y(-cur_stick_look.x * x_stick_sensitivity)
+	self.rotate_y(-cur_stick_look.x * x_stick_sensitivity)
 	%Camera3D.rotate_x(-cur_stick_look.y * y_stick_sensitivity)
 	%Camera3D.rotation.x = clamp(%Camera3D.rotation.x, deg_to_rad(-90.0), deg_to_rad(90.0))
 	
 
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("lean_left"):
+		_lean_left()
+	elif Input.is_action_just_pressed("lean_right"):
+		_lean_right()
+	
 	if Input.is_action_just_pressed("interact"):
 		if held_obj == null:
 			_hold_object()
@@ -258,6 +265,23 @@ func _headbob_effect(delta: float) -> void:
 		0
 	)
 
+func _lean_right() -> void:
+	_lean(-1.0)
+
+func _lean_left() -> void:
+	_lean(1.0)
+
+func _lean(dir: float) -> void:
+	if is_zero_approx(%CameraSmooth.rotation.z):
+		%CameraSmooth.rotation.z = deg_to_rad(dir * 15.0)
+		%CameraSmooth.position.x = -dir * 1.25
+	else:
+		_clear_lean()
+
+func _clear_lean() -> void:
+	%CameraSmooth.rotation.z = 0.0
+	%CameraSmooth.position.x = 0.0
+
 func _process(delta: float) -> void:
 	if casting and aiming:
 		show_aim(delta)
@@ -289,7 +313,7 @@ func _process(delta: float) -> void:
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
 	
-	sprinting = Input.is_action_pressed("sprint") or Input.is_action_pressed("sprint_1") or Input.is_action_pressed("sprint_2")
+	sprinting = Input.is_action_pressed("sprint")
 	
 	if is_on_floor() or _snapped_to_stairs_last_frame:
 		_last_frame_on_floor = Engine.get_physics_frames()
@@ -299,6 +323,9 @@ func _process(delta: float) -> void:
 	
 	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	
+	if self.velocity.length() > walk_speed and sprinting or %CameraSmooth/ShapeCast3D.is_colliding():
+		_clear_lean()
+		
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
 	cam_aligned_wish_dir = %Camera3D.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
 	if not _handle_noclip(delta):

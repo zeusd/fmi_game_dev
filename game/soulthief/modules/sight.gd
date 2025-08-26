@@ -49,6 +49,8 @@ func _on_spotted(body: Node3D) -> void:
 	intelligence.spotted(id, body)
 
 func _on_unspotted(body: Node3D) -> void:
+	if vision_c.overlaps_body(body) or vision_l.overlaps_body(body) or vision_r.overlaps_body(body):
+		return
 	intelligence.unspotted(id, body)
 
 func in_sight(body: Node3D) -> bool:
