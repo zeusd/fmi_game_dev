@@ -69,11 +69,17 @@ const FTR_TYPE = Combat.fighter_type.PLAYER
 var hitbox: Hitbox
 var hurtbox: Hurtbox
 var atk_timer: Timer = Timer.new()
+var hold_timer: Timer = Timer.new()
+var bonk_timer: Timer = Timer.new()
+
+var bonk:= false
 
 @onready var sword_up_res: WeaponResource = preload("res://weapons/sword_up/sword_up.tres")
 @onready var sword_down_res: WeaponResource = preload("res://weapons/sword_down/sword_down.tres")
+@onready var sword_bonk_res: WeaponResource = preload("res://weapons/sword_bonk/sword_bonk.tres")
 var sword_up: Node3D
 var sword_down: Node3D
+var sword_bonk: Node3D
 
 var aiming:= false
 var casting:= false
@@ -105,6 +111,10 @@ func _ready():
 	set_r_wep(sword_up, sword_up_res)
 	self.add_child(atk_timer)
 	atk_timer.one_shot = true
+	self.add_child(hold_timer)
+	hold_timer.one_shot = true
+	self.add_child(bonk_timer)
+	bonk_timer.one_shot = true
 	
 	%Combat.activate(str(self.get_instance_id()), FTR_TYPE)
 	
@@ -139,13 +149,13 @@ func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	wep.add_child(hitbox)
 	hitbox.id = str(self.get_instance_id())
 	hitbox.global_transform.origin = wep.global_transform.origin
-	hitbox.position += Vector3(0.0, 0.6, 0.0)
+	hitbox.position += Vector3(0.0, 0.5, 0.0)
 	var c_hit_b = CollisionShape3D.new()
 	hitbox.add_child(c_hit_b)
 	hitbox.monitorable = false
 	
 	var hit_s = CapsuleShape3D.new()
-	hit_s.height = 1.2
+	hit_s.height = 1.7
 	hit_s.radius = 0.3
 	c_hit_b.shape = hit_s
 	
@@ -221,23 +231,7 @@ func _input(event: InputEvent) -> void:
 			_hold_object()
 		else:
 			_drop_object()
-	if held_obj != null and Input.is_action_just_pressed("attack"):
-		_drop_object(THROW_FORCE)
-	elif Input.is_action_just_pressed("attack"):
-		if crouching:
-			pass
-		else:
-			pass
-		%WeaponManager.managed_input(event)
-		if atk_timer.is_stopped():
-			var anim_time
-			if crouching:
-				anim_time = 0.25
-				hitbox.monitorable = true
-			else:
-				anim_time = 0.4
-				hitbox.monitorable = true
-			atk_timer.start(anim_time)
+
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -283,6 +277,48 @@ func _clear_lean() -> void:
 	%CameraSmooth.position.x = 0.0
 
 func _process(delta: float) -> void:
+	if held_obj != null and Input.is_action_just_pressed("attack"):
+		_drop_object(THROW_FORCE)
+	elif Input.is_action_just_pressed("attack"):
+		hold_timer.start(0.2)
+	elif Input.is_action_pressed("attack"):
+		if hold_timer.is_stopped() and bonk_timer.is_stopped() and not bonk:
+			set_r_wep(sword_bonk, sword_bonk_res)
+			var anim_time = 1.5
+			bonk_timer.start(anim_time)
+			%WeaponManager.managed_input("hold")
+			bonk = true
+	elif Input.is_action_just_released("attack"):
+		if not hold_timer.is_stopped():
+			hold_timer.stop()
+			%WeaponManager.managed_input("attack")
+			if atk_timer.is_stopped():
+				var anim_time
+				if crouching:
+					anim_time = 0.25
+					hitbox.monitorable = true
+				else:
+					anim_time = 0.4
+					hitbox.monitorable = true
+				atk_timer.start(anim_time)
+		elif bonk_timer.is_stopped() and bonk:
+			var anim_time = 0.5
+			%WeaponManager.managed_input("attack")
+			hitbox.monitorable = true
+			atk_timer.start(anim_time)
+			bonk = false
+		else:
+			if crouching:
+				set_r_wep(sword_down, sword_down_res)
+			else:
+				set_r_wep(sword_up, sword_up_res)
+			bonk = false
+	elif not Input.is_action_pressed("attack") and not bonk and atk_timer.is_stopped():
+		if crouching:
+			set_r_wep(sword_down, sword_down_res)
+		else:
+			set_r_wep(sword_up, sword_up_res)
+	
 	if casting and aiming:
 		show_aim(delta)
 		aim.visible = true

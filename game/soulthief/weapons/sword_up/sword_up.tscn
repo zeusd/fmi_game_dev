@@ -11,7 +11,7 @@ _data = {
 }
 
 [node name="sword_up" type="Node3D"]
-transform = Transform3D(-3.40168e-06, 0.939692, 0.34202, -1, -3.61999e-06, 0, 1.23811e-06, -0.34202, 0.939693, 0.3, -0.3, -0.5)
+transform = Transform3D(0.901221, 0.0173382, -0.433013, 0.224144, 0.836516, 0.5, 0.370891, -0.547667, 0.75, 0.5, -0.3, -0.5)
 
 [node name="Blade" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0339845, 0)

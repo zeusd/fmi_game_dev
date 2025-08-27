@@ -48,10 +48,12 @@ func update_weapon_model() -> Array[Node3D]:
 			rl.append(curr_l_view)
 	return rl
 
-func managed_input(event: InputEvent) -> void:
+func managed_input(event: String) -> void:
 	if is_inside_tree():
-		if curr_r != null and event.is_action_pressed("attack") and allow_attack:
+		if curr_r != null and event == "attack" and allow_attack:
 			curr_r.on_strike()
+		elif curr_r != null and event == "hold":
+			curr_r.on_hold()
 
 func queue_anim(wep: WeaponResource, anim_name: String) -> void:
 	var anim_player

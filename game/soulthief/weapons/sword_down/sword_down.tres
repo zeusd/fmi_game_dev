@@ -10,6 +10,6 @@ wep_name = "sword_down"
 pos = Vector3(0.3, -0.3, -0.5)
 rot = Vector3(0, 0.349066, -1.5708)
 hold_anim = ""
-strike_anim = "stealth_hit"
+strike_anim = "slice"
 revert_anim = ""
 metadata/_custom_type_script = "uid://nwcthvx34rkp"

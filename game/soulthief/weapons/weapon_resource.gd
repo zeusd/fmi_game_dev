@@ -31,9 +31,17 @@ func on_strike() -> void:
 		return
 	_strike()
 
+func on_hold() -> void:
+	if hold_anim and weapon_manager.get_anim(self) == hold_anim:
+		return
+	_hold()
+
 func _strike() -> void:
 	weapon_manager.play_anim(self, strike_anim)
 	#weapon_manager.play_sound(strike_sound)
+
+func _hold() -> void:
+	weapon_manager.play_anim(self, hold_anim)
 
 func on_equip() -> void:
 	pass
