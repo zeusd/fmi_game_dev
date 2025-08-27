@@ -221,17 +221,11 @@ func _handle_stick_look_input(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("lean_left"):
-		_lean_left()
-	elif Input.is_action_just_pressed("lean_right"):
-		_lean_right()
-	
 	if Input.is_action_just_pressed("interact"):
 		if held_obj == null:
 			_hold_object()
 		else:
 			_drop_object()
-
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -260,15 +254,22 @@ func _headbob_effect(delta: float) -> void:
 	)
 
 func _lean_right() -> void:
-	_lean(-1.0)
-
-func _lean_left() -> void:
 	_lean(1.0)
 
+func _lean_left() -> void:
+	_lean(-1.0)
+
 func _lean(dir: float) -> void:
+	var pos_mov = dir * 1.25
+	%CameraSmooth/ShapeCast3D.target_position.x = pos_mov
+	%CameraSmooth/ShapeCast3D.force_shapecast_update()
+	var dont_lean = %CameraSmooth/ShapeCast3D.is_colliding()
+	%CameraSmooth/ShapeCast3D.target_position.x = 0.0
+	if dont_lean:
+		return
 	if is_zero_approx(%CameraSmooth.rotation.z):
-		%CameraSmooth.rotation.z = deg_to_rad(dir * 15.0)
-		%CameraSmooth.position.x = -dir * 1.25
+		%CameraSmooth.position.x = pos_mov
+		%CameraSmooth.rotation.z = deg_to_rad(-dir * 15.0)
 	else:
 		_clear_lean()
 
@@ -329,6 +330,7 @@ func _process(delta: float) -> void:
 			prev_veloc = self.velocity * Vector3.UP
 			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
 			blinking = true
+			_clear_lean()
 	else:
 		aim.visible = false
 		ground_aim.visible = false
@@ -359,8 +361,33 @@ func _process(delta: float) -> void:
 	
 	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
 	
-	if self.velocity.length() > walk_speed and sprinting or %CameraSmooth/ShapeCast3D.is_colliding():
+	if crouching or not sprinting:
+		if Input.is_action_just_pressed("lean_left"):
+			_lean_left()
+		elif Input.is_action_just_pressed("lean_right"):
+			_lean_right()
+		
+		if Input.is_action_just_pressed("lean"):
+			if not is_zero_approx(%CameraSmooth.position.x):
+				_clear_lean()
+			if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+				if is_zero_approx(%CameraSmooth.position.x) or (input_dir.x * %CameraSmooth.position.x) < 0.0:
+					if input_dir.x < 0.0:
+						_lean_left()
+					else:
+						_lean_right()
+		elif Input.is_action_pressed("lean"):
+			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
+				if is_zero_approx(%CameraSmooth.position.x) or (input_dir.x * %CameraSmooth.position.x) < 0.0:
+					if input_dir.x < 0.0:
+						_lean_left()
+					else:
+						_lean_right()
+	
+	if self.velocity.length() > walk_speed and sprinting or %CameraSmooth/ShapeCast3D.is_colliding() or not is_on_floor():
 		_clear_lean()
+	elif Input.is_action_pressed("lean") and not sprinting:
+		input_dir.x = 0.0
 		
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
 	cam_aligned_wish_dir = %Camera3D.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
