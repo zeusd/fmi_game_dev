@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ddg8c3vrt53w6"]
+[gd_scene load_steps=18 format=3 uid="uid://ddg8c3vrt53w6"]
 
 [ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
+[ext_resource type="Shader" uid="uid://ejx0vblubing" path="res://shaders/grayscale.gdshader" id="2_lm1k8"]
 [ext_resource type="PackedScene" uid="uid://b0jsuh0xqrhen" path="res://weapons/weapon_manager.tscn" id="3_4ybej"]
+[ext_resource type="Shader" uid="uid://kvoeovboxvwh" path="res://shaders/chroma.gdshader" id="3_twhuv"]
 [ext_resource type="Script" uid="uid://bgbslid4xxer5" path="res://weapons/weapon_manager.gd" id="4_4ybej"]
 [ext_resource type="Resource" uid="uid://i6um3xayorqr" path="res://weapons/sword_up/sword_up.tres" id="4_lm1k8"]
 
@@ -9,15 +11,33 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twhuv"]
+shader = ExtResource("2_lm1k8")
+shader_parameter/brightness = 0.3
+shader_parameter/contrast = 1.7
+shader_parameter/saturation = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aph7h"]
+shader = ExtResource("3_twhuv")
+shader_parameter/offset = 3.0
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_u08xt"]
 radius = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4ybej"]
 radius = 0.65
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lm1k8"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_twhuv"]
+seamless = true
+noise = SubResource("FastNoiseLite_lm1k8")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ybej"]
 transparency = 1
-albedo_color = Color(0.337255, 0, 0.611765, 0.678431)
+albedo_color = Color(0.337255, 0, 0.611765, 0.72549)
+albedo_texture = SubResource("NoiseTexture2D_twhuv")
 
 [sub_resource type="SphereMesh" id="SphereMesh_4ybej"]
 material = SubResource("StandardMaterial3D_4ybej")
@@ -57,6 +77,26 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 rotation_order = 1
 cull_mask = 1048573
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+
+[node name="Grayscale" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_twhuv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Chroma" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_aph7h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="CameraArea3D" type="Area3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D" groups=["CAM"]]
 

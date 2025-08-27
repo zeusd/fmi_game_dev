@@ -1,51 +1,173 @@
-<p align="center"><img src="https://github.com/func-godot/.github/assets/44485952/53bdc589-33e8-4a39-8707-01a5f850d155" alt="FuncGodotRanger" width="15%" /> 
-<img src="https://github.com/func-godot/.github/assets/44485952/b7c19218-2089-4319-a2bd-6ce4b354c1ce" alt="FuncGodot" width="80%"/></p>
-
-***FuncGodot*** is a plugin for [Godot 4](https://godotengine.org/) that allows users to generate Godot scenes using the [Quake MAP file format](https://quakewiki.org/wiki/Quake_Map_Format). Map files can be made in a variety of editors, the most commonly recommended one being [TrenchBroom](https://trenchbroom.github.io/). It is a reworking and rewrite of the [Qodot](https://github.com/QodotPlugin/Qodot) plugin for Godot 3 and 4.
-
-[Full documentation is available online](https://func-godot.github.io/func_godot_docs/) as well as off. Release zip files come pre-packaged with the manual, but if you need to you can [download the most up-to-date standalone copy here](https://github.com/func-godot/func_godot_docs/releases/).
-
-For more help or to contribute to the community, join us on the [Official FuncGodot Discord](https://discord.gg/eBQ7EfNZSZ)!
-
-<p align="center"><img src="https://github.com/func-godot/.github/assets/44485952/0a4d2436-884e-4cee-94a8-220df3813627" alt="TrenchBroom" width="45%" /> 
-<img src="https://github.com/func-godot/.github/assets/44485952/25e96e49-3482-40cf-ade9-99e83c3eca7d" alt="Godot FuncGodotMap Built" width="45%"/></p>
+SECTION 1: BIRD'S EYE VIEW - Broad design
 
 
-## Features
 
-- Godot Scene Generation
-  - File support for Quake `map`, `wad`, and `lmp` palette formats
-  - File support for Half-Life `wad` format
-  - Meshes from `map` brush geometry
-  - Materials and UVs from `map` texture definitions
-  - Convex and concave collision shapes
-- Entity Definition Support
-  - Fully customizable entities that can be defined for TrenchBroom and generated in Godot
-  - Leverage the `map` format's classname and key value pair systems
-  - Define the visual and collision properties of brush entities on a per-classname basis
-  - Retrieve easy to access mesh metadata for per face material information
-  - Define point entities that can be generated from node class name and script or from packed scenes
-  - Generate GLB display models with correct orientation and scale for point entities in map editors with GLTF support
-  - FGD (Forge Game Data) export
-- TrenchBroom Integration
-  - GameConfig export
-  - Brush and Face Tags
-  - `model` keyword and scale expression
-- NetRadiant Custom Integration
-  - Gamepack Export
-  - Shader definitions
-  - Customizable build options
 
-## Confirmed Compatible Map Editors
-  - TrenchBroom
-  - J.A.C.K.
-  - NetRadiant Custom[br]
-Help us add to this list by testing out your preferred map editor and helping us come up with compatibility solutions!
 
-## Credits
+Basic Gameplay:
+1) Movement
+2) Hiding
+3) Combat
+4) Theft
+5) Magic
 
-FuncGodot was created by [Hannah "EMBYR" Crawford](https://embyr.sh/), [Emberlynn Bland](https://github.com/deertears/), and [Tim "RhapsodyInGeek" Maccabe](https://github.com/RhapsodyInGeek), reworked from the [Godot 4 port of Qodot](https://github.com/QodotPlugin/Qodot/tree/main) by Embyr, with contributions from members of the FuncGodot, Qodot, Godot, and Quake Mapping Communities.
+Complex Systems (goal is first 2 or 3 out of 5):
+1) Platforming
+2) Enemy seeking for player behavior (line of sight stealth, complex AI)
+3) Light/dark stealth system
+4) Immersive sound
+5) Sound-based stealth
 
-Both plugins are based on the original [Qodot for Godot 3.5](https://github.com/QodotPlugin/qodot-plugin/) created by [Josh "Shifty" Palmer](https://twitter.com/ShiftyAxel).
+Core Gamefeel Philosophies:
+1) Traversal
+2) Atmosphere
+3) Sneaking and stealing
+4) Spatial and auditory awareness
+5) Many ways to move through spaces and solve problems
 
-<p align="center"><img src="https://github.com/func-godot/.github/assets/44485952/9ff9cd96-024b-4202-b4a2-611741b81609" alt="Godambler" /></p>
+
+
+
+
+
+
+SECTION 2: WHAT'S IN THE BOX - Desired concrete mechanics
+
+
+
+
+
+|||
+PLAYER
+|||
+
+[!] Movement
+--- Wallrun - Preserve momentum, chain a Walljump
+--- Walljump - Jump off wall, chain a Walljump
+
+[!] Kill
+--- Immediately eliminate enemy
+
+[.] Bonk
+-?- Take your time to incapacitate enemy
+
+[!] Abilities
+--- Blink - Short range teleport
+-?- Push - Force push
+-?- Link - Link enemies together
+-?- Slow - Slow or Stop Time
+-?- Spark - Blow up with fire
+
+[.] Weapons
+-?- Crossbow - Shoot enemies
+-?- Blowpipe - Sleep enemies
+
+
+
+|||
+ENEMY
+|||
+
+[!] Alert Level
+--- Unaware
+--- Searching
+--- Tracking
+
+[!] Patrol
+--- Dumb Guard - Search around post
+--- Smart Warrior - Search around last found position
+--- Hunter Mage - Find player anyhwhere, once seen
+
+[.] Shoot
+-?- Some Dumb Guards - Shoots player
+-?- Some Smart Warriors - Points out player to others
+-?- Some Hunter Mages - Explosion where player is
+
+
+
+|||
+BOSS
+|||
+
+[?] Await player
+--- Patrol around a certain space
+--- Guard an Important Item
+
+[?] Sense player
+--- Keep aware of entrances
+--- Do not leave Important Item Space
+
+[?] Battle
+--- Predict player behavior
+--- Counter player tactics
+--- Pursue player death 
+
+
+
+
+
+
+
+SECTION 3: THE PATH - Step-by-step implementation plan
+
+
+
+
+
+1.. Be able to move around in level
+1.1. Wallrun
+1.2. Walljump
+1.3. Chaining movement mechanics in a way that makes sense and is fun
+
+2.. Have enemies
+2.1. Be able to kill enemies
+2.2. Enemy alert levels
+2.2.1. Enemies can spot and attack player
+2.2.2. Enemies can search for player
+2.2.3. Enemies have patroul routes or will hunt for you
+2.3. Designated damage and assassinate mechanics
+
+3.. Open-ended levels
+3.1. Have multiple routes to get from place to place
+3.2. Have a few entrance points for levels
+
+4.. Theft
+4.1. Main objective you must take
+4.2. Loot to steal
+
+5.. Magic/Weapons
+5.1. Basic short-range teleport ability
+5.1.1. Mana meter
+5.1.2. Health meter
+5.1.3. Health potions can be picked up in world and used
+5.3. Ability wheel
+5.4. Different magic powers
+5.5. Upgrading is possible
+
+6.. Aesthetics
+6.1. Visually striking lighting
+6.2. Light-based stealth
+
+7.. Acoustics
+7.1. Immersive sound
+7.2. Sound-based stealth
+
+8.. Difficulty
+8.1. Standard basic objectives
+8.2. Kill no one also
+8.3. Minimum loot requirement
+
+9.. Save-game system
+9.1. Checkpoint based
+
+10.. Multiple levels
+10.1. Distinct level design in both form and visuals
+10.2. Loose narrative between levels
+
+11.. Voices
+11.1. Player
+11.2. Guards
+11.3. Boss
+
+12.. Minimal stylized cutscenes between levels
+

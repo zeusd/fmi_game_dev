@@ -98,6 +98,8 @@ var curr_spell:= spell.BLINK
 
 func _ready():
 	%Camera3D/SpringArm3D/MeshInstance3D.visible = false
+	%Camera3D/CanvasLayer/Grayscale.visible = false
+	%Camera3D/CanvasLayer/Chroma.visible = false
 	
 	hurtbox = Hurtbox.new()
 	self.add_child(hurtbox)
@@ -124,7 +126,6 @@ func _ready():
 	self.add_child(jump_timer)
 	jump_timer.one_shot = true
 	
-	
 	aim = %Camera3D/SpringArm3D/MeshInstance3D
 	ground_aim = MeshInstance3D.new()
 	self.add_child(ground_aim)
@@ -139,6 +140,8 @@ func _ready():
 	
 	%CameraSmooth/ShapeCast3D.add_exception(self)
 	
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
+
 func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
 	var rl = %WeaponManager.update_weapon_model()
@@ -278,6 +281,87 @@ func _clear_lean() -> void:
 	%CameraSmooth.position.x = 0.0
 
 func _process(delta: float) -> void:
+	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
+	sprinting = Input.is_action_pressed("sprint")
+	
+	_handle_stick_look_input(delta)
+	_crouch_uncrouch(delta)
+	
+	if crouching or not sprinting:
+		if Input.is_action_just_pressed("lean_left"):
+			_lean_left()
+		elif Input.is_action_just_pressed("lean_right"):
+			_lean_right()
+		
+		if Input.is_action_just_pressed("lean"):
+			if not is_zero_approx(%CameraSmooth.position.x):
+				_clear_lean()
+			if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+				if is_zero_approx(%CameraSmooth.position.x) or (input_dir.x * %CameraSmooth.position.x) < 0.0:
+					if input_dir.x < 0.0:
+						_lean_left()
+					else:
+						_lean_right()
+				input_dir = Vector2.ZERO
+		elif Input.is_action_pressed("lean"):
+			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
+				if is_zero_approx(%CameraSmooth.position.x) or (input_dir.x * %CameraSmooth.position.x) < 0.0:
+					if input_dir.x < 0.0:
+						_lean_left()
+					else:
+						_lean_right()
+				input_dir = Vector2.ZERO
+			elif Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+				input_dir = Vector2.ZERO
+	if self.velocity.length() > walk_speed and sprinting or %CameraSmooth/ShapeCast3D.is_colliding():
+		_clear_lean()
+	elif Input.is_action_pressed("lean") and not sprinting:
+		input_dir.x = 0.0
+	
+	if casting and aiming:
+		show_aim(delta)
+		aim.visible = true
+		aim.global_rotate(Vector3.UP, 12 * delta)
+		ground_aim.visible = true
+		ground_aim.global_rotate(Vector3.UP, -12 * delta)
+		if is_zero_approx(input_dir.length()) and not Input.is_action_pressed("jump"):
+			self.get_tree().paused = true
+		else:
+			self.get_tree().paused = false
+		if Input.is_action_just_pressed("interact"):
+			aiming = false
+			self.get_tree().paused = false
+		if Input.is_action_just_released("cast"):
+			prev_veloc = self.velocity * Vector3.UP
+			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
+			blinking = true
+			self.get_tree().paused = false
+			_clear_lean()
+			%Camera3D/CanvasLayer/Chroma.visible = true
+		%Camera3D/CanvasLayer/Grayscale.visible = self.get_tree().paused
+	else:
+		aim.visible = false
+		ground_aim.visible = false
+	
+	if blinking:
+		self.velocity = Vector3.ZERO
+		cast(delta * BLINK_SPEED)
+	
+	if Input.is_action_just_pressed("cast"):
+		aiming = true
+	
+	casting = Input.is_action_pressed("cast")
+	
+	if blinking and ((blink_pos - self.global_position).length() < 0.1 or is_on_wall() or is_on_ceiling()):
+		self.velocity = prev_veloc
+		blinking = false
+		%Camera3D/CanvasLayer/Chroma.visible = false
+	# # #
+	# TIME STOPS HERE IF IT MUST
+	# # #
+	if get_tree().paused:
+		return
+	
 	if held_obj != null and Input.is_action_just_pressed("attack"):
 		_drop_object(THROW_FORCE)
 	elif Input.is_action_just_pressed("attack"):
@@ -291,6 +375,12 @@ func _process(delta: float) -> void:
 			bonk = true
 	elif Input.is_action_just_released("attack"):
 		if not hold_timer.is_stopped():
+			if crouching:
+				set_r_wep(sword_down, sword_down_res)
+			else:
+				set_r_wep(sword_up, sword_up_res)
+			bonk = false
+			
 			hold_timer.stop()
 			%WeaponManager.managed_input("attack")
 			if atk_timer.is_stopped():
@@ -320,75 +410,12 @@ func _process(delta: float) -> void:
 		else:
 			set_r_wep(sword_up, sword_up_res)
 	
-	if casting and aiming:
-		show_aim(delta)
-		aim.visible = true
-		ground_aim.visible = true
-		if Input.is_action_just_pressed("interact"):
-			aiming = false
-		if Input.is_action_just_released("cast"):
-			prev_veloc = self.velocity * Vector3.UP
-			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
-			blinking = true
-			_clear_lean()
-	else:
-		aim.visible = false
-		ground_aim.visible = false
-	
-	if blinking:
-		self.velocity = Vector3.ZERO
-		cast(delta * BLINK_SPEED)
-	
-	if Input.is_action_just_pressed("cast"):
-		aiming = true
-	
-	casting = Input.is_action_pressed("cast")
-	
-	if blinking and ((blink_pos - self.global_position).length() < 0.1 or is_on_wall() or is_on_ceiling()):
-		self.velocity = prev_veloc
-		blinking = false
-	
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
-	
-	sprinting = Input.is_action_pressed("sprint")
 	
 	if is_on_floor() or _snapped_to_stairs_last_frame:
 		_last_frame_on_floor = Engine.get_physics_frames()
 	
-	_handle_stick_look_input(delta)
-	_crouch_uncrouch(delta)
-	
-	var input_dir = Input.get_vector("left", "right", "up", "down").normalized()
-	
-	if crouching or not sprinting:
-		if Input.is_action_just_pressed("lean_left"):
-			_lean_left()
-		elif Input.is_action_just_pressed("lean_right"):
-			_lean_right()
-		
-		if Input.is_action_just_pressed("lean"):
-			if not is_zero_approx(%CameraSmooth.position.x):
-				_clear_lean()
-			if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-				if is_zero_approx(%CameraSmooth.position.x) or (input_dir.x * %CameraSmooth.position.x) < 0.0:
-					if input_dir.x < 0.0:
-						_lean_left()
-					else:
-						_lean_right()
-		elif Input.is_action_pressed("lean"):
-			if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
-				if is_zero_approx(%CameraSmooth.position.x) or (input_dir.x * %CameraSmooth.position.x) < 0.0:
-					if input_dir.x < 0.0:
-						_lean_left()
-					else:
-						_lean_right()
-	
-	if self.velocity.length() > walk_speed and sprinting or %CameraSmooth/ShapeCast3D.is_colliding() or not is_on_floor():
-		_clear_lean()
-	elif Input.is_action_pressed("lean") and not sprinting:
-		input_dir.x = 0.0
-		
 	wish_dir = self.global_transform.basis * Vector3(-input_dir.x , 0.0, -input_dir.y)
 	cam_aligned_wish_dir = %Camera3D.global_transform.basis * Vector3(input_dir.x, 0.0, input_dir.y)
 	if not _handle_noclip(delta):
@@ -609,12 +636,15 @@ func _wall_run(delta: float) -> void:
 func _crouch_uncrouch(delta) -> void:
 	var was_crouched = crouching
 	if Input.is_action_just_pressed("crouch"):
+		var is_bonk: bool = %WeaponManager.curr_r == sword_bonk_res
 		if not crouching:
 			crouching = true
-			set_r_wep(sword_down, sword_down_res)
+			if not is_bonk:
+				set_r_wep(sword_down, sword_down_res)
 		elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
 			crouching = false
-			set_r_wep(sword_up, sword_up_res)
+			if not is_bonk:
+				set_r_wep(sword_up, sword_up_res)
 	
 	var bump_up_if_possible := 0.0
 	if was_crouched != crouching and not is_on_floor() and not _snapped_to_stairs_last_frame:
