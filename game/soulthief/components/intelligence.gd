@@ -8,6 +8,8 @@ enum enemy_type {
 }
 
 enum enemy_state {
+	DEAD,
+	NAP,
 	IDLE,
 	ALERT,
 	SEARCH,
@@ -43,9 +45,23 @@ func state_is(id: String) -> enemy_state:
 	return enemies[id][STA]
 
 func change_state(id: String, state: enemy_state) -> void:
+	if not awake(id, state):
+		return
+	
 	enemies[id][STA] = state
+	
 	if state == enemy_state.ALERT:
 		enemies[id][REF].alert = true
+	if state == enemy_state.DEAD:
+		enemies[id][REF].dead = true
+	elif state == enemy_state.NAP:
+		enemies[id][REF].nap = true
+
+func awake(id: String, state: enemy_state) -> bool:
+	if enemies[id][REF].dead or enemies[id][REF].nap:
+		return false
+	
+	return true
 
 func spotted(id: String, body: Node3D) -> void:
 	enemies[id][REF].nav_target = body

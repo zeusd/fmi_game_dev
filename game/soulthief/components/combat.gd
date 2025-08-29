@@ -12,7 +12,7 @@ var health: Dictionary = {
 }
 
 var damage: Dictionary = {
-	fighter_type.PLAYER: 20,
+	fighter_type.PLAYER: 10,
 	fighter_type.KNIGHT: 10
 }
 
@@ -56,13 +56,25 @@ func splat(id: String) -> void:
 
 func hit(from_id: String, to_id: String) -> void:
 	if fighters.has(from_id) and fighters.has(to_id):
+		var dmg_mod = 1.0
+		var weak_mod = 1.0
+		
+		if fighters[from_id][TYP] == fighter_type.PLAYER:
+			dmg_mod = fighters[from_id][REF].mod_dmg()
+		
+		if fighters[to_id][TYP] == fighter_type.KNIGHT:
+			weak_mod = fighters[to_id][REF].mod_weak()
+			
+			if (weak_mod < 5.0 and dmg_mod < 0.0) or (weak_mod == 0.0 and dmg_mod == 0.0):
+				fighters[to_id][REF].bonked()
+				return
+		
+		fighters[to_id][HLT] -= fighters[from_id][DMG] * (dmg_mod / weak_mod)
 		fighters[to_id][REF].hit_by(fighters[from_id][REF])
 		splat(to_id)
-		return
-		fighters[to_id][HLT] -= fighters[from_id][DMG]
 		if fighters[to_id][HLT] <= 0:
-			fighters.erase(to_id)
-			#fighters[to_id].die()
+			#fighters.erase(to_id)
+			_kill(to_id)
 			
 func _kill(id: String) -> void:
 	fighters[id][REF].die()

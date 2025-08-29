@@ -374,7 +374,7 @@ func _process(delta: float) -> void:
 			%WeaponManager.managed_input("hold")
 			bonk = true
 	elif Input.is_action_just_released("attack"):
-		if not hold_timer.is_stopped():
+		if not hold_timer.is_stopped() or not bonk_timer.is_stopped():
 			if crouching:
 				set_r_wep(sword_down, sword_down_res)
 			else:
@@ -663,9 +663,6 @@ func _crouch_uncrouch(delta) -> void:
 	%MeshInstance3D.mesh.height = %BodyBean.shape.height
 	%MeshInstance3D.position.y = %BodyBean.position.y
 
-func hit_by(who: Node3D) -> void:
-	pass
-
 func show_aim(delta: float) -> void:
 	var res = KinematicCollision3D.new()
 	var new_pos = %Camera3D/SpringArm3D/MeshInstance3D.global_position
@@ -689,3 +686,19 @@ func cast(delta: float) -> void:
 		self.global_position = self.global_position.lerp(blink_pos, 0.5)
 		#else:
 			#blinking = false
+
+func hit_by(who: Node3D) -> void:
+	pass
+
+func mod_dmg() -> float:
+	var wep = %WeaponManager.curr_r
+	if wep == sword_bonk_res:
+		return -1.0 if crouching else 0.0
+	elif wep == sword_down_res:
+		return 10.0 + self.velocity.length()
+	elif wep == sword_up_res:
+		return 5.0 + self.velocity.length()
+	return 1.0
+
+func die() -> void:
+	%Camera3D/CanvasLayer/Chroma.visible = true

@@ -12,26 +12,31 @@ var vision_r: VisionCone3D
 func _ready() -> void:
 	vision_c = VisionCone3D.new()
 	self.add_child(vision_c)
-	vision_c.angle = 45
+	vision_c.angle = 60
+	#vision_c.range = 10.0
+	#vision_c.rotate_x(deg_to_rad(-15.0))
 	vision_c.set_collision_mask_value(1, false)
 	vision_c.set_collision_mask_value(5, true)
-	vision_c.debug_draw = true
+	#vision_c.debug_draw = true
 	
 	vision_l = VisionCone3D.new()
 	self.add_child(vision_l)
 	vision_l.angle = 30
+	#vision_l.range = 10.0
+	#vision_l.rotate_x(deg_to_rad(-7.50))
 	vision_l.set_collision_mask_value(1, false)
 	vision_l.set_collision_mask_value(5, true)
 	vision_l.rotate_y(deg_to_rad(37.7))
-	vision_l.debug_draw = true
+	#vision_l.debug_draw = true
 	
 	vision_r = VisionCone3D.new()
 	self.add_child(vision_r)
 	vision_r.angle = 30
+	#vision_r.range = 10.0
 	vision_r.set_collision_mask_value(1, false)
 	vision_r.set_collision_mask_value(5, true)
 	vision_r.rotate_y(deg_to_rad(-37.7))
-	vision_r.debug_draw = true
+	#vision_r.debug_draw = true
 	
 	for node in get_tree().get_nodes_in_group("COMPONENT"):
 		if node is Intelligence:

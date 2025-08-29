@@ -18,6 +18,8 @@ var nav_agent: NavigationAgent3D
 var speed:= 3.0
 var angry:= false
 var alert:= false
+var nap:= false
+var dead:= false
 
 signal is_there
 
@@ -125,6 +127,11 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	if dead:
+		return
+	elif nap:
+		return
+	
 	if anim_p.current_animation == A_SLASH:
 		hitbox.monitorable = pre_atk_timer.is_stopped()
 	else:
@@ -145,20 +152,20 @@ func _process(delta: float) -> void:
 			nav_agent.target_position = nav_target.global_position
 			next = nav_agent.get_next_path_position()
 			
-			move_to(next)
-			smooth_look_at(tar_gr.global_position, delta)
+			_move_to(next)
+			_smooth_look_at(tar_gr.global_position, delta)
 			
 			var anim = A_ALERT_WALK if alert else A_IDLE_WALK
-			play_anim_loop(anim)
+			_play_anim_loop(anim)
 			
 			if nav_agent.is_target_reached():
 				self.emit_signal("is_there")
 		else:
-			play_anim_loop(A_IDLE)
+			_play_anim_loop(A_IDLE)
 	
 	if state == Intelligence.enemy_state.FIGHT:
 		if angry:
-			smooth_look_at(last_known_pos, 5 * delta)
+			_smooth_look_at(last_known_pos, 5 * delta)
 		if not sight.in_sight(nav_target):
 			%Intelligence.unspotted(str(self.get_instance_id()), nav_target)
 			nav_agent.target_position = last_known_pos
@@ -170,17 +177,17 @@ func _process(delta: float) -> void:
 				var atk_chance = 1.0 if angry else rand.randf_range(0.0, 1.0)
 				if atk_chance < 0.3:
 					idle_timer.start(1.5)
-					play_anim_loop(A_READY)
+					_play_anim_loop(A_READY)
 				elif sight.in_sight(nav_target):
 					atk_timer.start(1.5)
-					play_anim_loop(A_SLASH)
+					_play_anim_loop(A_SLASH)
 		else:
-			play_anim_loop(A_RUN)
-			move_to(next, speed)
-			smooth_look_at(last_known_pos, 5 * delta)
+			_play_anim_loop(A_RUN)
+			_move_to(next, speed)
+			_smooth_look_at(last_known_pos, 5 * delta)
 	elif state == Intelligence.enemy_state.SEARCH:
 		if not look_timer.is_stopped():
-			play_anim_loop(A_ALERT_WALK)
+			_play_anim_loop(A_ALERT_WALK)
 			var angle 
 			if (next - self.global_position).length() < 0.1:
 				angle = 90.0
@@ -189,10 +196,10 @@ func _process(delta: float) -> void:
 				angry = false
 			else:
 				angle = 15.0
-				move_to(next)
+				_move_to(next)
 				if angry:
-					smooth_look_at(last_known_pos, 5 * delta)
-			smooth_rotate(angle if sin(Time.get_datetime_dict_from_system()["second"] * 0.5 - 0.5) < 0.0 else -angle, delta)
+					_smooth_look_at(last_known_pos, 5 * delta)
+			_smooth_rotate(angle if sin(Time.get_datetime_dict_from_system()["second"] * 0.5 - 0.5) < 0.0 else -angle, delta)
 		else:
 			%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.ALERT)
 	
@@ -204,13 +211,13 @@ func hit_by(who: Node3D) -> void:
 	last_known_pos = who.global_position
 	angry = true
 
-func move_to(pos: Vector3, spd: float = 1.0) -> void:
+func _move_to(pos: Vector3, spd: float = 1.0) -> void:
 	var dir = ((pos - self.global_position)).normalized()
 	self.velocity = dir * spd 
 	#print_debug(pos)
 	#print_debug(self.global_position)
 
-func smooth_look_at(to: Vector3, delta: float) -> void:
+func _smooth_look_at(to: Vector3, delta: float) -> void:
 	if (to - self.global_position).length() < 0.1:
 		return
 	var old_tr = self.transform
@@ -221,14 +228,14 @@ func smooth_look_at(to: Vector3, delta: float) -> void:
 	self.transform = old_tr
 	self.transform = self.transform.interpolate_with(new_tr, speed * delta)
 
-func smooth_rotate(angle: float, delta: float) -> void:
+func _smooth_rotate(angle: float, delta: float) -> void:
 	var old_tr = self.transform
 	self.rotation_degrees += Vector3(0.0, angle, 0.0)
 	var new_tr = self.transform
 	self.transform = old_tr
 	self.transform = self.transform.interpolate_with(new_tr, delta)
 
-func play_anim_loop(anim: String) -> void:
+func _play_anim_loop(anim: String) -> void:
 	if anim_p.current_animation != anim:
 		anim_p.play(anim)
 		if anim == A_SLASH:
@@ -236,3 +243,27 @@ func play_anim_loop(anim: String) -> void:
 
 func change_state_anim(state: Intelligence.enemy_state) -> void:
 	pass
+
+func mod_weak() -> float:
+	var state: Intelligence.enemy_state = %Intelligence.state_is(str(self.get_instance_id()))
+	
+	if state == Intelligence.enemy_state.IDLE:
+		return 1.0
+	elif state == Intelligence.enemy_state.ALERT:
+		return 2.0
+	elif state != Intelligence.enemy_state.FIGHT:
+		return 3.0
+	return 5.0
+
+func bonked() -> void:
+	_ghost()
+	_play_anim_loop(A_BONK)
+	%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.NAP)
+
+func die() -> void:
+	_ghost()
+	_play_anim_loop(A_DEATH)
+	%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.DEAD)
+
+func _ghost() -> void:
+	%CollisionShape3D.disabled = true
