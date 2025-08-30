@@ -127,15 +127,15 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	if dead:
-		return
-	elif nap:
-		return
-	
 	if anim_p.current_animation == A_SLASH:
 		hitbox.monitorable = pre_atk_timer.is_stopped()
 	else:
 		hitbox.monitorable = false
+		
+	if dead:
+		return
+	elif nap:
+		return
 	
 	var state: Intelligence.enemy_state = %Intelligence.state_is(str(self.get_instance_id()))
 	

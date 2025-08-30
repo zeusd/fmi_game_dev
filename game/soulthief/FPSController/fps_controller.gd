@@ -42,8 +42,8 @@ var crouching = false
 @export var accel:= 100.0
 @export var stop_speed:= 100.0
 @export var max_speed:= 320.0
-@export var air_move_cap:= 0.85
-@export var air_speed:= 500.0
+@export var air_move_cap:= 30.0
+#@export var air_speed:= 500.0
 
 @export var swim_up_speed:= 7.0
 @export var water_speed_mult:= 1.0
@@ -374,7 +374,7 @@ func _process(delta: float) -> void:
 			%WeaponManager.managed_input("hold")
 			bonk = true
 	elif Input.is_action_just_released("attack"):
-		if not hold_timer.is_stopped() or not bonk_timer.is_stopped():
+		if (not hold_timer.is_stopped() or not bonk_timer.is_stopped()) and atk_timer.is_stopped():
 			if crouching:
 				set_r_wep(sword_down, sword_down_res)
 			else:
@@ -383,22 +383,21 @@ func _process(delta: float) -> void:
 			
 			hold_timer.stop()
 			%WeaponManager.managed_input("attack")
-			if atk_timer.is_stopped():
-				var anim_time
-				if crouching:
-					anim_time = 0.25
-					hitbox.monitorable = true
-				else:
-					anim_time = 0.4
-					hitbox.monitorable = true
-				atk_timer.start(anim_time)
+			var anim_time
+			if crouching:
+				anim_time = 0.25
+				hitbox.monitorable = true
+			else:
+				anim_time = 0.4
+				hitbox.monitorable = true
+			atk_timer.start(anim_time)
 		elif bonk_timer.is_stopped() and bonk:
 			var anim_time = 0.5
 			%WeaponManager.managed_input("attack")
 			hitbox.monitorable = true
 			atk_timer.start(anim_time)
 			bonk = false
-		else:
+		elif atk_timer.is_stopped():
 			if crouching:
 				set_r_wep(sword_down, sword_down_res)
 			else:
@@ -570,8 +569,8 @@ func _handle_ground_physics(delta: float) -> void:
 	_headbob_effect(delta)
 
 func _handle_air_physics(delta: float) -> void:
-	var wish_veloc := wish_dir
-	var wish_speed := wish_dir.length()
+	var wish_veloc:= wish_dir
+	var wish_speed:= wish_dir.length()
 	
 	if wish_speed > max_speed:
 		wish_veloc *= (max_speed / wish_speed)
@@ -610,12 +609,12 @@ func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
 	if not blinking:
 		self.velocity.y -= gravity * delta
 	
-	var wish_speed = min(air_move_cap, (air_speed * wish_dir).length())
+	var wish_speed = min(air_move_cap, (wish_veloc).length())
 	var cur_speed = self.velocity.dot(wish_veloc)
 	var add_speed = wish_speed - cur_speed
 	
 	if add_speed > 0:
-		var accel_speed = accel * air_speed * delta
+		var accel_speed = accel * get_speed() * delta
 		accel_speed = min(accel_speed, add_speed)
 		self.velocity += accel_speed * wish_veloc
 
@@ -627,7 +626,7 @@ func _wall_run(delta: float) -> void:
 		if Input.is_action_just_pressed("jump") and not wall_normal.is_equal_approx(last_bounce):
 			last_bounce = wall_normal
 			self.velocity += frict * wall_normal
-			self.velocity.y = max_speed * delta
+			self.velocity.y = walk_speed
 		else:
 			self.velocity -= wall_normal
 			self.velocity.y += WALLRUN_POWER * delta
