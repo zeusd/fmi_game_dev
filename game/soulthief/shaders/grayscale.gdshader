@@ -4,13 +4,14 @@ uniform sampler2D screen_texture: hint_screen_texture;
 uniform float brightness: hint_range(-1.0, 1.0, 0.01) = 0.0;
 uniform float contrast: hint_range(-10.0, 10.0, 0.01) = 1.0;
 uniform float saturation: hint_range(-10.0, 10.0, 0.01) = 1.0;
+uniform float alpha: hint_range(0.0, 1.0, 0.01) = 1.0;
 
 mat4 bri_mat(float b) {
 	return mat4(
 		vec4(1, 0, 0, 0),
 		vec4(0, 1, 0, 0),
 		vec4(0, 0, 1, 0),
-		vec4(b, b, b, 1)
+		vec4(b, b, b, alpha)
 	);
 }
 
@@ -20,7 +21,7 @@ mat4 con_mat(float c) {
 		vec4(c, 0, 0, 0),
 		vec4(0, c, 0, 0),
 		vec4(0, 0, c, 0),
-		vec4(t, t, t, 1)
+		vec4(t, t, t, alpha)
 	);
 }
 
@@ -33,7 +34,7 @@ mat4 sat_mat(float s) {
 		vec4(sr + s, sr, sr, 0),
 		vec4(sg, sg + s, sg, 0),
 		vec4(sb, sb, sb + s, 0),
-		vec4(0, 0, 0, 1)
+		vec4(0, 0, 0, alpha)
 	);
 }
 

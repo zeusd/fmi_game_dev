@@ -89,8 +89,8 @@ var aim: MeshInstance3D
 var ground_aim: MeshInstance3D
 var gnd_rc: RayCast3D
 var prev_veloc: Vector3
+var blink_d:= 0.0
 const BLINK_SPEED = 37.0
-const BLINK_DIST = 100.0
 enum spell {
 	BLINK
 }
@@ -110,7 +110,7 @@ func _ready():
 	hurtbox.add_child(c_hurt_b)
 	c_hurt_b.shape = %BodyBean.shape
 	
-	set_r_wep(sword_up, sword_up_res)
+	_set_r_wep(sword_up, sword_up_res)
 	self.add_child(atk_timer)
 	atk_timer.one_shot = true
 	self.add_child(hold_timer)
@@ -142,7 +142,7 @@ func _ready():
 	
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
-func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
+func _set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
 	var rl = %WeaponManager.update_weapon_model()
 	
@@ -171,11 +171,11 @@ func set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	
 	hurtbox.exclude["sword"] = hitbox
 
-func get_speed() -> float:
+func _get_speed() -> float:
 	var speed = sprint_speed if sprinting else walk_speed
 	return speed * CROUCH_SLOW if crouching else speed
 
-func is_surface_too_steep(normal: Vector3) -> bool:
+func _is_surface_too_steep(normal: Vector3) -> bool:
 	return normal.angle_to(Vector3.UP) > self.floor_max_angle
 
 func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) -> bool:
@@ -319,7 +319,7 @@ func _process(delta: float) -> void:
 		input_dir.x = 0.0
 	
 	if casting and aiming:
-		show_aim(delta)
+		_show_aim(delta)
 		aim.visible = true
 		aim.global_rotate(Vector3.UP, 12 * delta)
 		ground_aim.visible = true
@@ -335,6 +335,7 @@ func _process(delta: float) -> void:
 			prev_veloc = self.velocity * Vector3.UP
 			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
 			blinking = true
+			blink_d = ((blink_pos - self.global_position).length() + 0.1)
 			self.get_tree().paused = false
 			_clear_lean()
 			%Camera3D/CanvasLayer/Chroma.visible = true
@@ -345,7 +346,7 @@ func _process(delta: float) -> void:
 	
 	if blinking:
 		self.velocity = Vector3.ZERO
-		cast(delta * BLINK_SPEED)
+		_cast(delta)
 	
 	if Input.is_action_just_pressed("cast"):
 		aiming = true
@@ -368,7 +369,7 @@ func _process(delta: float) -> void:
 		hold_timer.start(0.2)
 	elif Input.is_action_pressed("attack"):
 		if hold_timer.is_stopped() and bonk_timer.is_stopped() and not bonk:
-			set_r_wep(sword_bonk, sword_bonk_res)
+			_set_r_wep(sword_bonk, sword_bonk_res)
 			var anim_time = 1.5
 			bonk_timer.start(anim_time)
 			%WeaponManager.managed_input("hold")
@@ -376,9 +377,9 @@ func _process(delta: float) -> void:
 	elif Input.is_action_just_released("attack"):
 		if (not hold_timer.is_stopped() or not bonk_timer.is_stopped()) and atk_timer.is_stopped():
 			if crouching:
-				set_r_wep(sword_down, sword_down_res)
+				_set_r_wep(sword_down, sword_down_res)
 			else:
-				set_r_wep(sword_up, sword_up_res)
+				_set_r_wep(sword_up, sword_up_res)
 			bonk = false
 			
 			hold_timer.stop()
@@ -399,15 +400,15 @@ func _process(delta: float) -> void:
 			bonk = false
 		elif atk_timer.is_stopped():
 			if crouching:
-				set_r_wep(sword_down, sword_down_res)
+				_set_r_wep(sword_down, sword_down_res)
 			else:
-				set_r_wep(sword_up, sword_up_res)
+				_set_r_wep(sword_up, sword_up_res)
 			bonk = false
 	elif not Input.is_action_pressed("attack") and not bonk and atk_timer.is_stopped():
 		if crouching:
-			set_r_wep(sword_down, sword_down_res)
+			_set_r_wep(sword_down, sword_down_res)
 		else:
-			set_r_wep(sword_up, sword_up_res)
+			_set_r_wep(sword_up, sword_up_res)
 	
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
@@ -457,7 +458,7 @@ func _handle_noclip(delta: float) -> bool:
 	if not noclip:
 		return false
 	
-	var speed = get_speed() * noclip_speed_mult
+	var speed = _get_speed() * noclip_speed_mult
 	if sprinting:
 		speed *= NOCLIP_SPEED_ORIG
 	
@@ -468,7 +469,7 @@ func _handle_noclip(delta: float) -> bool:
 
 func _snap_down_stairs_check() -> void:
 	var has_snapped = false
-	var floor_below: bool = %StairsBelowRayCast3D.is_colliding() and not is_surface_too_steep(%StairsBelowRayCast3D.get_collision_normal())
+	var floor_below: bool = %StairsBelowRayCast3D.is_colliding() and not _is_surface_too_steep(%StairsBelowRayCast3D.get_collision_normal())
 	var was_on_floor_prev_frame = Engine.get_physics_frames() - _last_frame_on_floor == 1
 	
 	if not is_on_floor() and velocity.y <= 0 and (was_on_floor_prev_frame or _snapped_to_stairs_last_frame) and floor_below:
@@ -501,7 +502,7 @@ func _snap_up_stairs_check(delta: float) -> bool:
 		%StairsAheadRayCast3D.global_position = body_test_res.get_collision_point() + Vector3(0, MAX_STEP_HEIGHT, 0) + expected_move_motion.normalized() * 0.1
 		%StairsAheadRayCast3D.force_raycast_update()
 		
-		if %StairsAheadRayCast3D.is_colliding() and not is_surface_too_steep(%StairsAheadRayCast3D.get_collision_normal()):
+		if %StairsAheadRayCast3D.is_colliding() and not _is_surface_too_steep(%StairsAheadRayCast3D.get_collision_normal()):
 			_save_camera_pos()
 			self.global_position = step_pos_with_clearance.origin + body_test_res.get_travel()
 			apply_floor_snap()
@@ -551,10 +552,10 @@ func _handle_liquid_physics(delta: float) -> bool:
 	if not is_on_floor():
 		velocity.y -= gravity * 0.1 * delta
 	
-	self.velocity += cam_aligned_wish_dir * get_speed() * delta
+	self.velocity += cam_aligned_wish_dir * _get_speed() * delta
 	
 	if Input.is_action_pressed("jump"):
-		self.velocity.y -= cam_aligned_wish_dir.y * get_speed() * delta
+		self.velocity.y -= cam_aligned_wish_dir.y * _get_speed() * delta
 		self.velocity.y += swim_up_speed * delta
 	
 	self.velocity = self.velocity.lerp(Vector3.ZERO, delta)
@@ -598,10 +599,10 @@ func _friction(delta) -> void:
 
 func _accelerate(delta: float) -> void:
 	var cur_speed = self.velocity.dot(wish_dir)
-	var add_speed = get_speed() - cur_speed
+	var add_speed = _get_speed() - cur_speed
 	
 	if add_speed > 0:
-		var accel_speed = accel * get_speed() * delta
+		var accel_speed = accel * _get_speed() * delta
 		accel_speed = min(accel_speed, add_speed)
 		self.velocity += accel_speed * wish_dir
 
@@ -614,7 +615,7 @@ func _air_accelerate(wish_veloc: Vector3, delta: float) -> void:
 	var add_speed = wish_speed - cur_speed
 	
 	if add_speed > 0:
-		var accel_speed = accel * get_speed() * delta
+		var accel_speed = accel * _get_speed() * delta
 		accel_speed = min(accel_speed, add_speed)
 		self.velocity += accel_speed * wish_veloc
 
@@ -639,11 +640,11 @@ func _crouch_uncrouch(delta) -> void:
 		if not crouching:
 			crouching = true
 			if not is_bonk:
-				set_r_wep(sword_down, sword_down_res)
+				_set_r_wep(sword_down, sword_down_res)
 		elif crouching and not self.test_move(self.transform, Vector3(0, CROUCH_DIST, 0)):
 			crouching = false
 			if not is_bonk:
-				set_r_wep(sword_up, sword_up_res)
+				_set_r_wep(sword_up, sword_up_res)
 	
 	var bump_up_if_possible := 0.0
 	if was_crouched != crouching and not is_on_floor() and not _snapped_to_stairs_last_frame:
@@ -662,7 +663,7 @@ func _crouch_uncrouch(delta) -> void:
 	%MeshInstance3D.mesh.height = %BodyBean.shape.height
 	%MeshInstance3D.position.y = %BodyBean.position.y
 
-func show_aim(delta: float) -> void:
+func _show_aim(delta: float) -> void:
 	var res = KinematicCollision3D.new()
 	var new_pos = %Camera3D/SpringArm3D/MeshInstance3D.global_position
 	
@@ -676,13 +677,17 @@ func show_aim(delta: float) -> void:
 		ground_aim.global_position = gnd_rc.get_collision_point()
 		ground_aim.global_position.y += 0.3
 
-func cast(delta: float) -> void:
+func _cast(delta: float) -> void:
 	if curr_spell == spell.BLINK:
 		#var res = KinematicCollision3D.new()
 		#var test_move = self.test_move(self.transform, blink_pos, res, 0.1, false)
 		#
 		#if not test_move:
-		self.global_position = self.global_position.lerp(blink_pos, 0.5)
+		
+		var blink_offset = 7.0 * sqrt(abs(blink_d / 2.0 - abs(blink_d / 2.0 - (blink_pos - self.global_position).length()) - 0.1))
+		%Camera3D/CanvasLayer/Chroma.material.set_shader_parameter("offset", blink_offset)
+		
+		self.global_position = self.global_position.lerp(blink_pos, BLINK_SPEED / 60.0)
 		#else:
 			#blinking = false
 
