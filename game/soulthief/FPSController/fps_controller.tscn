@@ -79,9 +79,9 @@ unique_name_in_owner = true
 rotation_order = 1
 cull_mask = 1048573
 
-[node name="CanvasLayer" type="CanvasLayer" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+[node name="Effect" type="CanvasLayer" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 
-[node name="Grayscale" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/CanvasLayer"]
+[node name="Grayscale" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Effect"]
 material = SubResource("ShaderMaterial_twhuv")
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,7 +90,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Chroma" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/CanvasLayer"]
+[node name="Chroma" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Effect"]
 material = SubResource("ShaderMaterial_aph7h")
 anchors_preset = 15
 anchor_right = 1.0
@@ -106,11 +106,11 @@ shape = SubResource("SphereShape3D_u08xt")
 
 [node name="Hand" type="Marker3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.8)
 
 [node name="Interaction" type="RayCast3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 unique_name_in_owner = true
-target_position = Vector3(0, 0, -3)
+target_position = Vector3(0, 0, -2.3)
 
 [node name="ViewModel" type="Node3D" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 unique_name_in_owner = true

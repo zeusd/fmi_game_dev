@@ -54,7 +54,8 @@ const FORCE:= 1.0
 const THROW_FORCE:= 70
 
 #signal interact_obj
-var held_obj: RigidBody3D
+var look_obj: Loot = null
+var held_obj: RigidBody3D = null
 var look_speed: float
 
 var wish_dir:= Vector3.ZERO
@@ -98,8 +99,8 @@ var curr_spell:= spell.BLINK
 
 func _ready():
 	%Camera3D/SpringArm3D/MeshInstance3D.visible = false
-	%Camera3D/CanvasLayer/Grayscale.visible = false
-	%Camera3D/CanvasLayer/Chroma.visible = false
+	%Camera3D/Effect/Grayscale.visible = false
+	%Camera3D/Effect/Chroma.visible = false
 	
 	hurtbox = Hurtbox.new()
 	self.add_child(hurtbox)
@@ -226,7 +227,7 @@ func _handle_stick_look_input(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		if held_obj == null:
-			_hold_object()
+			_take_object()
 		else:
 			_drop_object()
 
@@ -338,8 +339,8 @@ func _process(delta: float) -> void:
 			blink_d = ((blink_pos - self.global_position).length() + 0.1)
 			self.get_tree().paused = false
 			_clear_lean()
-			%Camera3D/CanvasLayer/Chroma.visible = true
-		%Camera3D/CanvasLayer/Grayscale.visible = self.get_tree().paused
+			%Camera3D/Effect/Chroma.visible = true
+		%Camera3D/Effect/Grayscale.visible = self.get_tree().paused
 	else:
 		aim.visible = false
 		ground_aim.visible = false
@@ -356,12 +357,14 @@ func _process(delta: float) -> void:
 	if blinking and ((blink_pos - self.global_position).length() < 0.1 or is_on_wall() or is_on_ceiling()):
 		self.velocity = prev_veloc
 		blinking = false
-		%Camera3D/CanvasLayer/Chroma.visible = false
+		%Camera3D/Effect/Chroma.visible = false
 	# # #
 	# TIME STOPS HERE IF IT MUST
 	# # #
 	if get_tree().paused:
 		return
+	
+	_interact()
 	
 	if held_obj != null and Input.is_action_just_pressed("attack"):
 		_drop_object(THROW_FORCE)
@@ -524,7 +527,21 @@ func _push_rigid_bodies() -> void:
 			var push_force = mass_ratio * FORCE
 			c.get_collider().apply_impulse(push_dir * veloc_diff * push_force, c.get_position() - c.get_collider().global_position)
 
-func _hold_object() -> void:
+func _interact() -> void:
+	var look_coll = %Interaction.get_collider()
+	
+	if look_coll != look_obj:
+		if look_obj != null:
+			look_obj.lit_up = false
+			look_obj = null
+		if look_coll != null and look_coll is Loot:
+			look_obj = look_coll
+			look_obj.lit_up = true
+
+func _take_object() -> void:
+	if look_obj != null:
+		look_obj.take()
+	
 	var collider = %Interaction.get_collider()
 	#for i in %ShapeCast3D.get_collision_count():
 		#var collider = %ShapeCast3D.get_collider(i)
@@ -685,7 +702,7 @@ func _cast(delta: float) -> void:
 		#if not test_move:
 		
 		var blink_offset = 7.0 * sqrt(abs(blink_d / 2.0 - abs(blink_d / 2.0 - (blink_pos - self.global_position).length()) - 0.1))
-		%Camera3D/CanvasLayer/Chroma.material.set_shader_parameter("offset", blink_offset)
+		%Camera3D/Effect/Chroma.material.set_shader_parameter("offset", blink_offset)
 		
 		self.global_position = self.global_position.lerp(blink_pos, BLINK_SPEED / 60.0)
 		#else:
@@ -705,4 +722,4 @@ func mod_dmg() -> float:
 	return 1.0
 
 func die() -> void:
-	%Camera3D/CanvasLayer/Chroma.visible = true
+	%Camera3D/Effect/Chroma.visible = true

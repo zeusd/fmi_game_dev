@@ -1,0 +1,17 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cfh0u13kqsyyf"]
+
+[ext_resource type="Texture2D" uid="uid://1pnfgde8s78d" path="res://assets/models/blender/cup/cup_cup_texture.png" id="1_5hnfl"]
+[ext_resource type="Shader" uid="uid://caobm23cnamd7" path="res://shaders/highlight.gdshader" id="2_t0u00"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t0u00"]
+render_priority = 0
+shader = ExtResource("2_t0u00")
+shader_parameter/strength = 0.0
+
+[resource]
+resource_local_to_scene = true
+resource_name = "Material.001"
+next_pass = SubResource("ShaderMaterial_t0u00")
+cull_mode = 2
+albedo_texture = ExtResource("1_5hnfl")
+roughness = 0.5

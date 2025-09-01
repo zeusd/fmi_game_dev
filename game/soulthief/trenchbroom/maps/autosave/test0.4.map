@@ -2724,15 +2724,5 @@
 // entity 41
 {
 "classname" "loot_cup"
-"origin" "168 488 128"
-}
-// entity 42
-{
-"classname" "loot_cup"
-"origin" "220 508 128"
-}
-// entity 43
-{
-"classname" "loot_cup"
-"origin" "188 540 128"
+"origin" "168 488 136"
 }

@@ -16,13 +16,13 @@ var damage: Dictionary = {
 	fighter_type.KNIGHT: 10
 }
 
-const REF := "ref"
-const HLT := "health"
-const DMG := "damage"
-const BLD := "blood"
-const TYP := "type"
-const HIT := "hitbox"
-const HUR := "hurtbox"
+const REF:= "ref"
+const HLT:= "health"
+const DMG:= "damage"
+const BLD:= "blood"
+const TYP:= "type"
+const HIT:= "hitbox"
+const HUR:= "hurtbox"
 
 var fighters: Dictionary = {}
 

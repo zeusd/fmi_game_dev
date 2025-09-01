@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2l0qx35h42cl"]
+
+[ext_resource type="PackedScene" uid="uid://b238vs7qqqgpt" path="res://assets/models/blender/cup/cup.glb" id="1_wcbbo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wcbbo"]
+radius = 0.2
+
+[node name="Cup" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+shape = SubResource("SphereShape3D_wcbbo")
+
+[node name="cup" parent="CollisionShape3D" instance=ExtResource("1_wcbbo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
