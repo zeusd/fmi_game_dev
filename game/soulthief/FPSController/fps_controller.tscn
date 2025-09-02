@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://ddg8c3vrt53w6"]
+[gd_scene load_steps=19 format=3 uid="uid://ddg8c3vrt53w6"]
 
 [ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
+[ext_resource type="PackedScene" uid="uid://dslqbnhsyeh5j" path="res://FPSController/hud/hud.tscn" id="2_aph7h"]
 [ext_resource type="Shader" uid="uid://ejx0vblubing" path="res://shaders/grayscale.gdshader" id="2_lm1k8"]
 [ext_resource type="PackedScene" uid="uid://b0jsuh0xqrhen" path="res://weapons/weapon_manager.tscn" id="3_4ybej"]
 [ext_resource type="Shader" uid="uid://kvoeovboxvwh" path="res://shaders/chroma.gdshader" id="3_twhuv"]
@@ -37,8 +38,9 @@ noise = SubResource("FastNoiseLite_lm1k8")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ybej"]
 transparency = 1
-albedo_color = Color(0.337255, 0, 0.611765, 0.72549)
+albedo_color = Color(0.25098, 0.12549, 0.501961, 0.752941)
 albedo_texture = SubResource("NoiseTexture2D_twhuv")
+metallic_specular = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_4ybej"]
 material = SubResource("StandardMaterial3D_4ybej")
@@ -50,6 +52,10 @@ radius = 0.25
 
 [node name="CharacterBody3D" type="CharacterBody3D" groups=["PLAYER"]]
 script = ExtResource("1_u08xt")
+
+[node name="HUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_aph7h")]
+unique_name_in_owner = true
+player = NodePath("..")
 
 [node name="BodyBean" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true

@@ -2485,7 +2485,7 @@ shape = SubResource("ConvexPolygonShape3D_mff7r")
 [node name="entity_1_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -2.5, 37.25)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@70181")
+col_rect = NodePath("@ColorRect@243595")
 liquid_type = 1
 gamma = 0.7
 
@@ -2504,7 +2504,7 @@ shape = SubResource("ConvexPolygonShape3D_gs521")
 [node name="entity_2_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 5.5, -2.5)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@70182")
+col_rect = NodePath("@ColorRect@243596")
 gamma = 0.7
 
 [node name="entity_2_mesh_instance" type="MeshInstance3D" parent="FuncGodotMap/entity_2_st_liquid"]
@@ -2516,7 +2516,7 @@ shape = SubResource("ConvexPolygonShape3D_luk0a")
 [node name="entity_3_st_liquid" type="Area3D" parent="FuncGodotMap" node_paths=PackedStringArray("col_rect")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5.5, -10)
 script = ExtResource("13_3v7ru")
-col_rect = NodePath("@ColorRect@70183")
+col_rect = NodePath("@ColorRect@243597")
 liquid_type = 2
 gamma = 1.0
 
@@ -3380,7 +3380,7 @@ shape = SubResource("ConvexPolygonShape3D_hhwog")
 [node name="entity_0_brush_224_collision_shape" type="CollisionShape3D" parent="NavigationRegion3D/entity_0_worldspawn"]
 shape = SubResource("ConvexPolygonShape3D_qf3qn")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("4_r3fl7")]
+[node name="Player" parent="." instance=ExtResource("4_r3fl7")]
 collision_layer = 21
 collision_mask = 5
 
@@ -3429,7 +3429,8 @@ unique_name_in_owner = true
 script = ExtResource("1_5t8nk")
 metadata/_custom_type_script = "uid://cfw8pqqkmvflr"
 
-[node name="Treasure" type="Node" parent="." groups=["COMPONENT"]]
+[node name="Treasure" type="Node" parent="." node_paths=PackedStringArray("player") groups=["COMPONENT"]]
 unique_name_in_owner = true
 script = ExtResource("31_1q667")
+player = NodePath("../Player")
 metadata/_custom_type_script = "uid://bvma1dn3m27fh"

@@ -14,6 +14,8 @@ const REF:= "ref"
 const TYP:= "type"
 const VAL:= "value"
 
+@export var player: CharacterBody3D
+
 func activate(id: String, type: loot_type) -> void:
 	if not loot.has(id):
 		var lt = instance_from_id(int(id))
@@ -26,5 +28,5 @@ func activate(id: String, type: loot_type) -> void:
 
 func take(id: String) -> void:
 	value_curr += loot[id][VAL]
-	print_debug(value_curr)
+	player.loot = value_curr
 	loot.erase(id)

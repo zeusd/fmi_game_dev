@@ -1,0 +1,180 @@
+[gd_scene load_steps=16 format=3 uid="uid://dslqbnhsyeh5j"]
+
+[ext_resource type="Script" uid="uid://dxfqpr8f2g6jh" path="res://FPSController/hud/hud.gd" id="1_mv35j"]
+[ext_resource type="Texture2D" uid="uid://bdrhjjyxlmleq" path="res://FPSController/hud/gems/dot.svg" id="2_mv35j"]
+[ext_resource type="Texture2D" uid="uid://bs3uvo2ha347e" path="res://FPSController/hud/gems/state_gem.svg" id="3_x0ysq"]
+[ext_resource type="Texture2D" uid="uid://bjbmwhffwfo3y" path="res://FPSController/hud/gems/health.svg" id="4_76e8g"]
+[ext_resource type="Shader" uid="uid://tbdlj0ns6gbp" path="res://shaders/health.gdshader" id="4_y6kh4"]
+[ext_resource type="Texture2D" uid="uid://b8b4c5x7lmko1" path="res://FPSController/hud/gems/mana.svg" id="5_y6kh4"]
+[ext_resource type="Shader" uid="uid://em2ph3wh1v2b" path="res://shaders/mana.gdshader" id="6_2jrln"]
+[ext_resource type="Texture2D" uid="uid://bj87skbvf4x2y" path="res://FPSController/hud/gems/blink_spell.svg" id="6_hybsy"]
+[ext_resource type="Texture2D" uid="uid://brfpibsya2rdh" path="res://FPSController/hud/gems/coin_gem.svg" id="7_2jrln"]
+[ext_resource type="Texture2D" uid="uid://d5srpnwmdr15" path="res://FPSController/hud/gems/light_gem.svg" id="7_76e8g"]
+[ext_resource type="Shader" uid="uid://mnnwvt3pfnpc" path="res://shaders/spell.gdshader" id="8_2jrln"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hybsy"]
+shader = ExtResource("4_y6kh4")
+shader_parameter/fill_percent = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xbebr"]
+shader = ExtResource("6_2jrln")
+shader_parameter/fill_percent = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aiuwm"]
+shader = ExtResource("8_2jrln")
+shader_parameter/active = false
+shader_parameter/passive = true
+shader_parameter/dont = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_xbebr"]
+font_size = 32
+font_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_mv35j")
+
+[node name="Crosshair" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dot" type="TextureRect" parent="Crosshair"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+texture = ExtResource("2_mv35j")
+expand_mode = 1
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Gems" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="State" type="Control" parent="Margin/Gems"]
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 2
+
+[node name="StateGem" type="TextureRect" parent="Margin/Gems/State"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_x0ysq")
+expand_mode = 1
+
+[node name="Health" type="TextureRect" parent="Margin/Gems/State"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_hybsy")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_76e8g")
+expand_mode = 1
+
+[node name="Mana" type="TextureRect" parent="Margin/Gems/State"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_xbebr")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_y6kh4")
+expand_mode = 1
+
+[node name="Spell" type="TextureRect" parent="Margin/Gems/State"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_aiuwm")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_hybsy")
+expand_mode = 1
+
+[node name="Light" type="Control" parent="Margin/Gems"]
+custom_minimum_size = Vector2(160, 90)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LightGem" type="TextureRect" parent="Margin/Gems/Light"]
+visible = false
+custom_minimum_size = Vector2(160, 90)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -90.0
+offset_right = 80.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("7_76e8g")
+expand_mode = 1
+
+[node name="Coin" type="Control" parent="Margin/Gems"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(320, 180)
+layout_mode = 2
+
+[node name="Loot" type="Label" parent="Margin/Gems/Coin"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -22.5
+offset_right = 100.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_xbebr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoinGem" type="TextureRect" parent="Margin/Gems/Coin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 103.5)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_2jrln")
+expand_mode = 1

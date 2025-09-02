@@ -9,7 +9,6 @@ shader = ExtResource("2_t0u00")
 shader_parameter/strength = 0.0
 
 [resource]
-resource_local_to_scene = true
 resource_name = "Material.001"
 next_pass = SubResource("ShaderMaterial_t0u00")
 cull_mode = 2

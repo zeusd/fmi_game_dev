@@ -26,7 +26,7 @@ var wall_normal:= Vector3.ZERO
 
 const MAX_JUMPS:= 1
 var jump_cnt:= 0
-var jump_timer: Timer = Timer.new()
+var jump_timer:= Timer.new()
 var jump_timeout:= jump_velocity / gravity
 
 const MAX_STEP_HEIGHT:= 0.5
@@ -69,9 +69,9 @@ const FTR_TYPE = Combat.fighter_type.PLAYER
 
 var hitbox: Hitbox
 var hurtbox: Hurtbox
-var atk_timer: Timer = Timer.new()
-var hold_timer: Timer = Timer.new()
-var bonk_timer: Timer = Timer.new()
+var atk_timer:=Timer.new()
+var hold_timer:= Timer.new()
+var bonk_timer:= Timer.new()
 
 var bonk:= false
 
@@ -82,8 +82,10 @@ var sword_up: Node3D
 var sword_down: Node3D
 var sword_bonk: Node3D
 
+@export var mana_timer:= Timer.new()
+@export var blink_cost:= 7.0
+@export var casting:= false
 var aiming:= false
-var casting:= false
 var blinking:= false
 var blink_pos: Vector3
 var aim: MeshInstance3D
@@ -96,6 +98,16 @@ enum spell {
 	BLINK
 }
 var curr_spell:= spell.BLINK
+
+@export var max_health: float = 100.0
+@export var health:= 100.0:
+	set(v):
+		health = v
+		%HUD.update_health()
+@export var loot: float = 0.0:
+	set(v):
+		loot = v
+		%HUD.update_loot()
 
 func _ready():
 	%Camera3D/SpringArm3D/MeshInstance3D.visible = false
@@ -124,6 +136,9 @@ func _ready():
 	%MeshInstance3D.mesh.height = %BodyBean.shape.height
 	%MeshInstance3D.mesh.radius = %BodyBean.shape.radius
 	
+	self.add_child(mana_timer)
+	mana_timer.one_shot = true
+	
 	self.add_child(jump_timer)
 	jump_timer.one_shot = true
 	
@@ -146,6 +161,9 @@ func _ready():
 func _set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
 	var rl = %WeaponManager.update_weapon_model()
+	
+	if wep_res == null:
+		return
 	
 	wep = rl[0]
 	
@@ -225,8 +243,8 @@ func _handle_stick_look_input(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("interact"):
-		if held_obj == null:
+	if Input.is_action_just_pressed("interact") and not casting:
+		if held_obj == null :
 			_take_object()
 		else:
 			_drop_object()
@@ -333,11 +351,13 @@ func _process(delta: float) -> void:
 			aiming = false
 			self.get_tree().paused = false
 		if Input.is_action_just_released("cast"):
-			prev_veloc = self.velocity * Vector3.UP
+			prev_veloc = self.velocity * Vector3.UP if self.get_tree().paused else self.velocity
 			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
 			blinking = true
 			blink_d = ((blink_pos - self.global_position).length() + 0.1)
 			self.get_tree().paused = false
+			mana_timer.paused = false
+			mana_timer.start(mana_timer.time_left + blink_cost)
 			_clear_lean()
 			%Camera3D/Effect/Chroma.visible = true
 		%Camera3D/Effect/Grayscale.visible = self.get_tree().paused
@@ -349,10 +369,15 @@ func _process(delta: float) -> void:
 		self.velocity = Vector3.ZERO
 		_cast(delta)
 	
-	if Input.is_action_just_pressed("cast"):
+	if Input.is_action_just_pressed("cast") and mana_timer.time_left < 2.0 * blink_cost:
+		mana_timer.paused = true
 		aiming = true
+		
+	if mana_timer.time_left >= 2.0 * blink_cost:
+		aiming = false
 	
 	casting = Input.is_action_pressed("cast")
+	mana_timer.paused = casting
 	
 	if blinking and ((blink_pos - self.global_position).length() < 0.1 or is_on_wall() or is_on_ceiling()):
 		self.velocity = prev_veloc
@@ -368,6 +393,7 @@ func _process(delta: float) -> void:
 	
 	if held_obj != null and Input.is_action_just_pressed("attack"):
 		_drop_object(THROW_FORCE)
+		Input.action_release("attack")
 	elif Input.is_action_just_pressed("attack"):
 		hold_timer.start(0.2)
 	elif Input.is_action_pressed("attack"):
@@ -379,10 +405,7 @@ func _process(delta: float) -> void:
 			bonk = true
 	elif Input.is_action_just_released("attack"):
 		if (not hold_timer.is_stopped() or not bonk_timer.is_stopped()) and atk_timer.is_stopped():
-			if crouching:
-				_set_r_wep(sword_down, sword_down_res)
-			else:
-				_set_r_wep(sword_up, sword_up_res)
+			_reset_wep()
 			bonk = false
 			
 			hold_timer.stop()
@@ -402,16 +425,10 @@ func _process(delta: float) -> void:
 			atk_timer.start(anim_time)
 			bonk = false
 		elif atk_timer.is_stopped():
-			if crouching:
-				_set_r_wep(sword_down, sword_down_res)
-			else:
-				_set_r_wep(sword_up, sword_up_res)
+			_reset_wep()
 			bonk = false
 	elif not Input.is_action_pressed("attack") and not bonk and atk_timer.is_stopped():
-		if crouching:
-			_set_r_wep(sword_down, sword_down_res)
-		else:
-			_set_r_wep(sword_up, sword_up_res)
+		_reset_wep()
 	
 	if atk_timer.is_stopped():
 		hitbox.monitorable = false
@@ -450,6 +467,12 @@ func _process(delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	pass
+
+func _reset_wep() -> void:
+	if crouching:
+		_set_r_wep(sword_down, sword_down_res)
+	else:
+		_set_r_wep(sword_up, sword_up_res)
 
 func _handle_noclip(delta: float) -> bool:
 	if Input.is_action_just_pressed("_noclip") and OS.has_feature("debug"):

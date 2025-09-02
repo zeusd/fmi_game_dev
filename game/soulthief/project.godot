@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 GAME="*res://game_manager.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/func_godot/plugin.cfg", "res://addons/tattomoosa.vision_cone_3d/plugin.cfg")

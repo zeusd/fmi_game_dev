@@ -6,14 +6,14 @@ enum fighter_type {
 	KNIGHT
 }
 
-var health: Dictionary = {
-	fighter_type.PLAYER: 100,
-	fighter_type.KNIGHT: 100
+static var health: Dictionary = {
+	fighter_type.PLAYER: 100.0,
+	fighter_type.KNIGHT: 100.0
 }
 
-var damage: Dictionary = {
-	fighter_type.PLAYER: 10,
-	fighter_type.KNIGHT: 10
+static var damage: Dictionary = {
+	fighter_type.PLAYER: 10.0,
+	fighter_type.KNIGHT: 10.0
 }
 
 const REF:= "ref"
@@ -72,10 +72,13 @@ func hit(from_id: String, to_id: String) -> void:
 		fighters[to_id][HLT] -= fighters[from_id][DMG] * (dmg_mod / weak_mod)
 		fighters[to_id][REF].hit_by(fighters[from_id][REF])
 		splat(to_id)
+		if fighters[to_id][TYP] == fighter_type.PLAYER:
+			fighters[to_id][REF].health = fighters[to_id][HLT]
 		if fighters[to_id][HLT] <= 0:
 			#fighters.erase(to_id)
 			_kill(to_id)
 			
 func _kill(id: String) -> void:
 	fighters[id][REF].die()
+	fighters.erase(id)
 	# blood decal?
