@@ -255,15 +255,26 @@ func mod_weak() -> float:
 		return 3.0
 	return 5.0
 
+func _lie_down() -> void:
+	%CollisionShape3D.global_position += Vector3.DOWN + Vector3.RIGHT.rotated(Vector3.UP, self.rotation.y)
+	%CollisionShape3D.rotate_z(deg_to_rad(90.0))
+	hurtbox.global_position += Vector3.DOWN + Vector3.RIGHT.rotated(Vector3.UP, self.rotation.y)
+	hurtbox.rotate_z(deg_to_rad(90.0))
+
+func _ghost() -> void:
+	%CollisionShape3D.disabled = true
+
 func bonked() -> void:
 	_ghost()
 	_play_anim_loop(A_BONK)
+	_lie_down()
+	%CollisionShape3D.rotate_y(deg_to_rad(-60.0))
+	hurtbox.rotate_y(deg_to_rad(-60.0))
 	%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.NAP)
 
 func die() -> void:
 	_ghost()
 	_play_anim_loop(A_DEATH)
+	_lie_down()
+	hurtbox.set_deferred("monitoring", false)
 	%Intelligence.change_state(str(self.get_instance_id()), Intelligence.enemy_state.DEAD)
-
-func _ghost() -> void:
-	%CollisionShape3D.disabled = true

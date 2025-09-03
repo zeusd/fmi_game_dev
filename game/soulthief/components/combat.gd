@@ -28,9 +28,7 @@ var fighters: Dictionary = {}
 
 func activate(id: String, ftr_type: fighter_type) -> void:
 	if not fighters.has(id):
-		
 		var b = Blood.new()
-		
 		var ftr = instance_from_id(int(id)) as Node3D
 		
 		var new_val: Dictionary = {
@@ -45,19 +43,25 @@ func activate(id: String, ftr_type: fighter_type) -> void:
 		
 		fighters[id] = new_val
 		fighters[id][REF].add_child(b)
-		#b.name = "Blood"
-		b.global_transform.origin = fighters[id][REF].global_transform.origin + Vector3.UP
+		b.global_position = fighters[id][REF][HUR].global_position
 		b.emitting = false
 
 func splat(id: String) -> void:
 	fighters[id][BLD].emitting = true
 	fighters[id][BLD].restart()
-	fighters[id][BLD].global_position = fighters[id][REF].global_position + Vector3.UP
+
+func bloodstain(id: String) -> void:
+	var decal = Bloodstain.new()
+	fighters[id][REF].add_child(decal)
+	decal.global_position = fighters[id][HUR].global_position
 
 func hit(from_id: String, to_id: String) -> void:
 	if fighters.has(from_id) and fighters.has(to_id):
 		var dmg_mod = 1.0
 		var weak_mod = 1.0
+		
+		if fighters[to_id][HLT] <= 0:
+			return
 		
 		if fighters[from_id][TYP] == fighter_type.PLAYER:
 			dmg_mod = fighters[from_id][REF].mod_dmg()
@@ -67,6 +71,14 @@ func hit(from_id: String, to_id: String) -> void:
 			
 			if (weak_mod < 5.0 and dmg_mod < 0.0) or (weak_mod == 0.0 and dmg_mod == 0.0):
 				fighters[to_id][REF].bonked()
+				fighters[to_id][BLD].global_position = fighters[to_id][HUR].global_position
+				return
+			
+			if fighters[to_id][REF].nap:
+				fighters[to_id][HLT] = 0
+				fighters[to_id].dead = true
+				splat(to_id)
+				bloodstain(to_id)
 				return
 		
 		fighters[to_id][HLT] -= fighters[from_id][DMG] * (dmg_mod / weak_mod)
@@ -75,10 +87,17 @@ func hit(from_id: String, to_id: String) -> void:
 		if fighters[to_id][TYP] == fighter_type.PLAYER:
 			fighters[to_id][REF].health = fighters[to_id][HLT]
 		if fighters[to_id][HLT] <= 0:
-			#fighters.erase(to_id)
 			_kill(to_id)
-			
+
+func area_damage(from_area: Area3D, damage: float, to_id: String) -> void:
+	if fighters.has(to_id):
+		fighters[to_id][HLT] -= damage
+		splat(to_id)
+		if fighters[to_id][TYP] == fighter_type.PLAYER:
+			fighters[to_id][REF].health = fighters[to_id][HLT]
+		if fighters[to_id][HLT] <= 0:
+			_kill(to_id)
+
 func _kill(id: String) -> void:
 	fighters[id][REF].die()
-	fighters.erase(id)
-	# blood decal?
+	bloodstain(id)

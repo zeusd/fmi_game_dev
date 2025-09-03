@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqvm7g44ybpuh"]
+
+[ext_resource type="Texture2D" uid="uid://mdab1j5r3a1p" path="res://juice/blood_decal.png" id="1_7yeqr"]
+
+[node name="Bloodstain" type="Decal"]
+size = Vector3(5, 5, 5)
+texture_albedo = ExtResource("1_7yeqr")
+upper_fade = 2.5895e-05
+lower_fade = 6.83375e-05

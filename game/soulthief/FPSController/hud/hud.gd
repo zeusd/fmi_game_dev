@@ -18,6 +18,9 @@ func _process(delta: float) -> void:
 		%Spell.material.set_shader_parameter("active", false)
 		%Spell.material.set_shader_parameter("passive", true)
 		%Spell.material.set_shader_parameter("dont", player.casting)
+	
+	if %FPS.visible:
+		%FPS.text = str(int(Engine.get_frames_per_second()))
 
 func update_health() -> void:
 	%Health.material.set_shader_parameter("fill_percent", player.health / player.max_health)

@@ -1,46 +1,57 @@
 @tool
 extends Area3D
 
-const MESH_INST_SUFF := "mesh_instance"
-const SHADER_DIR := "res://shaders/"
-const TXR_SPC_DIR := "res://assets/textures/special/"
+const MESH_INST_SUFF:= "mesh_instance"
+const SHADER_DIR:= "res://shaders/"
+const TXR_SPC_DIR:= "res://assets/textures/special/"
 
-const TXR_SUFF := ".tres"
-const SHADER_SUFF := ".gdshader"
-const SHD_MAT_SUFF := "_shader_material.tres"
+const TXR_SUFF:= ".tres"
+const SHADER_SUFF:= ".gdshader"
+const SHD_MAT_SUFF:= "_shader_material.tres"
 
-const TINT := "tint"
-const DENS := "dens"
-const ST_RIPPLE := "st_ripple_overlay"
+const TINT:= "tint"
+const DENS:= "dens"
+const DMG:= "dmg"
+const ST_RIPPLE:= "st_ripple_overlay"
 
 var env: WorldEnvironment = null
-const COL_MULT := 0.6
-const FOG_DIV := 300
+const COL_MULT:= 0.6
+const FOG_DIV:= 300
 
-const WATER_DENS := 0.2
-const SLIME_DENS := 0.25
-const LAVA_DENS := 0.3
+const WATER_DMG:= 0.0
+const SLIME_DMG:= 1.0
+const LAVA_DMG:= 5.0
 
-const WATER_TINT := Vector4(0, 5, 10, 0)
-const LAVA_TINT := Vector4(10, 2, 0, 0)
-const SLIME_TINT := Vector4(0, 3, 0, 0)
+const WATER_DENS:= 0.2
+const SLIME_DENS:= 0.25
+const LAVA_DENS:= 0.3
+
+const WATER_TINT:= Vector4(0, 5, 10, 0)
+const LAVA_TINT:= Vector4(10, 2, 0, 0)
+const SLIME_TINT:= Vector4(0, 3, 0, 0)
 
 @export var col_rect: ColorRect
 @export var liquid_type: int
 @export var gamma: float
 
+var dmg_timer:= Timer.new()
+var body: Node3D = null
+
 const LIQ_TYPES := {
 	0: {
 		TINT: WATER_TINT,
-		DENS: WATER_DENS
+		DENS: WATER_DENS,
+		DMG: WATER_DMG
 	},
 	1: {
 		TINT: SLIME_TINT,
-		DENS: SLIME_DENS
+		DENS: SLIME_DENS,
+		DMG: SLIME_DMG
 	},
 	2: {
 		TINT: LAVA_TINT,
-		DENS: LAVA_DENS
+		DENS: LAVA_DENS,
+		DMG: LAVA_DMG
 	}
 }
 
@@ -85,12 +96,23 @@ func _ready() -> void:
 	self.body_exited.connect(_on_body_exited)
 	self.area_entered.connect(_on_area_entered)
 	self.area_exited.connect(_on_area_exited)
+	
+	self.add_child(dmg_timer)
+	dmg_timer.one_shot = false
+	dmg_timer.timeout.connect(_do_damage)
 
 func _on_body_entered(node: Node3D) -> void:
-	pass
+	body = node
+	if liquid_type != 0:
+		var dmg_t = 5 if liquid_type == 1 else 3
+		dmg_timer.start(dmg_t)
 
 func _on_body_exited(node: Node3D) -> void:
-	pass
+	body = null
+
+func _do_damage() -> void:
+	if body != null:
+		%Combat.area_damage(self, LIQ_TYPES[liquid_type][DMG], str(body.get_instance_id()))
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.is_in_group("CAM"):

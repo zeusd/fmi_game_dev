@@ -19,7 +19,7 @@ var cur_stick_look:= Vector2.ZERO
 @export var sprint_speed:= 7.7
 var sprinting:= false
 
-const WALLRUN_POWER = 3
+const WALLRUN_POWER = 3.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var last_bounce:= Vector3.ZERO
 var wall_normal:= Vector3.ZERO
@@ -669,7 +669,7 @@ func _wall_run(delta: float) -> void:
 			self.velocity += frict * wall_normal
 			self.velocity.y = walk_speed
 		else:
-			self.velocity -= wall_normal
+			self.velocity -= wall_normal * Vector3(1.0, 0.0, 1.0)
 			self.velocity.y += WALLRUN_POWER * delta
 
 @onready var reg_height = %BodyBean.shape.height

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dslqbnhsyeh5j"]
+[gd_scene load_steps=18 format=3 uid="uid://dslqbnhsyeh5j"]
 
 [ext_resource type="Script" uid="uid://dxfqpr8f2g6jh" path="res://FPSController/hud/hud.gd" id="1_mv35j"]
 [ext_resource type="Texture2D" uid="uid://bdrhjjyxlmleq" path="res://FPSController/hud/gems/dot.svg" id="2_mv35j"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://brfpibsya2rdh" path="res://FPSController/hud/gems/coin_gem.svg" id="7_2jrln"]
 [ext_resource type="Texture2D" uid="uid://d5srpnwmdr15" path="res://FPSController/hud/gems/light_gem.svg" id="7_76e8g"]
 [ext_resource type="Shader" uid="uid://mnnwvt3pfnpc" path="res://shaders/spell.gdshader" id="8_2jrln"]
+[ext_resource type="FontFile" uid="uid://by5bnh2808r" path="res://assets/fonts/BirchLeaf.otf" id="11_xbebr"]
+[ext_resource type="FontFile" uid="uid://bxuaoi07abxmi" path="res://assets/fonts/Good Old DOS.ttf" id="13_aiuwm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hybsy"]
 shader = ExtResource("4_y6kh4")
@@ -23,12 +25,13 @@ shader_parameter/fill_percent = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aiuwm"]
 shader = ExtResource("8_2jrln")
 shader_parameter/active = false
-shader_parameter/passive = true
+shader_parameter/passive = false
 shader_parameter/dont = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_xbebr"]
+font = ExtResource("11_xbebr")
 font_size = 32
-font_color = Color(0.5, 0.5, 0.5, 1)
+font_color = Color(0.7, 0.7, 0.7, 1)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -39,6 +42,29 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_mv35j")
+
+[node name="Info" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FPS" type="RichTextLabel" parent="Info"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("13_aiuwm")
+vertical_alignment = 2
 
 [node name="Crosshair" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -155,9 +181,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -22.5
+offset_top = -18.0
 offset_right = 100.0
-offset_bottom = 22.5
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "0"
