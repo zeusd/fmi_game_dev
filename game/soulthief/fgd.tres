@@ -1,16 +1,17 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=6 format=3 uid="uid://bcgrlmyyyoabn"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=7 format=3 uid="uid://bcgrlmyyyoabn"]
 
 [ext_resource type="Script" uid="uid://bxb0w5lalsn2d" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_ptpdh"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="1_t3dar"]
 [ext_resource type="Resource" uid="uid://b32n2k0guskgy" path="res://trenchbroom/entities/fgd_base.tres" id="2_1tkxg"]
 [ext_resource type="Resource" uid="uid://5auqbv7sy3tl" path="res://trenchbroom/entities/fgd_point.tres" id="3_13pck"]
 [ext_resource type="Resource" uid="uid://dttghbe6c0igu" path="res://trenchbroom/entities/fgd_solid.tres" id="4_4ul8r"]
+[ext_resource type="Resource" uid="uid://dgrrvxj8mls2y" path="res://trenchbroom/entities/fgd_st_loot.tres" id="5_13pck"]
 
 [resource]
 script = ExtResource("1_ptpdh")
 export_file = false
 target_map_editor = 1
 fgd_name = "soulthief"
-base_fgd_files = Array[Resource]([ExtResource("1_t3dar"), ExtResource("2_1tkxg"), ExtResource("3_13pck"), ExtResource("4_4ul8r")])
+base_fgd_files = Array[Resource]([ExtResource("1_t3dar"), ExtResource("2_1tkxg"), ExtResource("3_13pck"), ExtResource("4_4ul8r"), ExtResource("5_13pck")])
 entity_definitions = Array[Resource]([])
 metadata/_custom_type_script = "uid://bxb0w5lalsn2d"

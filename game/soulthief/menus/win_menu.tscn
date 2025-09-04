@@ -1,0 +1,181 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbpvkmjrsoope"]
+
+[ext_resource type="Script" uid="uid://cwueae1rroxch" path="res://menus/win_menu.gd" id="1_kjyxm"]
+[ext_resource type="FontFile" uid="uid://by5bnh2808r" path="res://assets/fonts/BirchLeaf.otf" id="2_dlju8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qbfu6"]
+font = ExtResource("2_dlju8")
+font_size = 128
+font_color = Color(1, 0.843137, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mwwo6"]
+font = ExtResource("2_dlju8")
+font_size = 64
+font_color = Color(0.854902, 0.647059, 0.12549, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xlj3"]
+font = ExtResource("2_dlju8")
+font_size = 64
+font_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lrkm2"]
+font = ExtResource("2_dlju8")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kroxp"]
+font = ExtResource("2_dlju8")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[node name="WinMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kjyxm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 0.941, 0.6)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Text" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Text"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Success" type="Label" parent="VBoxContainer/Text/VBoxContainer"]
+layout_mode = 2
+text = "Mission Successful"
+label_settings = SubResource("LabelSettings_qbfu6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="VBoxContainer/Text/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Loot Value Acquired: "
+label_settings = SubResource("LabelSettings_mwwo6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="MissionRegion" type="MarginContainer" parent="VBoxContainer/Play"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 350
+theme_override_constants/margin_bottom = 50
+
+[node name="MissionButton" type="Button" parent="VBoxContainer/Play/MissionRegion"]
+layout_mode = 2
+mouse_filter = 2
+flat = true
+
+[node name="Mission" type="Label" parent="VBoxContainer/Play/MissionRegion/MissionButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Next Mission"
+label_settings = SubResource("LabelSettings_1xlj3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Exit"]
+layout_mode = 2
+
+[node name="QuitRegion" type="MarginContainer" parent="VBoxContainer/Exit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/Exit/VBoxContainer/QuitRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Quit" type="Label" parent="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Quit to Main Menu"
+label_settings = SubResource("LabelSettings_lrkm2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitRegion" type="MarginContainer" parent="VBoxContainer/Exit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_right = 350
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/Exit/VBoxContainer/ExitRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Exit" type="Label" parent="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Exit to Desktop"
+label_settings = SubResource("LabelSettings_kroxp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton" to="." method="_on_quit_held"]
+[connection signal="pressed" from="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_selected"]
+[connection signal="focus_exited" from="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_unselected"]
+[connection signal="mouse_entered" from="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_selected"]
+[connection signal="mouse_exited" from="VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_unselected"]
+[connection signal="button_down" from="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton" to="." method="_on_exit_held"]
+[connection signal="pressed" from="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_selected"]
+[connection signal="focus_exited" from="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_unselected"]
+[connection signal="mouse_entered" from="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_selected"]
+[connection signal="mouse_exited" from="VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_unselected"]

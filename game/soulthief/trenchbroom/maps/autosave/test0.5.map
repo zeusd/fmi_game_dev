@@ -2723,51 +2723,31 @@
 }
 // entity 41
 {
-"classname" "st_loot_cup"
-"origin" "148 468 128"
+"classname" "loot_cup"
+"origin" "168 488 128"
 }
 // entity 42
 {
-"classname" "st_loot_cup"
-"origin" "156 532 128"
+"classname" "loot_cup"
+"origin" "220 508 128"
 }
 // entity 43
 {
-"classname" "st_loot_cup"
-"origin" "196 532 128"
+"classname" "loot_cup"
+"origin" "188 540 128"
 }
 // entity 44
 {
-"classname" "st_loot_cup"
-"origin" "188 492 128"
-"lt_type" "special"
-"trs_name" "lvl_1_hammer"
+"classname" "loot_cup"
+"origin" "140 516 128"
 }
 // entity 45
 {
-"classname" "st_loot_cup"
-"origin" "180 460 128"
+"classname" "loot_cup"
+"origin" "220 476 128"
 }
 // entity 46
 {
-"classname" "st_loot_cup"
-"origin" "220 476 128"
-}
-// entity 47
-{
-"classname" "st_loot_cup"
-"origin" "228 516 128"
-}
-// entity 48
-{
-"classname" "st_getaway"
-// brush 0
-{
-( 288 536 136 ) ( 288 537 136 ) ( 288 536 137 ) special/skip [ 0 1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
-( 352 416 128 ) ( 351 416 128 ) ( 352 416 129 ) special/skip [ -1.0000000000000002 0 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
-( 352 424 128 ) ( 352 425 128 ) ( 351 424 128 ) special/skip [ -1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
-( 288 536 248 ) ( 287 536 248 ) ( 288 537 248 ) special/skip [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 1 1
-( 288 576 136 ) ( 288 576 137 ) ( 287 576 136 ) special/skip [ 1.0000000000000002 0 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
-( 352 424 128 ) ( 352 424 129 ) ( 352 425 128 ) special/skip [ 0 -1.0000000000000002 0 0 ] [ 0 0 -1.0000000000000002 0 ] 0 1 1
-}
+"classname" "loot_cup"
+"origin" "300 516 128"
 }

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=6 format=3 uid="uid://dttghbe6c0igu"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=7 format=3 uid="uid://dttghbe6c0igu"]
 
 [ext_resource type="Resource" uid="uid://ck2wflvofn5nt" path="res://trenchbroom/entities/solid/st_liquid.tres" id="1_m1rs1"]
 [ext_resource type="Script" uid="uid://bxb0w5lalsn2d" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="2_eau43"]
+[ext_resource type="Resource" uid="uid://bnqjxj637m7g0" path="res://trenchbroom/entities/solid/st_getaway.tres" id="5_tgbdh"]
 [ext_resource type="Resource" uid="uid://b3t000ocefkge" path="res://trenchbroom/entities/solid/funcs/func_move.tres" id="5_xidy1"]
 [ext_resource type="Resource" uid="uid://ptvum0fd8lvk" path="res://trenchbroom/entities/solid/triggers/trigger_area.tres" id="6_d4wy6"]
 [ext_resource type="Resource" uid="uid://ddlg0r60wpjqa" path="res://trenchbroom/entities/solid/st_mover.tres" id="8_obckr"]
@@ -12,5 +13,5 @@ export_file = false
 target_map_editor = 1
 fgd_name = "solid"
 base_fgd_files = Array[Resource]([])
-entity_definitions = Array[Resource]([ExtResource("6_d4wy6"), ExtResource("5_xidy1"), ExtResource("1_m1rs1"), ExtResource("8_obckr")])
+entity_definitions = Array[Resource]([ExtResource("6_d4wy6"), ExtResource("5_xidy1"), ExtResource("1_m1rs1"), ExtResource("8_obckr"), ExtResource("5_tgbdh")])
 metadata/_custom_type_script = "uid://bxb0w5lalsn2d"

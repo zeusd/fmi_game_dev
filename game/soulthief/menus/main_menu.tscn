@@ -1,0 +1,174 @@
+[gd_scene load_steps=8 format=3 uid="uid://btghk5xsyic3t"]
+
+[ext_resource type="Script" uid="uid://dtk3st3iu5jqh" path="res://menus/main_menu.gd" id="1_yjgyn"]
+[ext_resource type="FontFile" uid="uid://csvr5fv8h1utu" path="res://assets/fonts/Charakterny.otf" id="2_rqbgu"]
+[ext_resource type="FontFile" uid="uid://by5bnh2808r" path="res://assets/fonts/BirchLeaf.otf" id="3_oblsv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jix8l"]
+font = ExtResource("2_rqbgu")
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_glbon"]
+font = ExtResource("3_oblsv")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nlkkf"]
+font = ExtResource("3_oblsv")
+font_size = 64
+font_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qe12f"]
+font = ExtResource("3_oblsv")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yjgyn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Soulthief" type="Label" parent="ColorRect/VBoxContainer/Title"]
+layout_mode = 2
+text = "Soulthief"
+label_settings = SubResource("LabelSettings_jix8l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Game" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GameChoices" type="VBoxContainer" parent="ColorRect/VBoxContainer/Game"]
+layout_mode = 2
+
+[node name="StartRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Game/GameChoices"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 450
+theme_override_constants/margin_bottom = 0
+
+[node name="StartButton" type="Button" parent="ColorRect/VBoxContainer/Game/GameChoices/StartRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Start" type="Label" parent="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 360.0
+offset_bottom = 94.0
+size_flags_vertical = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Start"
+label_settings = SubResource("LabelSettings_glbon")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Empty" type="MarginContainer" parent="ColorRect/VBoxContainer/Game/GameChoices"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SettingsRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Game/GameChoices"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_right = 450
+
+[node name="Settings" type="Label" parent="ColorRect/VBoxContainer/Game/GameChoices/SettingsRegion"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 0
+text = "Settings"
+label_settings = SubResource("LabelSettings_nlkkf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="OptionChoices" type="VBoxContainer" parent="ColorRect/VBoxContainer/Exit"]
+layout_mode = 2
+
+[node name="QuitRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Exit/OptionChoices"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 500
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 500
+theme_override_constants/margin_bottom = 50
+
+[node name="QuitButton" type="Button" parent="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Quit" type="Label" parent="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 260.0
+offset_bottom = 118.0
+size_flags_vertical = 3
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+text = "Quit"
+label_settings = SubResource("LabelSettings_qe12f")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton" to="." method="_on_start_button_held"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton" to="." method="_on_start_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton" to="." method="_on_start_unselected"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton/Start" to="." method="_on_start_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton/Start" to="." method="_on_start_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton/Start" to="." method="_on_start_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Game/GameChoices/StartRegion/StartButton/Start" to="." method="_on_start_unselected"]
+[connection signal="button_down" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton" to="." method="_on_quit_button_held"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton" to="." method="_on_quit_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton" to="." method="_on_quit_unselected"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton/Quit" to="." method="_on_quit_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton/Quit" to="." method="_on_quit_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton/Quit" to="." method="_on_quit_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Exit/OptionChoices/QuitRegion/QuitButton/Quit" to="." method="_on_quit_unselected"]

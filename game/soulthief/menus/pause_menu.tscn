@@ -1,0 +1,246 @@
+[gd_scene load_steps=9 format=3 uid="uid://ck4y2u0s0r8yu"]
+
+[ext_resource type="Script" uid="uid://uak7q7jo2et" path="res://menus/pause_menu.gd" id="1_p1qj3"]
+[ext_resource type="FontFile" uid="uid://by5bnh2808r" path="res://assets/fonts/BirchLeaf.otf" id="1_s0u37"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1qj3"]
+font = ExtResource("1_s0u37")
+font_size = 128
+
+[sub_resource type="LabelSettings" id="LabelSettings_0wv6w"]
+font = ExtResource("1_s0u37")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qlf07"]
+font = ExtResource("1_s0u37")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ybqm1"]
+font = ExtResource("1_s0u37")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mtdpf"]
+font = ExtResource("1_s0u37")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_emjh3"]
+font = ExtResource("1_s0u37")
+font_size = 64
+font_color = Color(0.745098, 0.745098, 0.745098, 1)
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p1qj3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="Paused" type="Label" parent="ColorRect/VBoxContainer/Text"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "Mission Paused"
+label_settings = SubResource("LabelSettings_p1qj3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/Play"]
+layout_mode = 2
+
+[node name="ContinueRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Play/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 450
+theme_override_constants/margin_right = 450
+
+[node name="ContinueButton" type="Button" parent="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+flat = true
+
+[node name="Continue" type="Label" parent="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Continue"
+label_settings = SubResource("LabelSettings_0wv6w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Play/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_right = 350
+
+[node name="RestartButton" type="Button" parent="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion"]
+layout_mode = 2
+size_flags_vertical = 3
+flat = true
+
+[node name="Restart" type="Label" parent="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Restart Misson"
+label_settings = SubResource("LabelSettings_qlf07")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TryRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Play/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+
+[node name="TryButton" type="Button" parent="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion"]
+layout_mode = 2
+size_flags_vertical = 3
+flat = true
+
+[node name="Try" type="Label" parent="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Try Another Way"
+label_settings = SubResource("LabelSettings_ybqm1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="MarginContainer" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer/Exit"]
+layout_mode = 2
+
+[node name="QuitRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Exit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 425
+theme_override_constants/margin_right = 425
+
+[node name="QuitButton" type="Button" parent="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Quit" type="Label" parent="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Quit Game"
+label_settings = SubResource("LabelSettings_mtdpf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitRegion" type="MarginContainer" parent="ColorRect/VBoxContainer/Exit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 350
+theme_override_constants/margin_right = 350
+
+[node name="ExitButton" type="Button" parent="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Exit" type="Label" parent="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Exit to Desktop"
+label_settings = SubResource("LabelSettings_emjh3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton" to="." method="_on_continue_held"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton/Continue" to="." method="_on_continue_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton/Continue" to="." method="_on_continue_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton/Continue" to="." method="_on_continue_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Play/VBoxContainer/ContinueRegion/ContinueButton/Continue" to="." method="_on_continue_unselected"]
+[connection signal="button_down" from="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton" to="." method="_on_restart_held"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton" to="." method="_on_restart_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton/Restart" to="." method="_on_restart_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton/Restart" to="." method="_on_restart_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton/Restart" to="." method="_on_restart_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Play/VBoxContainer/RestartRegion/RestartButton/Restart" to="." method="_on_restart_unselected"]
+[connection signal="button_down" from="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton" to="." method="_on_try_held"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton" to="." method="_on_try_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton/Try" to="." method="_on_try_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton/Try" to="." method="_on_try_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton/Try" to="." method="_on_try_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Play/VBoxContainer/TryRegion/TryButton/Try" to="." method="_on_try_unselected"]
+[connection signal="button_down" from="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton" to="." method="_on_quit_held"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Exit/VBoxContainer/QuitRegion/QuitButton/Quit" to="." method="_on_quit_unselected"]
+[connection signal="button_down" from="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton" to="." method="_on_exit_held"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="focus_entered" from="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_selected"]
+[connection signal="focus_exited" from="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_unselected"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_selected"]
+[connection signal="mouse_exited" from="ColorRect/VBoxContainer/Exit/VBoxContainer/ExitRegion/ExitButton/Exit" to="." method="_on_exit_unselected"]

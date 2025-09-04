@@ -1,0 +1,135 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk1tjdjfb4g38"]
+
+[ext_resource type="Script" uid="uid://cm6dsxy3soos4" path="res://menus/prep_screen.gd" id="1_03iix"]
+[ext_resource type="FontFile" uid="uid://by5bnh2808r" path="res://assets/fonts/BirchLeaf.otf" id="1_gw4ly"]
+[ext_resource type="PackedScene" uid="uid://ccdsigono78cp" path="res://menus/journal_screen.tscn" id="3_3t16h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3t16h"]
+font = ExtResource("1_gw4ly")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_03ukw"]
+font = ExtResource("1_gw4ly")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[node name="PrepScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_03iix")
+
+[node name="JournalScreen" parent="." instance=ExtResource("3_3t16h")]
+layout_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 0.941176, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+
+[node name="BackRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/BackRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Back" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Menu"
+label_settings = SubResource("LabelSettings_3t16h")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="NextRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 20
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/NextRegion"]
+layout_mode = 2
+flat = true
+
+[node name="Next" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Begin"
+label_settings = SubResource("LabelSettings_03ukw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton" to="." method="_on_back_held"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton" to="." method="_on_back_pressed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton/Back" to="." method="_on_back_selected"]
+[connection signal="focus_exited" from="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton/Back" to="." method="_on_back_unselected"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton/Back" to="." method="_on_back_selected"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer/BackRegion/BackButton/Back" to="." method="_on_back_unselected"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton" to="." method="_on_next_held"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton" to="." method="_on_next_pressed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton/Next" to="." method="_on_next_selected"]
+[connection signal="focus_exited" from="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton/Next" to="." method="_on_next_unselected"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton/Next" to="." method="_on_next_selected"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer/NextRegion/NextButton/Next" to="." method="_on_next_unselected"]

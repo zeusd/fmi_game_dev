@@ -110,9 +110,21 @@ var curr_spell:= spell.BLINK
 		%HUD.update_loot()
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	%PauseMenu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	%JournalScreen.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	%WinMenu.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	
+	%JournalScreen.in_game()
+	%WinMenu.in_game()
+	
 	%Camera3D/SpringArm3D/MeshInstance3D.visible = false
 	%Camera3D/Effect/Grayscale.visible = false
 	%Camera3D/Effect/Chroma.visible = false
+	%Camera3D/Effect/Vignette.visible = false
 	
 	hurtbox = Hurtbox.new()
 	self.add_child(hurtbox)
@@ -155,8 +167,6 @@ func _ready():
 	gnd_rc.target_position = Vector3(0.0, -999, 0.0)
 	
 	%CameraSmooth/ShapeCast3D.add_exception(self)
-	
-	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _set_r_wep(wep: Node3D, wep_res: Resource) -> void:
 	%WeaponManager.curr_r = wep_res
@@ -208,11 +218,6 @@ func _run_body_test_motion(from: Transform3D, motion: Vector3, result = null) ->
 	return PhysicsServer3D.body_test_motion(self.get_rid(), params, result)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	elif event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			self.rotate_y(-event.relative.x * x_mouse_sensitivity)
@@ -222,6 +227,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			look_speed = event.screen_relative.length()
 		else:
 			look_speed = 0.0
+	elif event is InputEventMouseButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
 	if noclip:
 		if event is InputEventMouseButton and event.is_pressed():
 			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -243,11 +251,43 @@ func _handle_stick_look_input(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		pause_unpause(false)
+	elif Input.is_action_just_pressed("journal"):
+		journal_unjournal()
+	
 	if Input.is_action_just_pressed("interact") and not casting:
-		if held_obj == null :
+		if held_obj == null:
 			_take_object()
 		else:
 			_drop_object()
+
+func pause_unpause(game_over: bool) -> void:
+	handle_input(false)
+	self.get_tree().paused = true
+	%PauseMenu.handle_input(true)
+	if game_over:
+		%PauseMenu.game_over()
+	else:
+		await %PauseMenu.unpause
+		handle_input(true)
+
+func journal_unjournal() -> void:
+	handle_input(false)
+	self.get_tree().paused = true
+	%JournalScreen.handle_input(true)
+	await %JournalScreen.unjournal
+	handle_input(true)
+
+func handle_input(enable: bool) -> void:
+	self.set_process_input(enable)
+	self.set_process_unhandled_input(enable)
+	if not enable:
+		self.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		self.set_deferred("process_mode", Node.PROCESS_MODE_ALWAYS)
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 var _saved_camera_global_pos = null
 func _save_camera_pos() -> void:
@@ -347,10 +387,10 @@ func _process(delta: float) -> void:
 			self.get_tree().paused = true
 		else:
 			self.get_tree().paused = false
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("interact") or Input.is_action_pressed("interact"):
 			aiming = false
 			self.get_tree().paused = false
-		if Input.is_action_just_released("cast"):
+		if Input.is_action_just_released("cast") or not Input.is_action_pressed("cast"):
 			prev_veloc = self.velocity * Vector3.UP if self.get_tree().paused else self.velocity
 			blink_pos = aim.global_position * Vector3.UP + ground_aim.global_position * Vector3(1.0, 0.0, 1.0)
 			blinking = true
@@ -360,10 +400,11 @@ func _process(delta: float) -> void:
 			mana_timer.start(mana_timer.time_left + blink_cost)
 			_clear_lean()
 			%Camera3D/Effect/Chroma.visible = true
-		%Camera3D/Effect/Grayscale.visible = self.get_tree().paused
 	else:
 		aim.visible = false
 		ground_aim.visible = false
+	
+	%Camera3D/Effect/Grayscale.visible = self.get_tree().paused
 	
 	if blinking:
 		self.velocity = Vector3.ZERO
@@ -403,12 +444,13 @@ func _process(delta: float) -> void:
 			bonk_timer.start(anim_time)
 			%WeaponManager.managed_input("hold")
 			bonk = true
-	elif Input.is_action_just_released("attack"):
+	elif Input.is_action_just_released("attack") or not Input.is_action_pressed("attack"):
 		if (not hold_timer.is_stopped() or not bonk_timer.is_stopped()) and atk_timer.is_stopped():
-			_reset_wep()
 			bonk = false
-			
 			hold_timer.stop()
+			bonk_timer.stop()
+			
+			_reset_wep()
 			%WeaponManager.managed_input("attack")
 			var anim_time
 			if crouching:
@@ -702,6 +744,7 @@ func _crouch_uncrouch(delta) -> void:
 	%BodyBean.position.y = %BodyBean.shape.height / 2
 	%MeshInstance3D.mesh.height = %BodyBean.shape.height
 	%MeshInstance3D.position.y = %BodyBean.position.y
+	%Camera3D/Effect/Vignette.visible = crouching
 
 func _show_aim(delta: float) -> void:
 	var res = KinematicCollision3D.new()
@@ -744,5 +787,23 @@ func mod_dmg() -> float:
 		return 5.0 + self.velocity.length()
 	return 1.0
 
+func steal(stl: Node) -> void:
+	GAME.steal(stl.trs)
+	%JournalScreen.update_goals()
+	if GAME.difficulty == GAME.dfy.EASY:
+		game_win()
+
+func loot_done() -> void:
+	%JournalScreen.update_goals()
+
+func game_win() -> void:
+	handle_input(false)
+	self.get_tree().paused = true
+	%WinMenu.show_value(loot)
+	%WinMenu.handle_input(true)
+
 func die() -> void:
-	%Camera3D/Effect/Chroma.visible = true
+	game_over()
+
+func game_over() -> void:
+	pause_unpause(true)

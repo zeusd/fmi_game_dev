@@ -1,0 +1,410 @@
+[gd_scene load_steps=15 format=3 uid="uid://ccdsigono78cp"]
+
+[ext_resource type="Script" uid="uid://bqhbh0xftdn6q" path="res://menus/journal_screen.gd" id="1_o86c7"]
+[ext_resource type="FontFile" uid="uid://by5bnh2808r" path="res://assets/fonts/BirchLeaf.otf" id="2_8u0es"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dxnn7"]
+font = ExtResource("2_8u0es")
+font_size = 64
+font_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ajy72"]
+font = ExtResource("2_8u0es")
+font_size = 64
+font_color = Color(0.411765, 0.411765, 0.411765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4sscj"]
+font = ExtResource("2_8u0es")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o86c7"]
+font = ExtResource("2_8u0es")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8u0es"]
+font = ExtResource("2_8u0es")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yjfjq"]
+font = ExtResource("2_8u0es")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vptg8"]
+font = ExtResource("2_8u0es")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3rrlt"]
+font = ExtResource("2_8u0es")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m6k4l"]
+font = ExtResource("2_8u0es")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_52m1n"]
+font = ExtResource("2_8u0es")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lqa6e"]
+font = ExtResource("2_8u0es")
+font_size = 64
+font_color = Color(0.721569, 0.52549, 0.0431373, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_5j62l"]
+font = ExtResource("2_8u0es")
+font_size = 64
+font_color = Color(0, 0, 0, 1)
+
+[node name="JournalScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o86c7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 0.94, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Tab" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Tab"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="TargetRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_right = 10
+
+[node name="TargetButton" type="Button" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer/TargetRegion"]
+layout_mode = 2
+mouse_filter = 1
+flat = true
+
+[node name="Target" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer/TargetRegion/TargetButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Target"
+label_settings = SubResource("LabelSettings_dxnn7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="MapButton" type="Button" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer/MapRegion"]
+layout_mode = 2
+mouse_filter = 1
+flat = true
+
+[node name="Map" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer/MapRegion/MapButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Map"
+label_settings = SubResource("LabelSettings_ajy72")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoalsRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+
+[node name="GoalsButton" type="Button" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer/GoalsRegion"]
+layout_mode = 2
+mouse_filter = 1
+flat = true
+
+[node name="Goals" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/HBoxContainer/GoalsRegion/GoalsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Goals"
+label_settings = SubResource("LabelSettings_4sscj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="Control" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GoalsInfo" type="Control" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 300
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 30
+
+[node name="Steal" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "[-]   Steal The Soulsmith Hammer."
+label_settings = SubResource("LabelSettings_o86c7")
+vertical_alignment = 1
+
+[node name="Loot" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+text = "[-]   Collect at least 70% of all loot value."
+label_settings = SubResource("LabelSettings_8u0es")
+vertical_alignment = 1
+
+[node name="Getaway" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "[-]   Get out."
+label_settings = SubResource("LabelSettings_yjfjq")
+vertical_alignment = 1
+
+[node name="Mercy" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
+text = "[-]   Kill no humans."
+label_settings = SubResource("LabelSettings_vptg8")
+vertical_alignment = 1
+
+[node name="Health" type="Label" parent="MarginContainer/VBoxContainer/Tab/MarginContainer/VBoxContainer/Info/GoalsInfo/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "[-]   Sustain no injuries."
+label_settings = SubResource("LabelSettings_3rrlt")
+vertical_alignment = 1
+
+[node name="Choices" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Choices"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Choices/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Explainer" type="Control" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Choose" type="Label" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Explainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Chosen Difficulty:"
+label_settings = SubResource("LabelSettings_m6k4l")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Difficulty" type="Control" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EasyRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="EasyButton" type="Button" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+flat = true
+
+[node name="Easy" type="Label" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Easy"
+label_settings = SubResource("LabelSettings_52m1n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UsualRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="UsualButton" type="Button" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+flat = true
+
+[node name="Usual" type="Label" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Usual"
+label_settings = SubResource("LabelSettings_lqa6e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HardRegion" type="MarginContainer" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="HardButton" type="Button" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+flat = true
+
+[node name="Hard" type="Label" parent="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Hard"
+label_settings = SubResource("LabelSettings_5j62l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton" to="." method="_on_easy_held"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton" to="." method="_on_easy_pressed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton/Easy" to="." method="_on_easy_selected"]
+[connection signal="focus_exited" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton/Easy" to="." method="_on_easy_unselected"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton/Easy" to="." method="_on_easy_selected"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/EasyRegion/EasyButton/Easy" to="." method="_on_easy_unselected"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton" to="." method="_on_usual_held"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton" to="." method="_on_usual_pressed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton/Usual" to="." method="_on_usual_selected"]
+[connection signal="focus_exited" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton/Usual" to="." method="_on_usual_unselected"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton/Usual" to="." method="_on_usual_selected"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/UsualRegion/UsualButton/Usual" to="." method="_on_usual_unselected"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton" to="." method="_on_hard_held"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton" to="." method="_on_hard_pressed"]
+[connection signal="focus_entered" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton/Hard" to="." method="_on_hard_selected"]
+[connection signal="focus_exited" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton/Hard" to="." method="_on_hard_unselected"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton/Hard" to="." method="_on_hard_selected"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Choices/MarginContainer/VBoxContainer/Difficulty/HBoxContainer/HardRegion/HardButton/Hard" to="." method="_on_hard_unselected"]

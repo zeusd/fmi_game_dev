@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ddg8c3vrt53w6"]
+[gd_scene load_steps=21 format=3 uid="uid://ddg8c3vrt53w6"]
 
 [ext_resource type="Script" uid="uid://cmn7gy8lkgr28" path="res://FPSController/fps_controller.gd" id="1_u08xt"]
 [ext_resource type="PackedScene" uid="uid://dslqbnhsyeh5j" path="res://FPSController/hud/hud.tscn" id="2_aph7h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://kvoeovboxvwh" path="res://shaders/chroma.gdshader" id="3_twhuv"]
 [ext_resource type="Script" uid="uid://bgbslid4xxer5" path="res://weapons/weapon_manager.gd" id="4_4ybej"]
 [ext_resource type="Resource" uid="uid://i6um3xayorqr" path="res://weapons/sword_up/sword_up.tres" id="4_lm1k8"]
+[ext_resource type="Shader" uid="uid://dck8ijcyff8av" path="res://shaders/vignette.gdshader" id="5_c14xb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tk4"]
 
@@ -22,6 +23,12 @@ shader_parameter/alpha = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aph7h"]
 shader = ExtResource("3_twhuv")
 shader_parameter/offset = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vgne1"]
+shader = ExtResource("5_c14xb")
+shader_parameter/alpha = 1.0
+shader_parameter/inner_radius = 0.5
+shader_parameter/outer_radius = 1.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_u08xt"]
 radius = 0.1
@@ -85,7 +92,7 @@ unique_name_in_owner = true
 rotation_order = 1
 cull_mask = 1048573
 
-[node name="Effect" type="CanvasLayer" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
+[node name="Effect" type="Node" parent="HeadOriginal/Head/CameraSmooth/Camera3D"]
 
 [node name="Grayscale" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Effect"]
 material = SubResource("ShaderMaterial_twhuv")
@@ -98,6 +105,15 @@ mouse_filter = 2
 
 [node name="Chroma" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Effect"]
 material = SubResource("ShaderMaterial_aph7h")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Vignette" type="ColorRect" parent="HeadOriginal/Head/CameraSmooth/Camera3D/Effect"]
+material = SubResource("ShaderMaterial_vgne1")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

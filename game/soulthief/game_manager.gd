@@ -11,6 +11,65 @@ enum {
 	TRIGGER_LAYER = (1 << 2)
 }
 
+var steal_goal:= false
+var difficulty:= dfy.USUAL
+enum dfy {
+	EASY,
+	USUAL,
+	HARD
+}
+
+var loot_goal:= false
+var lt_thld: Dictionary = {
+	dfy.EASY: 0.0,
+	dfy.USUAL: 0.7,
+	dfy.HARD: 0.7
+}
+
+var lvl: levels
+enum levels {
+	LVL_1
+}
+
+var lvl_1_stl: Dictionary = {}
+enum treasures {
+	NULL,
+	LVL_1_HAMMER
+}
+
+func prepare_level() -> void:
+	steal_goal = false
+	loot_goal = false
+	match lvl:
+		levels.LVL_1:
+			lvl_1_stl[treasures.LVL_1_HAMMER] = false
+
+func steal(trs: treasures) -> void:
+	match lvl:
+		levels.LVL_1:
+			lvl_1_stl[trs] = true
+
+func check_steal() -> bool:
+	match lvl:
+		levels.LVL_1:
+			for thing in lvl_1_stl.keys():
+				if lvl_1_stl[thing] == false:
+					return false
+			steal_goal = true
+			return true
+	return false
+
+func check_loot(percent: float) -> bool:
+	loot_goal = percent >= lt_thld[difficulty]
+	return loot_goal
+
+func resolve_treasure(trs_name: String) -> treasures:
+	match trs_name:
+		"lvl_1_hammer":
+			return treasures.LVL_1_HAMMER
+		_:
+			return treasures.NULL
+
 func use_targets(activator: Node, target: String, new_activator: Node = null) -> void:
 	# Targetnames are really Godot Groups, so we can have multiple entities 
 	# share a common "targetname" in Trenchbroom.

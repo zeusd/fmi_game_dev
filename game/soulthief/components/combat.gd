@@ -1,6 +1,8 @@
 class_name Combat
 extends Node
 
+@export var player: CharacterBody3D
+
 enum fighter_type {
 	PLAYER,
 	KNIGHT
@@ -45,6 +47,9 @@ func activate(id: String, ftr_type: fighter_type) -> void:
 		fighters[id][REF].add_child(b)
 		b.global_position = fighters[id][REF][HUR].global_position
 		b.emitting = false
+		
+		if fighters[id][TYP] == fighter_type.PLAYER:
+			fighters[id][REF].health = fighters[id][HLT]
 
 func splat(id: String) -> void:
 	fighters[id][BLD].emitting = true
@@ -71,7 +76,6 @@ func hit(from_id: String, to_id: String) -> void:
 			
 			if (weak_mod < 5.0 and dmg_mod < 0.0) or (weak_mod == 0.0 and dmg_mod == 0.0):
 				fighters[to_id][REF].bonked()
-				fighters[to_id][BLD].global_position = fighters[to_id][HUR].global_position
 				return
 			
 			if fighters[to_id][REF].nap:
@@ -83,9 +87,12 @@ func hit(from_id: String, to_id: String) -> void:
 		
 		fighters[to_id][HLT] -= fighters[from_id][DMG] * (dmg_mod / weak_mod)
 		fighters[to_id][REF].hit_by(fighters[from_id][REF])
-		splat(to_id)
+		if dmg_mod > 0.0:
+			splat(to_id)
 		if fighters[to_id][TYP] == fighter_type.PLAYER:
 			fighters[to_id][REF].health = fighters[to_id][HLT]
+			if GAME.difficulty == GAME.dfy.HARD:
+				player.game_over()
 		if fighters[to_id][HLT] <= 0:
 			_kill(to_id)
 
@@ -95,9 +102,13 @@ func area_damage(from_area: Area3D, damage: float, to_id: String) -> void:
 		splat(to_id)
 		if fighters[to_id][TYP] == fighter_type.PLAYER:
 			fighters[to_id][REF].health = fighters[to_id][HLT]
+			if GAME.difficulty == GAME.dfy.HARD:
+				player.game_over()
 		if fighters[to_id][HLT] <= 0:
 			_kill(to_id)
 
 func _kill(id: String) -> void:
 	fighters[id][REF].die()
 	bloodstain(id)
+	if GAME.difficulty == GAME.dfy.HARD and fighters[id][TYP] != fighter_type.PLAYER:
+		player.game_over()

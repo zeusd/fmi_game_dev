@@ -6,9 +6,12 @@ extends StaticBody3D
 @export var targetname: String = ""
 @export var globalname: String = ""
 
-@export var value:= 30.0
+@export var value:= 0.0
 @export var mesh_path: String = ""
 @export var lt_type: String = ""
+
+@export var trs_name:= ""
+var trs: GAME.treasures
 
 var shader_mat: ShaderMaterial
 
@@ -19,6 +22,7 @@ func _func_godot_apply_properties(props: Dictionary) -> void:
 	value = props["value"] as float
 	mesh_path = props["mesh_path"] as String
 	lt_type = props["lt_type"] as String
+	trs_name = props["trs_name"] as String
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -31,7 +35,13 @@ func _ready() -> void:
 	mat.next_pass = mat.next_pass.duplicate()
 	shader_mat = mat.next_pass
 	
-	var lt_t = Treasure.loot_type.SPC if lt_type == "special" else Treasure.loot_type.REG
+	var lt_t: Treasure.loot_type
+	
+	if lt_type == "special":
+		lt_t = Treasure.loot_type.SPC
+		trs = GAME.resolve_treasure(trs_name)
+	else:
+		lt_t = Treasure.loot_type.REG
 	%Treasure.activate(str(self.get_instance_id()), lt_t)
 
 var lit_up:= false:

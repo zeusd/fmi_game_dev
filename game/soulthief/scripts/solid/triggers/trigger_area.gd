@@ -11,6 +11,7 @@ enum TriggerStates {
 	READY,
 	USED
 }
+
 var trigger_state: TriggerStates = TriggerStates.READY
 var timeout: float = 0.0
 var last_activator: Node = null
