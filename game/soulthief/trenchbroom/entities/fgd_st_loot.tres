@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=3 format=3 uid="uid://dgrrvxj8mls2y"]
+[gd_resource type="Resource" script_class="FuncGodotFGDFile" load_steps=4 format=3 uid="uid://dgrrvxj8mls2y"]
 
 [ext_resource type="Script" uid="uid://bxb0w5lalsn2d" path="res://addons/func_godot/src/fgd/func_godot_fgd_file.gd" id="1_5u5r7"]
 [ext_resource type="Resource" uid="uid://dfcj0nxnn4aoc" path="res://trenchbroom/entities/point/modelpoint/cup.tres" id="1_i2mik"]
+[ext_resource type="Resource" uid="uid://b2yobxdldhwb3" path="res://trenchbroom/entities/point/modelpoint/hammer.tres" id="2_u7ubd"]
 
 [resource]
 script = ExtResource("1_5u5r7")
@@ -9,5 +10,5 @@ export_file = false
 target_map_editor = 1
 fgd_name = "st_loot"
 base_fgd_files = Array[Resource]([])
-entity_definitions = Array[Resource]([ExtResource("1_i2mik")])
+entity_definitions = Array[Resource]([ExtResource("1_i2mik"), ExtResource("2_u7ubd")])
 metadata/_custom_type_script = "uid://bxb0w5lalsn2d"

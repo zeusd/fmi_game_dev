@@ -2720,7 +2720,6 @@
 "classname" "knight"
 "origin" "288 192 0"
 "target" "path_1_1"
-"angle" "270"
 }
 // entity 41
 {
@@ -2775,6 +2774,5 @@
 // entity 49
 {
 "classname" "st_loot_hammer"
-"origin" "296 504 168"
-"angle" "0"
+"origin" "280 488 168"
 }

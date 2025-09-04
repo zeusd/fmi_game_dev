@@ -446,6 +446,7 @@ func build_entity_nodes() -> Array:
 										angles = Vector3(angles_raw[1], angles_raw[0], -angles_raw[2])
 									elif entity_definition.classname == 'info_intermission':
 										angles = Vector3(angles_raw[0], angles_raw[1], -angles_raw[2])
+									angles.y -= 90.0
 							else:
 								push_error("Invalid vector format for \'" + key + "\' in entity \'" + classname + "\'")
 						elif 'angle' in properties:
@@ -454,8 +455,8 @@ func build_entity_nodes() -> Array:
 								angle = float(angle)
 							angles.y += angle
 							# model point entity sync between model angle, trenchbroom angle and game angle
-							angles.y += 90
-						angles.y += 180
+							#angles.y += 90
+						angles.y -= 90.0
 						
 						node.rotation_degrees = angles
 					

@@ -2775,6 +2775,10 @@
 // entity 49
 {
 "classname" "st_loot_hammer"
-"origin" "296 504 168"
-"angle" "0"
+"origin" "280 488 168"
+}
+// entity 50
+{
+"classname" "light_spot"
+"origin" "88 120 56"
 }

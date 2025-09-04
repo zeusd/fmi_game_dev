@@ -94,7 +94,7 @@ func hit(from_id: String, to_id: String) -> void:
 			if GAME.difficulty == GAME.dfy.HARD:
 				player.game_over()
 		if fighters[to_id][HLT] <= 0:
-			_kill(to_id)
+			_kill(to_id, fighters[from_id][TYP] == fighter_type.PLAYER)
 
 func area_damage(from_area: Area3D, damage: float, to_id: String) -> void:
 	if fighters.has(to_id):
@@ -105,10 +105,10 @@ func area_damage(from_area: Area3D, damage: float, to_id: String) -> void:
 			if GAME.difficulty == GAME.dfy.HARD:
 				player.game_over()
 		if fighters[to_id][HLT] <= 0:
-			_kill(to_id)
+			_kill(to_id, false)
 
-func _kill(id: String) -> void:
+func _kill(id: String, player_caused: bool) -> void:
 	fighters[id][REF].die()
 	bloodstain(id)
-	if GAME.difficulty == GAME.dfy.HARD and fighters[id][TYP] != fighter_type.PLAYER:
+	if GAME.difficulty == GAME.dfy.HARD and player_caused and fighters[id][TYP] != fighter_type.PLAYER:
 		player.game_over()

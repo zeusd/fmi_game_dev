@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://xektsdlgyvsa"]
+
+[ext_resource type="PackedScene" uid="uid://dsrax8ijh2vv7" path="res://assets/models/blender/hammer/hammer.glb" id="1_jhxx1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhxx1"]
+radius = 0.4
+height = 1.2
+
+[node name="Hammer" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_jhxx1")
+
+[node name="hammer" parent="CollisionShape3D" instance=ExtResource("1_jhxx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
