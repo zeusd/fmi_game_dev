@@ -74,7 +74,7 @@ func hit(from_id: String, to_id: String) -> void:
 		if fighters[to_id][TYP] == fighter_type.KNIGHT:
 			weak_mod = fighters[to_id][REF].mod_weak()
 			
-			if (weak_mod < 5.0 and dmg_mod < 0.0) or (weak_mod == 0.0 and dmg_mod == 0.0):
+			if (weak_mod < 5.0 and dmg_mod < 0.0) or (weak_mod == 1.0 and dmg_mod == 0.0):
 				fighters[to_id][REF].bonked()
 				return
 			

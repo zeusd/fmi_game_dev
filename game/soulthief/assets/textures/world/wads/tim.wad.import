@@ -1,0 +1,16 @@
+[remap]
+
+importer="func_godot.wad"
+type="Resource"
+uid="uid://b70quyd3w7myo"
+path="res://.godot/imported/tim.wad-b98ea842e938ce4ebac42710096037a9.res"
+
+[deps]
+
+source_file="res://assets/textures/world/wads/tim.wad"
+dest_files=["res://.godot/imported/tim.wad-b98ea842e938ce4ebac42710096037a9.res"]
+
+[params]
+
+palette_file="res://addons/func_godot/palette.lmp"
+generate_mipmaps=true

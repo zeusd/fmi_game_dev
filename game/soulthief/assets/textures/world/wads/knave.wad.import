@@ -1,0 +1,16 @@
+[remap]
+
+importer="func_godot.wad"
+type="Resource"
+uid="uid://m3bbp5yvs3vk"
+path="res://.godot/imported/knave.wad-d32516f768d58df1dc6ea9f1e254c867.res"
+
+[deps]
+
+source_file="res://assets/textures/world/wads/knave.wad"
+dest_files=["res://.godot/imported/knave.wad-d32516f768d58df1dc6ea9f1e254c867.res"]
+
+[params]
+
+palette_file="res://addons/func_godot/palette.lmp"
+generate_mipmaps=true

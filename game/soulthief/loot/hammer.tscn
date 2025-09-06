@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://xektsdlgyvsa"]
+[gd_scene load_steps=4 format=3 uid="uid://xektsdlgyvsa"]
 
 [ext_resource type="PackedScene" uid="uid://dsrax8ijh2vv7" path="res://assets/models/blender/hammer/hammer.glb" id="1_jhxx1"]
+[ext_resource type="Script" uid="uid://sl7kynx4vjwo" path="res://scripts/point/lights/light_omni.gd" id="2_vrvfk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhxx1"]
 radius = 0.4
@@ -13,3 +14,29 @@ shape = SubResource("CapsuleShape3D_jhxx1")
 
 [node name="hammer" parent="CollisionShape3D" instance=ExtResource("1_jhxx1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="BlueSoulGem" type="OmniLight3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43, 0)
+light_color = Color(0, 0.5, 1, 1)
+light_energy = 16.0
+omni_range = 0.07
+script = ExtResource("2_vrvfk")
+metadata/_custom_type_script = "uid://sl7kynx4vjwo"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="CollisionShape3D/BlueSoulGem"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_color = Color(0, 0.501961, 1, 1)
+light_energy = 16.0
+
+[node name="GreenSoulGem" type="OmniLight3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.57, 0)
+light_color = Color(0, 1, 0.483333, 1)
+light_energy = 16.0
+omni_range = 0.05
+script = ExtResource("2_vrvfk")
+metadata/_custom_type_script = "uid://sl7kynx4vjwo"
+
+[node name="SpotLight3D" type="OmniLight3D" parent="CollisionShape3D/GreenSoulGem"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.2, 0)
+light_color = Color(0, 1, 1, 1)
+omni_range = 0.2

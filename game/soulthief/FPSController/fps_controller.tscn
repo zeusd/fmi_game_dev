@@ -71,11 +71,11 @@ shape = SubResource("CapsuleShape3D_a0tk4")
 
 [node name="PlayerModel" type="Node3D" parent="."]
 unique_name_in_owner = true
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerModel"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
 mesh = SubResource("CapsuleMesh_a0tk4")
 
 [node name="HeadOriginal" type="Node3D" parent="."]

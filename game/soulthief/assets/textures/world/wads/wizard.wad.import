@@ -1,0 +1,16 @@
+[remap]
+
+importer="func_godot.wad"
+type="Resource"
+uid="uid://bawivj14i2a7w"
+path="res://.godot/imported/wizard.wad-22c7bfdca9aa10d5a6d2e894436e1669.res"
+
+[deps]
+
+source_file="res://assets/textures/world/wads/wizard.wad"
+dest_files=["res://.godot/imported/wizard.wad-22c7bfdca9aa10d5a6d2e894436e1669.res"]
+
+[params]
+
+palette_file="res://addons/func_godot/palette.lmp"
+generate_mipmaps=true

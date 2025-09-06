@@ -30,7 +30,7 @@ class_property_descriptions = {}
 auto_apply_to_matching_node_properties = false
 meta_properties = {
 "color": Color(0.8, 0.8, 0.8, 1),
-"size": AABB(-8, -12, -16, 8, 12, 16),
+"size": AABB(-8, -8, -16, 8, 8, 16),
 "studio": "\"trenchbroom\\models/st_loot_hammer.glb\""
 }
 node_class = ""

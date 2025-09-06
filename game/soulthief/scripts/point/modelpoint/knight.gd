@@ -148,6 +148,10 @@ func _process(delta: float) -> void:
 		if target:
 			var tar_gr = get_tree().get_first_node_in_group(target) as PathCorner
 			
+			if tar_gr == null:
+				target = ""
+				return
+			
 			nav_target = tar_gr
 			nav_agent.target_position = nav_target.global_position
 			next = nav_agent.get_next_path_position()

@@ -172,7 +172,8 @@ target={
 
 [navigation]
 
-3d/default_cell_size=0.1
+3d/default_cell_size=0.05
+3d/merge_rasterizer_cell_scale=0.1
 
 [physics]
 

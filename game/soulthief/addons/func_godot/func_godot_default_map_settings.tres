@@ -1,9 +1,21 @@
-[gd_resource type="Resource" script_class="FuncGodotMapSettings" load_steps=5 format=3 uid="uid://bkhxcqsquw1yg"]
+[gd_resource type="Resource" script_class="FuncGodotMapSettings" load_steps=17 format=3 uid="uid://bkhxcqsquw1yg"]
 
 [ext_resource type="Material" uid="uid://cvex6toty8yn7" path="res://addons/func_godot/textures/default_material.tres" id="1_8l5wm"]
 [ext_resource type="Script" uid="uid://bmh3we3xudux8" path="res://addons/func_godot/src/map/func_godot_map_settings.gd" id="1_dlf23"]
 [ext_resource type="Resource" uid="uid://bcgrlmyyyoabn" path="res://fgd.tres" id="2_576s4"]
 [ext_resource type="Resource" uid="uid://b3f6exbkvb0h7" path="res://assets/textures/world/wads/medieval.wad" id="4_576s4"]
+[ext_resource type="Resource" uid="uid://baplo35bgo678" path="res://assets/textures/world/wads/base.wad" id="4_gcvjv"]
+[ext_resource type="Resource" uid="uid://c6vtos0km36ar" path="res://assets/textures/world/wads/desert.wad" id="5_a2tx0"]
+[ext_resource type="Resource" uid="uid://g8tpbvscp3jk" path="res://assets/textures/world/wads/impel.wad" id="6_tvea0"]
+[ext_resource type="Resource" uid="uid://cxny65arsj6jr" path="res://assets/textures/world/wads/items.wad" id="7_never"]
+[ext_resource type="Resource" uid="uid://pk1ihf5sjjpu" path="res://assets/textures/world/wads/jr_med.wad" id="8_twf3q"]
+[ext_resource type="Resource" uid="uid://m3bbp5yvs3vk" path="res://assets/textures/world/wads/knave.wad" id="9_focn0"]
+[ext_resource type="Resource" uid="uid://b3qm72875fsy4" path="res://assets/textures/world/wads/metal.wad" id="11_es7mf"]
+[ext_resource type="Resource" uid="uid://bh275ndcqfxdn" path="res://assets/textures/world/wads/misc.wad" id="12_ebpup"]
+[ext_resource type="Resource" uid="uid://bopctc5w80wfx" path="res://assets/textures/world/wads/runic.wad" id="13_jedkk"]
+[ext_resource type="Resource" uid="uid://dqagkh6vp2gbv" path="res://assets/textures/world/wads/start.wad" id="14_vj0xc"]
+[ext_resource type="Resource" uid="uid://b70quyd3w7myo" path="res://assets/textures/world/wads/tim.wad" id="15_wb31e"]
+[ext_resource type="Resource" uid="uid://bawivj14i2a7w" path="res://assets/textures/world/wads/wizard.wad" id="16_nu0k1"]
 
 [resource]
 script = ExtResource("1_dlf23")
@@ -15,7 +27,7 @@ texture_file_extensions = Array[String](["png", "jpg", "jpeg", "bmp", "tga", "we
 clip_texture = "special/clip"
 skip_texture = "special/skip"
 origin_texture = "special/origin"
-texture_wads = Array[Resource]([ExtResource("4_576s4")])
+texture_wads = Array[Resource]([ExtResource("4_gcvjv"), ExtResource("5_a2tx0"), ExtResource("6_tvea0"), ExtResource("7_never"), ExtResource("8_twf3q"), ExtResource("9_focn0"), ExtResource("4_576s4"), ExtResource("11_es7mf"), ExtResource("12_ebpup"), ExtResource("13_jedkk"), ExtResource("14_vj0xc"), ExtResource("15_wb31e"), ExtResource("16_nu0k1")])
 material_file_extension = "tres"
 default_material = ExtResource("1_8l5wm")
 default_material_albedo_uniform = ""

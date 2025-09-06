@@ -35,7 +35,7 @@ var _last_frame_on_floor:= -INF
 
 const CROUCH_DIST = 0.7
 const CROUCH_SLOW = 0.5
-const CROUCH_JUMP_ADD = CROUCH_DIST * 0.9
+const CROUCH_JUMP_ADD = CROUCH_DIST * 1.1
 var crouching = false
 
 @export var frict:= 6.0
